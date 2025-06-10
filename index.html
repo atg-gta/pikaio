@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pikaio: One Person. Endless Roles. Zero Photoshoots.</title>
+    <!-- Favicon -->
+    <link rel="icon" href="https://placehold.co/32x32/2563EB/ffffff?text=P" type="image/png">
+    <!-- Tailwind CSS CDN for modern, responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter for a professional and clean look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons (Hamburger, etc.) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f9fafb;
+        }
+        /* Header shrink effect */
+        header {
+            transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        header.header-scrolled {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+        }
+        /* Full screen Mobile Menu */
+        #mobile-menu-overlay {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            transform: translateX(100%);
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #f9fafb;
+            z-index: 999;
+            overflow: hidden;
+        }
+        #mobile-menu-overlay.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        /* Modal for form submission feedback */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            align-items: center;
+            justify-content: center;
+        }
+        /* Enhanced Navbar Links */
+        .nav-link-desktop {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link-desktop::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #2563EB;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.3s ease-in-out;
+        }
+        .nav-link-desktop:hover::after {
+            transform: scaleX(1);
+        }
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+            transform: translateY(20px);
+        }
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        /* Enticing shine effect for button */
+        .shine-on-hover {
+            position: relative;
+            overflow: hidden;
+        }
+        .shine-on-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+        .shine-on-hover:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body id="top">
+
+    <!-- Sticky Header Navigation -->
+    <header class="bg-white shadow-sm py-4 sticky top-0 z-50" id="main-header">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-900 flex items-center">
+                <img src="Image/file.svg" alt="Pikaio Logo" class="h-10 w-10 mr-2 rounded-full">
+                Pikaio
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="gallery.html" class="text-gray-700 font-medium hover:text-blue-600 transition-colors nav-link-desktop">Gallery</a>
+                <a href="#process" class="text-gray-700 font-medium hover:text-blue-600 transition-colors nav-link-desktop">Process</a>
+                <a href="#pricing" class="text-gray-700 font-medium hover:text-blue-600 transition-colors nav-link-desktop">Pricing</a>
+                <a href="#faq" class="text-gray-700 font-medium hover:text-blue-600 transition-colors nav-link-desktop">FAQ</a>
+                <a href="#contact" class="text-gray-700 font-medium hover:text-blue-600 transition-colors nav-link-desktop">Contact</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="#contact" class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300 hidden md:inline-block">
+                    Get Started
+                </a>
+                <button id="hamburger-button" class="md:hidden text-gray-600 hover:text-blue-600 transition-colors text-xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="hidden">
+        <button id="close-mobile-menu" class="absolute top-6 right-6 text-gray-600 hover:text-blue-600 text-3xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <nav class="flex flex-col space-y-8 text-center text-2xl">
+            <a href="gallery.html" class="text-gray-800 hover:text-blue-600 transition-colors py-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('active')">Gallery</a>
+            <a href="#process" class="text-gray-800 hover:text-blue-600 transition-colors py-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('active')">Process</a>
+            <a href="#pricing" class="text-gray-800 hover:text-blue-600 transition-colors py-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('active')">Pricing</a>
+            <a href="#faq" class="text-gray-800 hover:text-blue-600 transition-colors py-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('active')">FAQ</a>
+            <a href="#contact" class="text-gray-800 hover:text-blue-600 transition-colors py-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('active')">Contact</a>
+            <a href="#contact" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300 mt-8" onclick="document.getElementById('mobile-menu-overlay').classList.remove('active')">
+                Get Started
+            </a>
+        </nav>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative bg-gradient-to-r from-blue-50 to-indigo-50 min-h-[calc(100vh-80px)] flex items-center justify-center py-20 px-4 overflow-hidden">
+            <div class="container mx-auto text-center z-10 relative">
+                <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+                    Photos of You That Were Never Taken<br>
+                    <span class="text-blue-600">But Should Have Been.</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto">
+                    Pikaio creates stunning, ultra-realistic images that show <span class="font-bold">you</span> in any setting, style, or story - without ever stepping in front of a camera.
+                </p>
+                <a href="#contact" class="bg-blue-600 text-white text-lg px-8 py-4 rounded-xl shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105 duration-300 inline-block">
+                    Book a Free Consultation
+                </a>
+            </div>
+            <div class="absolute inset-0 opacity-10 pointer-events-none">
+                <svg class="w-full h-full" fill="none" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+                    <defs><pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M 80 0 L 0 0 L 0 80" fill="none" stroke="#e0e7ff" stroke-width="0.5"/></pattern></defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                </svg>
+            </div>
+        </section>
+
+        <!-- Gallery Teaser Section -->
+        <section id="gallery-teaser" class="py-20 bg-gray-50 px-4">
+            <div class="container mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Elevate Your Brand, Instantly.</h2>
+                    <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-6">From personal branding to full marketing campaigns, we create the exact visuals you need to build credibility.</p>
+                    <div class="inline-flex items-center bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full shadow-md">
+                        <i class="fas fa-check-circle mr-2"></i>These images were never taken. They were made - by Pikaio.
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    <a href="gallery.html" class="block">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/erty.jpg" alt="Professional Portrait" class="w-full h-80 object-cover"><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 mb-2">Your Professional Presence</h3><p class="text-gray-600">From the boardroom to the main stage. We create powerful visuals that establish you as a leader worth listening to - no studio required.</p></div></div>
+                    </a>
+                    <a href="gallery.html" class="block">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/mic.jpg" alt="Business Team" class="w-full h-80 object-cover"><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 mb-2">Elevate Your Company's Look</h3><p class="text-gray-600">Show off your brand with workspace images or location based photos - no photoshoot required.</p></div></div>
+                    </a>
+                    <a href="gallery.html" class="block">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/out-2-4.webp" alt="Lifestyle Persona" class="w-full h-80 object-cover"><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 mb-2">Show the Best Version of You</h3><p class="text-gray-600">Whether it's travel, fitness, fashion or future-you, we help you look aspirational and authentic.</p></div></div>
+                    </a>
+                    <a href="gallery.html" class="block">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full">
+                            <div class="relative w-full h-80 overflow-hidden" id="slider-container">
+                                <img src="Image/567yttg.jpg" alt="After Image" class="absolute inset-0 w-full h-full object-cover z-0" />
+                                <div id="before-wrapper" class="absolute inset-0 overflow-hidden z-10"><img src="Image/getty_1421479584_200013322000928054_cijnbk.webp" alt="Before Image" class="w-full h-full object-cover" /></div>
+                                <div id="divider" class="absolute top-0 h-full w-0.5 bg-white z-20" style="left: 50%;"></div>
+                            </div>
+                            <div class="p-6"><h3 class="text-xl font-semibold text-gray-900 mb-2">Before & After: Scene Stealer</h3><p class="text-gray-600">Why admire their moments when you can own them? We place you at the center of any iconic photo, flawlessly.</p></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="text-center mt-12">
+                    <a href="gallery.html" class="shine-on-hover bg-blue-600 text-white text-lg px-8 py-4 rounded-xl shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105 duration-300 inline-flex items-center">
+                        See What's Possible
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="process" class="py-20 bg-white px-4">
+            <div class="container mx-auto">
+                <div class="text-center mb-16"><h2 class="text-4xl font-bold text-gray-900 mb-4">Our Simple 3-Step Process</h2><p class="text-lg text-gray-700 max-w-2xl mx-auto">From vision to delivery, we turn your ideas into hyper-real visuals.</p></div>
+                <div class="relative grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+                    <div class="flex flex-col items-center text-center"><div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-6 shadow-md"><i class="fas fa-cloud-upload-alt text-3xl"></i></div><h3 class="text-2xl font-semibold text-gray-900 mb-3">1. Consult & Upload</h3><p class="text-gray-600">We chat to understand your goals. Then you securely upload your photos to a private cloud folder.</p></div>
+                    <!-- FINAL CHANGE: Replaced with the correct Font Awesome icon -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-6 shadow-md">
+                            <i class="fa-regular fa-lightbulb text-4xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-3">2. Create & Refine</h3>
+                        <p class="text-gray-600">We build your custom model and send a preview gallery. You give feedback, we perfect the images.</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center"><div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-6 shadow-md"><i class="fas fa-check-circle text-3xl"></i></div><h3 class="text-2xl font-semibold text-gray-900 mb-3">3. Deliver</h3><p class="text-gray-600">Every final image is delivered via a private cloud folder—polished, high-quality, and ready to use.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-20 bg-gray-50 px-4">
+            <div class="container mx-auto">
+                <div class="text-center mb-10"><h2 class="text-4xl font-bold text-gray-900 mb-4">A Clear Investment in Your Vision</h2><p class="text-lg text-gray-700 max-w-3xl mx-auto">Choose the package that aligns with your personal or professional goals.</p></div>
+                <div class="flex flex-col items-center space-y-6 mb-12">
+                    <!-- Pricing Toggle -->
+                    <div class="inline-flex rounded-full shadow-sm bg-white p-1 border border-gray-200">
+                        <button id="showBusinessPricing" class="px-6 py-2 rounded-full font-semibold transition-colors duration-300">For Businesses</button>
+                        <button id="showIndividualPricing" class="px-6 py-2 rounded-full font-semibold transition-colors duration-300">For Individuals</button>
+                    </div>
+                    <!-- Currency Switcher -->
+                    <div class="inline-flex rounded-full shadow-sm bg-gray-200 p-1">
+                        <button id="usdButton" class="px-5 py-1 rounded-full text-sm font-semibold transition-colors duration-300" data-currency="usd">USD</button>
+                        <button id="inrButton" class="px-5 py-1 rounded-full text-sm font-semibold transition-colors duration-300" data-currency="inr">INR</button>
+                    </div>
+                </div>
+
+                <!-- Business Pricing -->
+                <div id="businessPricing" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div class="bg-white border border-gray-200 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300">
+                        <div><h3 class="text-2xl font-bold text-gray-900 mb-4">Starter</h3><p class="text-gray-600 mb-6">Essential visuals for new ventures and personal brands.</p><div class="price text-4xl font-bold text-blue-600 mb-8" data-price-usd="$499" data-price-inr="₹39,999">$499</div><ul class="text-gray-700 space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>One person</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>20 high-resolution images</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Up to 2 distinct visual scenarios</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Full commercial usage rights</li></ul></div><a href="#contact" class="block w-full text-center bg-blue-100 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-200 transition-colors">Get Started</a>
+                    </div>
+                    <div class="bg-blue-600 text-white rounded-xl shadow-2xl p-8 flex flex-col justify-between transform lg:scale-105 duration-300 relative">
+                        <div class="absolute -top-3 right-0 bg-blue-800 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">POPULAR</div><div><h3 class="text-2xl font-bold mb-4">Pro Brand Pack</h3><p class="mb-6 opacity-90">Expand your presence across platforms or campaigns.</p><div class="price text-4xl font-bold mb-8" data-price-usd="$849" data-price-inr="₹69,999">$849</div><ul class="space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>One person</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>50 high-resolution images</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Up to 10 visual scenarios</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Two rounds of revisions</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Full commercial usage rights</li></ul></div><a href="#contact" class="block w-full text-center bg-white text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">Select Plan</a>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300">
+                        <div><h3 class="text-2xl font-bold text-gray-900 mb-4">Enterprise & Teams</h3><p class="text-gray-600 mb-6">Tailored solutions for brands, agencies, and teams.</p><div class="price text-4xl font-bold text-blue-600 mb-8" data-price-usd="Custom Quote" data-price-inr="Custom Quote">Custom Quote</div><ul class="text-gray-700 space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Multiple people</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Custom image volumes</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Unlimited visual scenarios</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Dedicated art direction</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Priority delivery & support</li></ul></div><a href="#contact" class="block w-full text-center bg-blue-100 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-200 transition-colors">Request Custom Quote</a>
+                    </div>
+                </div>
+
+                <!-- Individual Pricing -->
+                <div id="individualPricing" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto hidden">
+                    <div class="bg-white border border-gray-200 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300">
+                        <div><h3 class="text-2xl font-bold text-gray-900 mb-4">Personal Refresh</h3><div class="flex flex-wrap gap-2 mb-6"><span class="bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Dating Apps</span><span class="bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full">Social Media</span><span class="bg-pink-100 text-pink-700 text-xs font-semibold px-3 py-1 rounded-full">Trying Something New</span></div><div class="price text-4xl font-bold text-blue-600 mb-8" data-price-usd="$149" data-price-inr="₹12,499">$149</div><ul class="text-gray-700 space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>10 high-res images</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>2 unique looks or settings</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Personal use only</li></ul></div><a href="#contact" class="block w-full text-center bg-blue-100 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-200 transition-colors">Get Started</a>
+                    </div>
+                    <div class="bg-blue-600 text-white rounded-xl shadow-2xl p-8 flex flex-col justify-between transform lg:scale-105 duration-300 relative">
+                        <div class="absolute -top-3 right-0 bg-blue-800 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">POPULAR</div><div><h3 class="text-2xl font-bold mb-4">Visionary Profile</h3><div class="flex flex-wrap gap-2 mb-6"><span class="bg-white text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">LinkedIn</span><span class="bg-white text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Personal Branding</span><span class="bg-white text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Content Creators</span></div><div class="price text-4xl font-bold mb-8" data-price-usd="$279" data-price-inr="₹22,999">$279</div><ul class="space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>25 high-res images</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Up to 5 distinct scenarios</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Personal use only</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>One round of revisions</li></ul></div><a href="#contact" class="block w-full text-center bg-white text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">Select Plan</a>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300">
+                        <div><h3 class="text-2xl font-bold text-gray-900 mb-4">Ultimate Identity</h3><div class="flex flex-wrap gap-2 mb-6"><span class="bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Entrepreneurs</span><span class="bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Personal Brands</span><span class="bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Commercial Use</span></div><div class="price text-4xl font-bold text-blue-600 mb-8" data-price-usd="$499" data-price-inr="₹39,999">$499</div><ul class="text-gray-700 space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>50 high-res images</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Up to 10 scenarios or styles</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Full commercial use</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Two rounds of revisions</li></ul></div><a href="#contact" class="block w-full text-center bg-blue-100 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-200 transition-colors">Go Ultimate</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20 bg-white px-4">
+            <div class="container mx-auto max-w-4xl">
+                <div class="text-center mb-16"><h2 class="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2><p class="text-lg text-gray-700">Got questions? We've got answers.</p></div>
+                <div class="space-y-6">
+                    <div class="bg-gray-50 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 focus:outline-none list-none">What kind of photos do I need to provide?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600"></i></span></summary><p class="mt-4 text-gray-600">For best results, provide 30-60 clear photos of yourself in various lighting, angles, and backgrounds. Good quality selfies and social photos work perfectly. These don't need to be professional; just everyday social photos are perfect. The more variety, the more realistic and versatile your results.</p></details></div>
+                    <div class="bg-gray-50 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 focus:outline-none list-none">How are my photos handled?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600"></i></span></summary><p class="mt-4 text-gray-600">Your privacy matters. Every image you send is stored in a secure, private folder. We use them only to build your custom AI model and delete them permanently after the project is complete. Nothing is shared or reused EVER.</p></details></div>
+                    <div class="bg-gray-50 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 focus:outline-none list-none">What if I'm not happy with the results?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600"></i></span></summary><p class="mt-4 text-gray-600">Our process is highly collaborative. We provide a proof gallery for you to review. Our Pro and Premium packages include revision rounds where we'll work with you on your feedback to refine the prompts and generate new images that perfectly match your vision. Your satisfaction is key.</p></details></div>
+                    <div class="bg-gray-50 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 focus:outline-none list-none">How long does it take?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600"></i></span></summary><p class="mt-4 text-gray-600">Expect your first proof set within 1-2 business days of sending your photos. If your package includes revisions, each round typically takes 2-3 extra business days. Fast, clear communication helps us move even quicker.</p></details></div>
+                    <div class="bg-gray-50 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 focus:outline-none list-none">Do I get full ownership and commercial rights?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600"></i></span></summary><p class="mt-4 text-gray-600">Yes! For our 'Ultimate Identity' package (for individuals) and all 'Business' packages, you receive full commercial usage rights. 'Personal Refresh' and 'Visionary Profile' packages include a personal usage license as well.</p></details></div>
+                    <div class="bg-gray-50 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 focus:outline-none list-none">Is this ethical? Am I misrepresenting myself?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600"></i></span></summary><p class="mt-4 text-gray-600">Our service is about enhancement, not deception. We work with you to create the best version of yourself, or to visualize aspirational scenarios. We require you to have the rights to the photos you provide and will not create 'deepfakes' or images of other individuals without their consent. Transparency and ethical use are core to our values.</p></details></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-gradient-to-r from-blue-50 to-indigo-50 px-4">
+            <div class="container mx-auto max-w-xl text-center">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">Ready to See What's Possible?</h2>
+                <p class="text-lg text-gray-700 mb-10">Whether for brand, business, or personal presence - start your free consultation and discover what custom AI visuals can do for you.</p>
+                <form id="contactForm" class="bg-white p-8 rounded-xl shadow-xl space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><label for="fullName" class="block text-left text-gray-700 text-sm font-medium mb-2">Full Name</label><input type="text" id="fullName" name="fullName" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition-colors" placeholder="John Doe" required></div>
+                        <div><label for="email" class="block text-left text-gray-700 text-sm font-medium mb-2">Email Address</label><input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition-colors" placeholder="john.doe@example.com" required></div>
+                    </div>
+                    <div><label for="inquiryType" class="block text-left text-gray-700 text-sm font-medium mb-2">I'm inquiring for...</label><select id="inquiryType" name="inquiryType" class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition-colors"><option value="">Select an option</option><option value="individual">Personal Branding (Individual)</option><option value="business">Business / Team Branding</option><option value="general">General Inquiry</option></select></div>
+                    <div><label for="message" class="block text-left text-gray-700 text-sm font-medium mb-2">How can we help?</label><textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition-colors" placeholder="Tell us about your vision..."></textarea></div>
+                    <button type="submit" class="w-full bg-blue-600 text-white text-lg px-8 py-4 rounded-xl shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105 duration-300">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#0f172a] text-white pt-12 pb-8 px-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-gray-300">
+            <div>
+                <a href="#top" class="flex items-center mb-3">
+                    <img src="Image/Adobe Express - file(1)-256x256.png" alt="Pikaio Logo" class="h-8 w-8 mr-2 rounded-full">
+                    <h2 class="text-white text-xl font-bold">Pikaio</h2>
+                </a>
+                <p class="opacity-80 mb-4">Look like a million bucks. Without spending it.</p>
+                <p class="text-xs text-gray-500">© 2025 Pikaio. All rights reserved.<br>All images shown are generated with permission.</p>
+            </div>
+            <div><h3 class="text-white font-semibold mb-3">Explore</h3><ul class="space-y-2"><li><a href="#pricing" class="hover:text-white transition-colors">Pricing</a></li><li><a href="#process" class="hover:text-white transition-colors">How it Works</a></li><li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li><li><a href="#faq" class="hover:text-white transition-colors">FAQ</a></li></ul></div>
+            <div><h3 class="text-white font-semibold mb-3">Connect</h3><div class="flex space-x-4 items-center mb-4"><a href="https://www.linkedin.com/company/pikaio/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors"><i class="fab fa-linkedin fa-lg"></i></a></div><p class="text-sm text-gray-500">For inquiries: <a href="mailto:hello@pikaio.com" class="underline hover:text-white">hello@pikaio.com</a></p></div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button HTML -->
+    <a href="#top" id="back-to-top" class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-700 transition-all z-50">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Contact Form Submission Modal -->
+    <div id="successModal" class="modal"><div class="modal-content"><h3 class="text-green-600">Message Sent!</h3><p>Thank you for reaching out. We've received your message and will get back to you shortly.</p><button id="closeModal" class="bg-blue-600 hover:bg-blue-700">Close</button></div></div>
+
+    <script>
+        // --- Navigation & UI ---
+        const hamburgerButton = document.getElementById('hamburger-button');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+        const mainHeader = document.getElementById('main-header');
+        const backToTopButton = document.getElementById('back-to-top');
+
+        // Fullscreen Mobile Menu
+        hamburgerButton.addEventListener('click', () => { mobileMenuOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; });
+        const closeMenu = () => { mobileMenuOverlay.classList.remove('active'); document.body.style.overflow = ''; };
+        closeMobileMenuButton.addEventListener('click', closeMenu);
+        mobileMenuOverlay.querySelectorAll('a').forEach(link => { link.addEventListener('click', (e) => { if (link.getAttribute('href').startsWith('#')) { closeMenu(); } }); });
+        
+        // Header Shrink & Back to Top on Scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) { mainHeader.classList.add('header-scrolled'); } else { mainHeader.classList.remove('header-scrolled'); }
+            if (window.scrollY > 400) { backToTopButton.classList.add('show'); } else { backToTopButton.classList.remove('show'); }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { const href = anchor.getAttribute('href'); if (href.startsWith('#') && href.length > 1 && document.querySelector(href)) { e.preventDefault(); document.querySelector(href).scrollIntoView({ behavior: 'smooth' }); } }); });
+
+        // --- Contact Form ---
+        const contactForm = document.getElementById('contactForm');
+        const successModal = document.getElementById('successModal');
+        const closeModalButton = document.getElementById('closeModal');
+        contactForm.addEventListener('submit', function(e) { e.preventDefault(); successModal.style.display = 'flex'; contactForm.reset(); });
+        closeModalButton.addEventListener('click', () => { successModal.style.display = 'none'; });
+        window.addEventListener('click', (event) => { if (event.target == successModal) { successModal.style.display = 'none'; } });
+
+        // --- Pricing Toggles (Type & Currency) ---
+        const showBusinessBtn = document.getElementById('showBusinessPricing');
+        const showIndividualBtn = document.getElementById('showIndividualPricing');
+        const businessPricingDiv = document.getElementById('businessPricing');
+        const individualPricingDiv = document.getElementById('individualPricing');
+        
+        const usdButton = document.getElementById('usdButton');
+        const inrButton = document.getElementById('inrButton');
+        let currentCurrency = 'usd';
+
+        function updatePrices() {
+            const priceElements = document.querySelectorAll('.price');
+            priceElements.forEach(el => {
+                const price = el.dataset[`price${currentCurrency.charAt(0).toUpperCase() + currentCurrency.slice(1)}`];
+                el.textContent = price;
+            });
+        }
+
+        function setActivePricingTab(activeButton, inactiveButton) {
+            activeButton.classList.add('bg-blue-600', 'text-white');
+            activeButton.classList.remove('text-gray-600', 'hover:bg-gray-100');
+            inactiveButton.classList.remove('bg-blue-600', 'text-white');
+            inactiveButton.classList.add('text-gray-600', 'hover:bg-gray-100');
+        }
+        
+        function setActiveCurrencyTab(activeButton, inactiveButton) {
+            activeButton.classList.add('bg-white', 'text-blue-600', 'shadow-inner');
+            activeButton.classList.remove('text-gray-600');
+            inactiveButton.classList.remove('bg-white', 'text-blue-600', 'shadow-inner');
+            inactiveButton.classList.add('text-gray-600');
+        }
+
+        showBusinessBtn.addEventListener('click', () => {
+            setActivePricingTab(showBusinessBtn, showIndividualBtn);
+            businessPricingDiv.classList.remove('hidden');
+            individualPricingDiv.classList.add('hidden');
+            updatePrices(); // Update prices for the newly shown tab
+        });
+        showIndividualBtn.addEventListener('click', () => {
+            setActivePricingTab(showIndividualBtn, showBusinessBtn);
+            individualPricingDiv.classList.remove('hidden');
+            businessPricingDiv.classList.add('hidden');
+            updatePrices(); // Update prices for the newly shown tab
+        });
+        
+        usdButton.addEventListener('click', () => {
+            currentCurrency = 'usd';
+            setActiveCurrencyTab(usdButton, inrButton);
+            updatePrices();
+        });
+        inrButton.addEventListener('click', () => {
+            currentCurrency = 'inr';
+            setActiveCurrencyTab(inrButton, usdButton);
+            updatePrices();
+        });
+
+        // Set initial states
+        setActivePricingTab(showBusinessBtn, showIndividualBtn);
+        setActiveCurrencyTab(usdButton, inrButton);
+
+        // --- Before/After Slider ---
+        const sliderContainer = document.getElementById("slider-container");
+        const beforeWrapper = document.getElementById("before-wrapper");
+        const divider = document.getElementById("divider");
+        function updateSlider(x) { const rect = sliderContainer.getBoundingClientRect(); const offsetX = Math.max(0, Math.min(rect.width, x - rect.left)); beforeWrapper.style.clipPath = `inset(0 ${rect.width - offsetX}px 0 0)`; divider.style.left = `${offsetX}px`; }
+        window.addEventListener("load", () => { const rect = sliderContainer.getBoundingClientRect(); const initialX = rect.width / 2; updateSlider(rect.left + initialX); });
+        sliderContainer.addEventListener("mousemove", (e) => { updateSlider(e.clientX); });
+        sliderContainer.addEventListener("touchmove", (e) => { if (e.touches.length > 0) { updateSlider(e.touches[0].clientX); } });
+    </script>
+</body>
+</html>
