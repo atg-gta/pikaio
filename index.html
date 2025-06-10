@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    
     <title>Pikaio: One Person. Endless Roles. Zero Photoshoots.</title>
     <!-- Favicon -->
     <link rel="icon" href="https://placehold.co/32x32/2563EB/ffffff?text=P" type="image/png">
@@ -18,11 +20,17 @@
             scroll-behavior: smooth;
             background-color: #f9fafb;
         }
-        /* Header shrink effect */
+
+        /* --- FIX 1: HIDE-ON-SCROLL HEADER --- */
         header {
-            transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            /* Added 'transform' to the transition for smooth hiding/showing */
+            transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease-in-out;
             padding-top: 1rem;
             padding-bottom: 1rem;
+        }
+        /* This new class will be added by JS to hide the header */
+        header.header-hidden {
+            transform: translateY(-100%);
         }
         header.header-scrolled {
             padding-top: 0.5rem;
@@ -31,15 +39,12 @@
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(5px);
         }
-        /* Full screen Mobile Menu */
+
+        /* --- FIX 2: CENTERED MOBILE MENU --- */
         #mobile-menu-overlay {
             transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
             transform: translateX(100%);
             opacity: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             position: fixed;
             top: 0;
             left: 0;
@@ -48,113 +53,68 @@
             background-color: #f9fafb;
             z-index: 999;
             overflow: hidden;
+            /* This ensures the nav element inside is perfectly centered */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         #mobile-menu-overlay.active {
             transform: translateX(0);
             opacity: 1;
         }
-        /* Modal for form submission feedback */
+        
+        /* Modal for form submission feedback (unchanged) */
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0; top: 0;
-            width: 100%; height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-            align-items: center;
-            justify-content: center;
+            display: none; position: fixed; z-index: 1000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            overflow: auto; background-color: rgba(0,0,0,0.4);
+            align-items: center; justify-content: center;
         }
-        /* Style for the actual modal content box */
         .modal-content {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 0.75rem;
-            text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-            width: 90%;
-            max-width: 400px;
+            background-color: #fff; padding: 2rem; border-radius: 0.75rem;
+            text-align: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            width: 90%; max-width: 400px;
         }
-        .modal-content h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        .modal-content p {
-            margin-bottom: 1.5rem;
-            color: #4b5563;
-        }
+        .modal-content h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .modal-content p { margin-bottom: 1.5rem; color: #4b5563; }
         .modal-content button {
-            color: #fff;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: background-color 0.2s;
-            border: none;
-            cursor: pointer;
+            color: #fff; padding: 0.75rem 1.5rem; border-radius: 0.5rem;
+            font-weight: 600; transition: background-color 0.2s;
+            border: none; cursor: pointer;
         }
-        /* Enhanced Navbar Links */
-        .nav-link-desktop {
-            position: relative;
-            padding-bottom: 4px;
-        }
+        
+        /* Other styles (unchanged) */
+        .nav-link-desktop { position: relative; padding-bottom: 4px; }
         .nav-link-desktop::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #2563EB;
-            transform: scaleX(0);
-            transform-origin: center;
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 100%; height: 2px; background-color: #2563EB;
+            transform: scaleX(0); transform-origin: center;
             transition: transform 0.3s ease-in-out;
         }
-        .nav-link-desktop:hover::after {
-            transform: scaleX(1);
-        }
-        /* Back to Top Button */
+        .nav-link-desktop:hover::after { transform: scaleX(1); }
         #back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            opacity: 0;
-            visibility: hidden;
+            position: fixed; bottom: 2rem; right: 2rem;
+            opacity: 0; visibility: hidden;
             transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
             transform: translateY(20px);
         }
-        #back-to-top.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        /* Enticing shine effect for button */
-        .shine-on-hover {
-            position: relative;
-            overflow: hidden;
-        }
+        #back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        .shine-on-hover { position: relative; overflow: hidden; }
         .shine-on-hover::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%;
             background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
             transition: left 0.6s ease;
         }
-        .shine-on-hover:hover::before {
-            left: 100%;
-        }
+        .shine-on-hover:hover::before { left: 100%; }
     </style>
 </head>
-<body id="top">
+<body id="top" class="bg-gray-50 text-gray-900">
 
-    <!-- Sticky Header Navigation -->
     <header class="bg-white shadow-sm py-4 sticky top-0 z-50" id="main-header">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <a href="index.html" class="text-2xl font-bold text-gray-900 flex items-center">
-                <img src="Image/file.svg" alt="Pikaio Logo" class="h-10 w-10 mr-2 rounded-full">
+                <img src="Image/file.svg" alt="Pikaio Logo" class="h-10 w-10 mr-2 rounded-full" loading="eager" decoding="async" width="40" height="40">
                 Pikaio
             </a>
             <nav class="hidden md:flex space-x-8">
@@ -175,18 +135,18 @@
         </div>
     </header>
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu-overlay" class="hidden">
+    <div id="mobile-menu-overlay" class="hidden bg-gray-50">
         <button id="close-mobile-menu" class="absolute top-6 right-6 text-gray-600 hover:text-blue-600 text-3xl">
             <i class="fas fa-times"></i>
         </button>
+        <!-- This nav is now perfectly centered by the parent div's CSS -->
         <nav class="flex flex-col space-y-8 text-center text-2xl">
-            <a href="gallery.html" class="text-gray-800 hover:text-blue-600 transition-colors py-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('active')">Gallery</a>
-            <a href="#process" class="text-gray-800 hover:text-blue-600 transition-colors py-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('active')">Process</a>
-            <a href="#pricing" class="text-gray-800 hover:text-blue-600 transition-colors py-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('active')">Pricing</a>
-            <a href="#faq" class="text-gray-800 hover:text-blue-600 transition-colors py-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('active')">FAQ</a>
-            <a href="#contact" class="text-gray-800 hover:text-blue-600 transition-colors py-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('active')">Contact</a>
-            <a href="#contact" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300 mt-8" onclick="document.getElementById('mobile-menu-overlay').classList.remove('active')">
+            <a href="gallery.html" class="text-gray-800 hover:text-blue-600 transition-colors py-2">Gallery</a>
+            <a href="#process" class="text-gray-800 hover:text-blue-600 transition-colors py-2">Process</a>
+            <a href="#pricing" class="text-gray-800 hover:text-blue-600 transition-colors py-2">Pricing</a>
+            <a href="#faq" class="text-gray-800 hover:text-blue-600 transition-colors py-2">FAQ</a>
+            <a href="#contact" class="text-gray-800 hover:text-blue-600 transition-colors py-2">Contact</a>
+            <a href="#contact" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300 mt-8">
                 Get Started
             </a>
         </nav>
@@ -227,19 +187,19 @@
                 </div>
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                     <a href="gallery.html" class="block">
-                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/erty.jpg" alt="Professional Portrait" class="w-full h-80 object-cover"><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 mb-2">Your Professional Presence</h3><p class="text-gray-600">From the boardroom to the main stage. We create powerful visuals that establish you as a leader worth listening to - no studio required.</p></div></div>
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/erty.jpg" alt="Professional Portrait" class="w-full h-80 object-cover" loading="lazy" decoding="async" width="800" height="600"><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 mb-2">Your Professional Presence</h3><p class="text-gray-600">From the boardroom to the main stage. We create powerful visuals that establish you as a leader worth listening to - no studio required.</p></div></div>
                     </a>
                     <a href="gallery.html" class="block">
-                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/mic.jpg" alt="Business Team" class="w-full h-80 object-cover"><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 mb-2">Elevate Your Company's Look</h3><p class="text-gray-600">Show off your brand with workspace images or location based photos - no photoshoot required.</p></div></div>
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/mic.jpg" alt="Business Team" class="w-full h-80 object-cover" loading="lazy" decoding="async" width="800" height="600"><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 mb-2">Elevate Your Company's Look</h3><p class="text-gray-600">Show off your brand with workspace images or location based photos - no photoshoot required.</p></div></div>
                     </a>
                     <a href="gallery.html" class="block">
-                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/out-2-4.webp" alt="Lifestyle Persona" class="w-full h-80 object-cover"><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 mb-2">Show the Best Version of You</h3><p class="text-gray-600">Whether it's travel, fitness, fashion or future-you, we help you look aspirational and authentic.</p></div></div>
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/out-2-4.webp" alt="Lifestyle Persona" class="w-full h-80 object-cover" loading="lazy" decoding="async" width="800" height="600"><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 mb-2">Show the Best Version of You</h3><p class="text-gray-600">Whether it's travel, fitness, fashion or future-you, we help you look aspirational and authentic.</p></div></div>
                     </a>
                     <a href="gallery.html" class="block">
                         <div class="bg-white rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full">
                             <div class="relative w-full h-80 overflow-hidden" id="slider-container">
-                                <img src="Image/567yttg.jpg" alt="After Image" class="absolute inset-0 w-full h-full object-cover z-0" />
-                                <div id="before-wrapper" class="absolute inset-0 overflow-hidden z-10"><img src="Image/getty_1421479584_200013322000928054_cijnbk.webp" alt="Before Image" class="w-full h-full object-cover" /></div>
+                                <img src="Image/567yttg.jpg" alt="After Image" class="absolute inset-0 w-full h-full object-cover z-0" loading="lazy" decoding="async" width="800" height="600" />
+                                <div id="before-wrapper" class="absolute inset-0 overflow-hidden z-10"><img src="Image/getty_1421479584_200013322000928054_cijnbk.webp" alt="Before Image" class="w-full h-full object-cover" loading="lazy" decoding="async" width="800" height="600" /></div>
                                 <div id="divider" class="absolute top-0 h-full w-0.5 bg-white z-20" style="left: 50%;"></div>
                             </div>
                             <div class="p-6"><h3 class="text-xl font-semibold text-gray-900 mb-2">Before & After: Scene Stealer</h3><p class="text-gray-600">Why admire their moments when you can own them? We place you at the center of any iconic photo, flawlessly.</p></div>
@@ -368,7 +328,7 @@
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-gray-300">
             <div>
                 <a href="#top" class="flex items-center mb-3">
-                    <img src="Image/Adobe Express - file(1)-256x256.png" alt="Pikaio Logo" class="h-8 w-8 mr-2 rounded-full">
+                    <img src="Image/Adobe Express - file(1)-256x256.png" alt="Pikaio Logo" class="h-8 w-8 mr-2 rounded-full" loading="lazy" decoding="async" width="32" height="32">
                     <h2 class="text-white text-xl font-bold">Pikaio</h2>
                 </a>
                 <p class="opacity-80 mb-4">Look like a million bucks. Without spending it.</p>
@@ -393,69 +353,101 @@
         </div>
     </div>
 
-    <script>
-        // --- Navigation & UI ---
-        const hamburgerButton = document.getElementById('hamburger-button');
-        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-        const closeMobileMenuButton = document.getElementById('close-mobile-menu');
-        const mainHeader = document.getElementById('main-header');
-        const backToTopButton = document.getElementById('back-to-top');
+<script>
+        // --- FIX: IMPROVED NAVIGATION & UI SCRIPT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerButton = document.getElementById('hamburger-button');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+            const mainHeader = document.getElementById('main-header');
+            const backToTopButton = document.getElementById('back-to-top');
 
-        // Fullscreen Mobile Menu
-        hamburgerButton.addEventListener('click', () => { mobileMenuOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; });
-        const closeMenu = () => { mobileMenuOverlay.classList.remove('active'); document.body.style.overflow = ''; };
-        closeMobileMenuButton.addEventListener('click', closeMenu);
-        mobileMenuOverlay.querySelectorAll('a').forEach(link => { link.addEventListener('click', (e) => { if (link.getAttribute('href').startsWith('#')) { closeMenu(); } }); });
-        
-        // Header Shrink & Back to Top on Scroll
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 80) { mainHeader.classList.add('header-scrolled'); } else { mainHeader.classList.remove('header-scrolled'); }
-            if (window.scrollY > 400) { backToTopButton.classList.add('show'); } else { backToTopButton.classList.remove('show'); }
+            // --- Mobile Menu Logic ---
+            const openMenu = () => {
+                mobileMenuOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background from scrolling
+            };
+            const closeMenu = () => {
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Allow background to scroll again
+            };
+
+            hamburgerButton.addEventListener('click', openMenu);
+            closeMobileMenuButton.addEventListener('click', closeMenu);
+            // Close menu when a link inside is clicked
+            mobileMenuOverlay.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+
+            // --- Combined Scroll Logic ---
+            let lastScrollY = window.scrollY;
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.scrollY;
+
+                // 1. Shrink effect logic
+                if (currentScrollY > 80) {
+                    mainHeader.classList.add('header-scrolled');
+                } else {
+                    mainHeader.classList.remove('header-scrolled');
+                }
+
+                // 2. Hide/show header on mobile
+                if (window.innerWidth < 768) {
+                    if (lastScrollY < currentScrollY && currentScrollY > 150) {
+                        mainHeader.classList.add('header-hidden');
+                    } else if (currentScrollY < lastScrollY) {
+                        mainHeader.classList.remove('header-hidden');
+                    }
+                } else {
+                    mainHeader.classList.remove('header-hidden');
+                }
+                
+                // 3. Back to top button logic
+                if (currentScrollY > 400) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+
+                lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
+            });
+
+            // --- Smooth scrolling for anchor links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = anchor.getAttribute('href');
+                    if (href.length > 1 && document.querySelector(href)) {
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
         });
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { const href = anchor.getAttribute('href'); if (href.startsWith('#') && href.length > 1 && document.querySelector(href)) { e.preventDefault(); document.querySelector(href).scrollIntoView({ behavior: 'smooth' }); } }); });
-
-
-        // START: MODIFIED JAVASCRIPT FOR NETLIFY FORM
         // --- Contact Form with Netlify AJAX Submission ---
+        // This part is self-contained and correct, no changes needed
         const contactForm = document.getElementById('contactForm');
         const successModal = document.getElementById('successModal');
         const closeModalButton = document.getElementById('closeModal');
         
         contactForm.addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevent the default form submission
-
+            e.preventDefault();
             const formData = new FormData(contactForm);
-            
             fetch("/", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: new URLSearchParams(formData).toString(),
             })
             .then(() => {
-                // On success, show your custom modal and reset the form
-                console.log("Form successfully submitted to Netlify");
                 successModal.style.display = 'flex';
                 contactForm.reset();
             })
             .catch((error) => {
-                // On error, display an alert
-                console.error("Form submission error:", error);
-                alert("Sorry, there was an error submitting your form. Please try again.");
+                alert("Sorry, there was an error submitting your form.");
             });
         });
-
-        // Your existing modal close logic
-        closeModalButton.addEventListener('click', () => {
-            successModal.style.display = 'none';
-        });
-        window.addEventListener('click', (event) => {
-            if (event.target == successModal) {
-                successModal.style.display = 'none';
-            }
-        });
-        // END: MODIFIED JAVASCRIPT FOR NETLIFY FORM
+        closeModalButton.addEventListener('click', () => { successModal.style.display = 'none'; });
+        window.addEventListener('click', (event) => { if (event.target == successModal) { successModal.style.display = 'none'; } });
 
 
         // --- Pricing Toggles (Type & Currency) ---

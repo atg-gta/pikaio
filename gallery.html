@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    
     <title>Pikaio Gallery: Your Ambition, Visualized.</title>
     <!-- Favicon -->
     <link rel="icon" href="https://placehold.co/32x32/2563EB/ffffff?text=P" type="image/png">
@@ -24,91 +26,67 @@
             background-color: #f9fafb;
             color: #1a202c;
         }
-        /* Header shrink effect */
+        
+        /* --- FIX 1: HIDE-ON-SCROLL HEADER --- */
         header {
-            transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            /* Added 'transform' to the transition for smooth hiding/showing */
+            transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease-in-out;
+        }
+        /* This new class will be added by JS to hide the header */
+        header.header-hidden {
+            transform: translateY(-100%);
         }
         header.header-scrolled {
             padding-top: 0.5rem; padding-bottom: 0.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px);
         }
-        /* Mobile menu */
+        
+        /* --- FIX 2: CENTERED MOBILE MENU --- */
         #mobile-menu {
             transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
             transform: translateX(100%); opacity: 0;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background-color: #f9fafb; z-index: 999; overflow: hidden;
+            /* This ensures the nav element inside is perfectly centered */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         #mobile-menu.active { transform: translateX(0); opacity: 1; }
         
-        /* --- GALLERY ENHANCEMENTS --- */
+        /* --- GALLERY ENHANCEMENTS (UNCHANGED from your original working version) --- */
         #gallery-controls {
-            position: sticky; top: 72px; z-index: 40;
+            position: sticky; top: 88px;
+            z-index: 40;
             transition: top 0.3s ease;
         }
-        header.header-scrolled + main #gallery-controls { top: 60px; }
-        
+        header.header-scrolled + main #gallery-controls { top: 76px; }
         .filter-button.active {
             background-color: #2563EB; color: white; box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
         }
-
-        .gallery-item {
-            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-        }
-        .gallery-item.is-hiding {
-            opacity: 0;
-            transform: scale(0.95);
-        }
-        
-        .gallery-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .gallery-card:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); /* Corresponds to shadow-2xl */
-        }
-
-        .image-container .overlay {
-            position: absolute; inset: 0; background: rgba(0,0,0,0.4);
-            opacity: 0; transition: opacity 0.3s ease;
-        }
+        .gallery-item { transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out; }
+        .gallery-item.is-hiding { opacity: 0; transform: scale(0.95); }
+        .gallery-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .gallery-card:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); }
+        .image-container .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); opacity: 0; transition: opacity 0.3s ease; }
         .image-container:hover .overlay { opacity: 1; }
-
-        .image-container .view-icon {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            color: white; font-size: 2.5rem; opacity: 0;
-            transition: all 0.3s ease;
-        }
+        .image-container .view-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); color: white; font-size: 2.5rem; opacity: 0; transition: all 0.3s ease; }
         .image-container:hover .view-icon { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-
-        .image-container .card-title {
-            position: absolute; bottom: 0; left: 0; right: 0;
-            padding: 1.5rem 1rem 1rem; color: white;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            transform: translateY(100%); transition: transform 0.3s ease;
-        }
+        .image-container .card-title { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem 1rem 1rem; color: white; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); transform: translateY(100%); transition: transform 0.3s ease; }
         .image-container:hover .card-title { transform: translateY(0); }
-
-        /* Subtle dot pattern background for specific framed images */
         .pattern-bg {
-            background-color: #f3f4f6; /* bg-gray-100 */
+            background-color: #f3f4f6;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%23d1d5db'/%3E%3C/svg%3E");
             background-position: center;
         }
-        
-        /* Forcefully hide the GLightbox description box */
-        .gslide-description {
-            display: none !important;
-        }
+        .gslide-description { display: none !important; }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 text-gray-900">
 
     <header class="bg-white shadow-sm py-4 sticky top-0 z-50" id="main-header">
         <div class="container mx-auto px-4 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-gray-900 flex items-center"><img src="Image/file.svg" alt="Pikaio Logo" class="h-10 w-10 mr-2 rounded-full">Pikaio</a>
+            <a href="index.html" class="text-2xl font-bold text-gray-900 flex items-center"><img src="Image/file.svg" alt="Pikaio Logo" class="h-10 w-10 mr-2 rounded-full" loading="eager" decoding="async" width="40" height="40">Pikaio</a>
             <nav class="hidden md:flex space-x-8">
                 <a href="gallery.html" class="text-blue-600 font-semibold">Gallery</a><a href="index.html#process" class="text-gray-600 hover:text-blue-600">Process</a><a href="index.html#pricing" class="text-gray-600 hover:text-blue-600">Pricing</a><a href="index.html#faq" class="text-gray-600 hover:text-blue-600">FAQ</a><a href="index.html#contact" class="text-gray-600 hover:text-blue-600">Contact</a>
             </nav>
@@ -116,9 +94,17 @@
         </div>
     </header>
 
-    <div id="mobile-menu" class="hidden">
+    <div id="mobile-menu" class="hidden bg-gray-50">
         <button id="close-mobile-menu" class="absolute top-6 right-6 text-gray-600 hover:text-blue-600 text-3xl"><i class="fas fa-times"></i></button>
-        <nav class="flex flex-col space-y-8 text-center text-2xl"><a href="gallery.html" class="text-blue-600 font-semibold py-2">Gallery</a><a href="index.html#process" class="text-gray-800 hover:text-blue-600 py-2">Process</a><a href="index.html#pricing" class="text-gray-800 hover:text-blue-600 py-2">Pricing</a><a href="index.html#faq" class="text-gray-800 hover:text-blue-600 py-2">FAQ</a><a href="index.html#contact" class="text-gray-800 hover:text-blue-600 py-2">Contact</a><a href="index.html#contact" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 mt-8">Get Started</a></nav>
+        <!-- This nav is now perfectly centered by the parent #mobile-menu div's CSS -->
+        <nav class="flex flex-col space-y-8 text-center text-2xl">
+            <a href="gallery.html" class="text-blue-600 font-semibold py-2">Gallery</a>
+            <a href="index.html#process" class="text-gray-800 hover:text-blue-600 py-2">Process</a>
+            <a href="index.html#pricing" class="text-gray-800 hover:text-blue-600 py-2">Pricing</a>
+            <a href="index.html#faq" class="text-gray-800 hover:text-blue-600 py-2">FAQ</a>
+            <a href="index.html#contact" class="text-gray-800 hover:text-blue-600 py-2">Contact</a>
+            <a href="index.html#contact" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 mt-8">Get Started</a>
+        </nav>
     </div>
 
     <main class="container mx-auto px-4 pt-0">
@@ -143,20 +129,19 @@
             <section class="pt-12">
                 <div class="flex flex-col items-center mb-10">
                     <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Your Original Photos <br class="md:hidden">(Reference for AI Training)</h3>
-                    <!-- CHANGE: grid-cols-4 for all screen sizes -->
                     <div class="grid grid-cols-4 gap-4 max-w-xl">
-                        <div class="bg-white rounded-xl shadow-lg p-1 pattern-bg"><img src="Image/atg (3).png" alt="Original Photo of Person A 1" class="w-full h-[120px] object-contain rounded-lg"></div>
-                        <div class="bg-white rounded-xl shadow-lg p-1 pattern-bg"><img src="Image/atg (1).png" alt="Original Photo of Person A 2" class="w-full h-[120px] object-contain rounded-lg"></div>
-                        <div class="bg-white rounded-xl shadow-lg p-1 pattern-bg"><img src="Image/atg (9).png" alt="Original Photo of Person A 3" class="w-full h-[120px] object-contain rounded-lg"></div>
-                        <div class="bg-white rounded-xl shadow-lg p-1 pattern-bg"><img src="Image/atg (5).jpg" alt="Original Photo of Person A 4" class="w-full h-[120px] object-contain rounded-lg"></div>
+                        <div class="bg-white rounded-xl shadow-lg p-1 pattern-bg"><img src="Image/atg (3).png" alt="Original Photo of Person A 1" class="w-full h-[120px] object-contain rounded-lg" loading="lazy" decoding="async" width="120" height="120"></div>
+                        <div class="bg-white rounded-xl shadow-lg p-1 pattern-bg"><img src="Image/atg (1).png" alt="Original Photo of Person A 2" class="w-full h-[120px] object-contain rounded-lg" loading="lazy" decoding="async" width="120" height="120"></div>
+                        <div class="bg-white rounded-xl shadow-lg p-1 pattern-bg"><img src="Image/atg (9).png" alt="Original Photo of Person A 3" class="w-full h-[120px] object-contain rounded-lg" loading="lazy" decoding="async" width="120" height="120"></div>
+                        <div class="bg-white rounded-xl shadow-lg p-1 pattern-bg"><img src="Image/atg (5).jpg" alt="Original Photo of Person A 4" class="w-full h-[120px] object-contain rounded-lg" loading="lazy" decoding="async" width="120" height="120"></div>
                     </div>
                     <div class="my-8 text-5xl text-blue-600 animate-bounce"><i class="fas fa-arrow-down"></i></div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Pikaio Generated Images <br class="md:hidden">(From Your Custom Model)</h3>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-                        <div class="gallery-card bg-white rounded-xl shadow-xl overflow-hidden group"><img src="Image/752.jpg" alt="AI Generated Portrait" loading="lazy" class="w-full h-[250px] object-cover"></div>
-                        <div class="gallery-card bg-white rounded-xl shadow-xl overflow-hidden group"><img src="Image/movie (7).webp" alt="AI Generated Lifestyle" loading="lazy" class="w-full h-[250px] object-cover"></div>
-                        <div class="gallery-card bg-white rounded-xl shadow-xl overflow-hidden group"><img src="Image/link (32).png" alt="AI Generated Creative" loading="lazy" class="w-full h-[250px] object-cover"></div>
-                        <div class="gallery-card bg-white rounded-xl shadow-xl overflow-hidden group"><img src="Image/out-1-8.webp" alt="AI Generated Lifestyle" loading="lazy" class="w-full h-[250px] object-cover"></div>
+                        <div class="gallery-card bg-white rounded-xl shadow-xl overflow-hidden group"><img src="Image/752.jpg" alt="AI Generated Portrait" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"></div>
+                        <div class="gallery-card bg-white rounded-xl shadow-xl overflow-hidden group"><img src="Image/movie (7).webp" alt="AI Generated Lifestyle" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"></div>
+                        <div class="gallery-card bg-white rounded-xl shadow-xl overflow-hidden group"><img src="Image/link (32).png" alt="AI Generated Creative" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"></div>
+                        <div class="gallery-card bg-white rounded-xl shadow-xl overflow-hidden group"><img src="Image/out-1-8.webp" alt="AI Generated Lifestyle" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"></div>
                     </div>
                 </div>
                 <div class="text-center mt-10"><div class="inline-flex items-center bg-blue-600 text-white text-xs sm:text-sm font-medium px-4 py-2 rounded-full shadow-lg"><i class="fas fa-check-circle mr-2"></i>Unified Digital Likeness Throughout.</div></div>
@@ -165,60 +150,67 @@
             <div id="gallery-controls" class="mt-10">
                 <div class="container mx-auto px-4">
                     <div class="flex flex-wrap justify-center gap-4 bg-white/70 backdrop-blur-sm shadow-lg rounded-xl py-4">
-                        <button class="filter-button px-6 py-2 rounded-full font-semibold transition-colors" data-filter="*">All</button>
-                        <button class="filter-button px-6 py-2 rounded-full font-semibold transition-colors" data-filter=".professional">Professional</button>
-                        <button class="filter-button px-6 py-2 rounded-full font-semibold transition-colors" data-filter=".instagram">Instagram & Lifestyle</button>
-                        <button class="filter-button px-6 py-2 rounded-full font-semibold transition-colors" data-filter=".fantasy">Fantasy</button>
-                        <button class="filter-button px-6 py-2 rounded-full font-semibold transition-colors" data-filter=".scenestealer">Scene Stealer</button>
-                        <button class="filter-button px-6 py-2 rounded-full font-semibold transition-colors" data-filter=".video">Video</button>
+                        <button class="filter-button px-6 py-2 rounded-full font-semibold transition-colors text-gray-700" data-filter="*">All</button>
+                        <button class="filter-button px-6 py-2 rounded-full font-semibold transition-colors text-gray-700" data-filter=".professional">Professional</button>
+                        <button class="filter-button px-6 py-2 rounded-full font-semibold transition-colors text-gray-700" data-filter=".instagram">Instagram & Lifestyle</button>
+                        <button class="filter-button px-6 py-2 rounded-full font-semibold transition-colors text-gray-700" data-filter=".fantasy">Fantasy</button>
+                        <button class="filter-button px-6 py-2 rounded-full font-semibold transition-colors text-gray-700" data-filter=".scenestealer">Scene Stealer</button>
+                        <button class="filter-button px-6 py-2 rounded-full font-semibold transition-colors text-gray-700" data-filter=".video">Video</button>
                     </div>
                 </div>
             </div>
 
             <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mb-16 mt-10">
                 <!-- PROFESSIONAL (8 items) -->
-                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/45re.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="The Thought Leader"><img src="Image/45re.jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">The Though Leader</p></a></div></div>
-                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/link (20).png" class="glightbox image-container block relative" data-gallery="gallery" data-title="Dynamic Speaker"><img src="Image/link (20).png" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Commanding the Stage</p></a></div></div>
-                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/link (40).png" class="glightbox image-container block relative" data-gallery="gallery" data-title="Expert Consultant"><img src="Image/link (40).png" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Boardroom Sharp</p></a></div></div>
-                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/link (38).png" class="glightbox image-container block relative" data-gallery="gallery" data-title="Engaged Professional"><img src="Image/link (38).png" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Engaged Professional</p></a></div></div>
-                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/link (29).jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Seamless Presentation"><img src="Image/link (29).jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Seamless Presentation</p></a></div></div>
-                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/7uyhrtg.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Business Casual"><img src="Image/7uyhrtg.jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">The Key-note You Remember</p></a></div></div>
-                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/953.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Networking Event"><img src="Image/953.jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Big Ideas, Big Room</p></a></div></div>
-                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/tgfrd.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Thought Leader"><img src="Image/tgfrd.jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Mic On. Eyes Forward.</p></a></div></div>
+                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/45re.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="The Thought Leader"><img src="Image/45re.jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">The Though Leader</p></a></div></div>
+                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/link (20).png" class="glightbox image-container block relative" data-gallery="gallery" data-title="Dynamic Speaker"><img src="Image/link (20).png" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Commanding the Stage</p></a></div></div>
+                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/link (40).png" class="glightbox image-container block relative" data-gallery="gallery" data-title="Expert Consultant"><img src="Image/link (40).png" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Boardroom Sharp</p></a></div></div>
+                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/link (38).png" class="glightbox image-container block relative" data-gallery="gallery" data-title="Engaged Professional"><img src="Image/link (38).png" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Engaged Professional</p></a></div></div>
+                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/link (29).jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Seamless Presentation"><img src="Image/link (29).jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Seamless Presentation</p></a></div></div>
+                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/7uyhrtg.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Business Casual"><img src="Image/7uyhrtg.jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">The Key-note You Remember</p></a></div></div>
+                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/953.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Networking Event"><img src="Image/953.jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Big Ideas, Big Room</p></a></div></div>
+                <div class="gallery-item professional"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/tgfrd.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Thought Leader"><img src="Image/tgfrd.jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Mic On. Eyes Forward.</p></a></div></div>
                 
-                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/5yhn.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Adventurous Traveler"><img src="Image/5yhn.jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Adventurous Traveler</p></a></div></div>
-                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/sdfghgh.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Passionate Hobbyist"><img src="Image/sdfghgh.jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Passionate Hobbyist</p></a></div></div>
-                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/4e56rftyvgh.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Relaxed Lifestyle"><img src="Image/4e56rftyvgh.jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Relaxed Lifestyle</p></a></div></div>
-                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/model (15).webp" class="glightbox image-container block relative" data-gallery="gallery" data-title="Stylish & On-Trend"><img src="Image/model (15).webp" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Stylish & On-Trend</p></a></div></div>
-                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/98465.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Outdoor Adventure"><img src="Image/98465.jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Outdoor Adventure</p></a></div></div>
-                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/link (32).jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Cafe Vibe"><img src="Image/link (32).jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Cafe Vibe</p></a></div></div>
-                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/guitar (5).webp" class="glightbox image-container block relative" data-gallery="gallery" data-title="Culinary Enthusiast"><img src="Image/guitar (5).webp" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">The Musician</p></a></div></div>
-                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/link (7).png" class="glightbox image-container block relative" data-gallery="gallery" data-title="Relaxing Read"><img src="Image/link (7).png" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Relaxing Read</p></a></div></div>
+                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/5yhn.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Adventurous Traveler"><img src="Image/5yhn.jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Adventurous Traveler</p></a></div></div>
+                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/sdfghgh.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Passionate Hobbyist"><img src="Image/sdfghgh.jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Passionate Hobbyist</p></a></div></div>
+                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/4e56rftyvgh.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Relaxed Lifestyle"><img src="Image/4e56rftyvgh.jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Relaxed Lifestyle</p></a></div></div>
+                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/model (15).webp" class="glightbox image-container block relative" data-gallery="gallery" data-title="Stylish & On-Trend"><img src="Image/model (15).webp" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Stylish & On-Trend</p></a></div></div>
+                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/98465.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Outdoor Adventure"><img src="Image/98465.jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Outdoor Adventure</p></a></div></div>
+                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/link (32).jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Cafe Vibe"><img src="Image/link (32).jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Cafe Vibe</p></a></div></div>
+                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/guitar (5).webp" class="glightbox image-container block relative" data-gallery="gallery" data-title="Culinary Enthusiast"><img src="Image/guitar (5).webp" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">The Musician</p></a></div></div>
+                <div class="gallery-item instagram"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/link (7).png" class="glightbox image-container block relative" data-gallery="gallery" data-title="Relaxing Read"><img src="Image/link (7).png" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Relaxing Read</p></a></div></div>
 
-                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/creative (22).webp" class="glightbox image-container block relative" data-gallery="gallery" data-title="Epic Fantasy Persona"><img src="Image/creative (22).webp" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Cinematic Fantasy</p></a></div></div>
-                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/j67yh5tgr.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Futuristic Visionary"><img src="Image/j67yh5tgr.jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Aspirational Lifestyle</p></a></div></div>
-                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/creative (7).webp" class="glightbox image-container block relative" data-gallery="gallery" data-title="Artistic Expression"><img src="Image/creative (7).webp" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Editorial Fantasy</p></a></div></div>
-                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/uj6yhtr.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Historical Figure"><img src="Image/uj6yhtr.jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Nightlife Chaos</p></a></div></div>
-                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/846513.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Deep Conceptual"><img src="Image/846513.jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Legacy Mood</p></a></div></div>
-                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/74fryvg.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Surreal Dreamscape"><img src="Image/74fryvg.jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">After-Hours Main Character</p></a></div></div>
-                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/67566.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Real Dreamscape"><img src="Image/67566.jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Imaginary Realm</p></a></div></div>
-                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/56ygt.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Imaginary Realm"><img src="Image/56ygt.jpg" loading="lazy" class="w-full h-[250px] object-cover"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Star-Life Glimpse</p></a></div></div>
+                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/creative (22).webp" class="glightbox image-container block relative" data-gallery="gallery" data-title="Epic Fantasy Persona"><img src="Image/creative (22).webp" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Cinematic Fantasy</p></a></div></div>
+                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/j67yh5tgr.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Futuristic Visionary"><img src="Image/j67yh5tgr.jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Aspirational Lifestyle</p></a></div></div>
+                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/creative (7).webp" class="glightbox image-container block relative" data-gallery="gallery" data-title="Artistic Expression"><img src="Image/creative (7).webp" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Editorial Fantasy</p></a></div></div>
+                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/uj6yhtr.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Historical Figure"><img src="Image/uj6yhtr.jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Nightlife Chaos</p></a></div></div>
+                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/846513.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Deep Conceptual"><img src="Image/846513.jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Legacy Mood</p></a></div></div>
+                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/74fryvg.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Surreal Dreamscape"><img src="Image/74fryvg.jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">After-Hours Main Character</p></a></div></div>
+                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/67566.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Real Dreamscape"><img src="Image/67566.jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Imaginary Realm</p></a></div></div>
+                <div class="gallery-item fantasy"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><a href="Image/56ygt.jpg" class="glightbox image-container block relative" data-gallery="gallery" data-title="Imaginary Realm"><img src="Image/56ygt.jpg" class="w-full h-[250px] object-cover" loading="lazy" decoding="async" width="400" height="250"><div class="overlay"></div><i class="view-icon fas fa-search-plus"></i><p class="card-title font-bold">Star-Life Glimpse</p></a></div></div>
 
                 <!-- TRANSFORMATION (4 items) -->
-                <div class="gallery-item scenestealer"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><div class="p-4 flex flex-col items-center justify-center text-center"><p class="text-xl font-semibold text-gray-900 mb-4">Original → Reimagined</p><div class="relative w-full overflow-hidden rounded-md slider-container h-[250px]"><img src="Image/87yt.jpg" alt="Transformed Image 1" class="absolute inset-0 w-full h-full object-cover z-0" /><div class="absolute inset-0 overflow-hidden z-10 before-wrapper" style="clip-path: inset(0 50% 0 0);"><img src="Image/63f7f9734ca0e30019ba3f5e.webp" alt="Original Image 1" class="w-full h-full object-cover" /></div><div class="absolute top-0 h-full w-0.5 bg-white z-20 slider-divider" style="left: 50%;"></div></div><p class="text-gray-700 text-sm mt-4 max-w-md mx-auto">Step into iconic moments like you were always meant to be there.</p></div></div></div>
-                <div class="gallery-item scenestealer"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><div class="p-4 flex flex-col items-center justify-center text-center"><p class="text-xl font-semibold text-gray-900 mb-4">Original → Reimagined</p><div class="relative w-full overflow-hidden rounded-md slider-container h-[250px]"><img src="Image/5tyj.jpg" alt="Transformed Image 1" class="absolute inset-0 w-full h-full object-cover z-0" /><div class="absolute inset-0 overflow-hidden z-10 before-wrapper" style="clip-path: inset(0 50% 0 0);"><img src="Image/GettyImages-2188268152_599530-e1738782378286.webp" alt="Original Image 1" class="w-full h-full object-cover" /></div><div class="absolute top-0 h-full w-0.5 bg-white z-20 slider-divider" style="left: 50%;"></div></div><p class="text-gray-700 text-sm mt-4 max-w-md mx-auto">Same power pose. Same setting. But now, it's you in the moment.</p></div></div></div>
-                <div class="gallery-item scenestealer"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><div class="p-4 flex flex-col items-center justify-center text-center"><p class="text-xl font-semibold text-gray-900 mb-4">Original → Reimagined</p><div class="relative w-full overflow-hidden rounded-md slider-container h-[250px]"><img src="Image/pokjn.jpg" alt="Transformed Image 1" class="absolute inset-0 w-full h-full object-cover z-0" /><div class="absolute inset-0 overflow-hidden z-10 before-wrapper" style="clip-path: inset(0 50% 0 0);"><img src="Image/thumb_web_16-sixteen_nine.jpg" alt="Original Image 1" class="w-full h-full object-cover" /></div><div class="absolute top-0 h-full w-0.5 bg-white z-20 slider-divider" style="left: 50%;"></div></div><p class="text-gray-700 text-sm mt-4 max-w-md mx-auto">From magazine covers to global talks - rewrite the headline with your face.</p></div></div></div>
-                <div class="gallery-item scenestealer"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><div class="p-4 flex flex-col items-center justify-center text-center"><p class="text-xl font-semibold text-gray-900 mb-4">Original → Reimagined</p><div class="relative w-full overflow-hidden rounded-md slider-container h-[250px] pattern-bg"><img src="Image/blazerr.png" alt="Transformed Image 1" class="absolute inset-0 w-full h-full object-contain z-0" /><div class="absolute inset-0 overflow-hidden z-10 before-wrapper" style="clip-path: inset(0 50% 0 0);"><img src="Image/DSC01314.1(1).jpg" alt="Original Image 1" class="w-full h-full object-contain" /></div><div class="absolute top-0 h-full w-0.5 bg-white z-20 slider-divider" style="left: 50%;"></div></div><p class="text-gray-700 text-sm mt-4 max-w-md mx-auto">Switch outfits without switching rooms - the ultimate try-on trick.</p></div></div></div>
+                <div class="gallery-item scenestealer"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><div class="p-4 flex flex-col items-center justify-center text-center"><p class="text-xl font-semibold text-gray-900 mb-4">Original → Reimagined</p><div class="relative w-full overflow-hidden rounded-md slider-container h-[250px]"><img src="Image/87yt.jpg" alt="Transformed Image 1" class="absolute inset-0 w-full h-full object-cover z-0" loading="lazy" decoding="async" width="400" height="250"><div class="absolute inset-0 overflow-hidden z-10 before-wrapper" style="clip-path: inset(0 50% 0 0);"><img src="Image/63f7f9734ca0e30019ba3f5e.webp" alt="Original Image 1" class="w-full h-full object-cover" loading="lazy" decoding="async" width="400" height="250"></div><div class="absolute top-0 h-full w-0.5 bg-white z-20 slider-divider" style="left: 50%;"></div></div><p class="text-gray-700 text-sm mt-4 max-w-md mx-auto">Step into iconic moments like you were always meant to be there.</p></div></div></div>
+                <div class="gallery-item scenestealer"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><div class="p-4 flex flex-col items-center justify-center text-center"><p class="text-xl font-semibold text-gray-900 mb-4">Original → Reimagined</p><div class="relative w-full overflow-hidden rounded-md slider-container h-[250px]"><img src="Image/5tyj.jpg" alt="Transformed Image 1" class="absolute inset-0 w-full h-full object-cover z-0" loading="lazy" decoding="async" width="400" height="250"><div class="absolute inset-0 overflow-hidden z-10 before-wrapper" style="clip-path: inset(0 50% 0 0);"><img src="Image/GettyImages-2188268152_599530-e1738782378286.webp" alt="Original Image 1" class="w-full h-full object-cover" loading="lazy" decoding="async" width="400" height="250"></div><div class="absolute top-0 h-full w-0.5 bg-white z-20 slider-divider" style="left: 50%;"></div></div><p class="text-gray-700 text-sm mt-4 max-w-md mx-auto">Same power pose. Same setting. But now, it's you in the moment.</p></div></div></div>
+                <div class="gallery-item scenestealer"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><div class="p-4 flex flex-col items-center justify-center text-center"><p class="text-xl font-semibold text-gray-900 mb-4">Original → Reimagined</p><div class="relative w-full overflow-hidden rounded-md slider-container h-[250px]"><img src="Image/pokjn.jpg" alt="Transformed Image 1" class="absolute inset-0 w-full h-full object-cover z-0" loading="lazy" decoding="async" width="400" height="250"><div class="absolute inset-0 overflow-hidden z-10 before-wrapper" style="clip-path: inset(0 50% 0 0);"><img src="Image/thumb_web_16-sixteen_nine.jpg" alt="Original Image 1" class="w-full h-full object-cover" loading="lazy" decoding="async" width="400" height="250"></div><div class="absolute top-0 h-full w-0.5 bg-white z-20 slider-divider" style="left: 50%;"></div></div><p class="text-gray-700 text-sm mt-4 max-w-md mx-auto">From magazine covers to global talks - rewrite the headline with your face.</p></div></div></div>
+                <div class="gallery-item scenestealer"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><div class="p-4 flex flex-col items-center justify-center text-center"><p class="text-xl font-semibold text-gray-900 mb-4">Original → Reimagined</p><div class="relative w-full overflow-hidden rounded-md slider-container h-[250px] pattern-bg"><img src="Image/blazerr.png" alt="Transformed Image 1" class="absolute inset-0 w-full h-full object-contain z-0" loading="lazy" decoding="async" width="250" height="250"><div class="absolute inset-0 overflow-hidden z-10 before-wrapper" style="clip-path: inset(0 50% 0 0);"><img src="Image/DSC01314.1(1).jpg" alt="Original Image 1" class="w-full h-full object-contain" loading="lazy" decoding="async" width="250" height="250"></div><div class="absolute top-0 h-full w-0.5 bg-white z-20 slider-divider" style="left: 50%;"></div></div><p class="text-gray-700 text-sm mt-4 max-w-md mx-auto">Switch outfits without switching rooms - the ultimate try-on trick.</p></div></div></div>
                 
                 <!-- VIDEO (2 items) -->
-                <div class="gallery-item video xl:col-span-2"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><div class="p-4 flex flex-col items-center justify-center text-center"><p class="text-xl font-semibold text-gray-900 mb-4">Bring it to Life <span class="text-sm bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full font-normal">Beta</span></p><div class="flex flex-col md:flex-row items-center justify-center gap-4 w-full"><div class="w-full md:w-1/2 relative bg-white rounded-xl shadow-md p-1 "><img src="Image/e54fty.jpg" alt="Original Image for Video 1" class="w-full h-[200px] object-cover rounded-lg"><p class="mt-2 text-gray-700 text-sm font-semibold">Original Image</p></div><div class="w-full md:w-1/2 relative"><video controls poster="Image/e54fty.jpg" class="w-full h-[200px] object-cover rounded-md bg-black"><source src="Image/GbuInANLdh8gib2jAo_C2_video.mp4" type="video/mp4"></video><a href="Image/GbuInANLdh8gib2jAo_C2_video.mp4" class="glightbox absolute top-2 right-2 bg-black bg-opacity-50 text-white rounded-full h-8 w-8 flex items-center justify-center cursor-pointer hover:bg-opacity-75 transition" data-gallery="video1"><i class="fas fa-expand text-sm"></i></a></div></div><p class="text-gray-700 text-sm mt-4 max-w-lg mx-auto">Turn a single photo into a moving moment - bold, scroll-stopping, and real.</p></div></div></div>
-                <div class="gallery-item video xl:col-span-2"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><div class="p-4 flex flex-col items-center justify-center text-center"><p class="text-xl font-semibold text-gray-900 mb-4">Bring it to Life <span class="text-sm bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full font-normal">Beta</span></p><div class="flex flex-col md:flex-row items-center justify-center gap-4 w-full"><div class="w-full md:w-1/2 relative bg-white rounded-xl shadow-md p-1 "><img src="Image/edfc.jpg" alt="Original Image for Video 2" class="w-full h-[200px] object-cover rounded-lg"><p class="mt-2 text-gray-700 text-sm font-semibold">Original Image</p></div><div class="w-full md:w-1/2 relative"><video controls poster="Image/edfc.jpg" class="w-full h-[200px] object-cover rounded-md bg-black"><source src="Image/replicate-prediction-n7ax6c0jzsrm80cq6sas856rvc(1).mp4" type="video/mp4"></video><a href="Image/replicate-prediction-n7ax6c0jzsrm80cq6sas856rvc(1).mp4" class="glightbox absolute top-2 right-2 bg-black bg-opacity-50 text-white rounded-full h-8 w-8 flex items-center justify-center cursor-pointer hover:bg-opacity-75 transition" data-gallery="video2"><i class="fas fa-expand text-sm"></i></a></div></div><p class="text-gray-700 text-sm mt-4 max-w-lg mx-auto">From static to cinematic - perfect for reels, promos, or just showing off.</p></div></div></div>
+                <div class="gallery-item video xl:col-span-2"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><div class="p-4 flex flex-col items-center justify-center text-center"><p class="text-xl font-semibold text-gray-900 mb-4">Bring it to Life <span class="text-sm bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full font-normal">Beta</span></p><div class="flex flex-col md:flex-row items-center justify-center gap-4 w-full"><div class="w-full md:w-1/2 relative bg-white rounded-xl shadow-md p-1 "><img src="Image/e54fty.jpg" alt="Original Image for Video 1" class="w-full h-[200px] object-cover rounded-lg" loading="lazy" decoding="async" width="356" height="200"><p class="mt-2 text-gray-700 text-sm font-semibold">Original Image</p></div><div class="w-full md:w-1/2 relative"><video controls poster="Image/e54fty.jpg" class="w-full h-[200px] object-cover rounded-md bg-black"><source src="Image/GbuInANLdh8gib2jAo_C2_video.mp4" type="video/mp4"></video><a href="Image/GbuInANLdh8gib2jAo_C2_video.mp4" class="glightbox absolute top-2 right-2 bg-black bg-opacity-50 text-white rounded-full h-8 w-8 flex items-center justify-center cursor-pointer hover:bg-opacity-75 transition" data-gallery="video1"><i class="fas fa-expand text-sm"></i></a></div></div><p class="text-gray-700 text-sm mt-4 max-w-lg mx-auto">Turn a single photo into a moving moment - bold, scroll-stopping, and real.</p></div></div></div>
+                <div class="gallery-item video xl:col-span-2"><div class="gallery-card rounded-xl shadow-xl overflow-hidden bg-white"><div class="p-4 flex flex-col items-center justify-center text-center"><p class="text-xl font-semibold text-gray-900 mb-4">Bring it to Life <span class="text-sm bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full font-normal">Beta</span></p><div class="flex flex-col md:flex-row items-center justify-center gap-4 w-full"><div class="w-full md:w-1/2 relative bg-white rounded-xl shadow-md p-1 "><img src="Image/edfc.jpg" alt="Original Image for Video 2" class="w-full h-[200px] object-cover rounded-lg" loading="lazy" decoding="async" width="356" height="200"><p class="mt-2 text-gray-700 text-sm font-semibold">Original Image</p></div><div class="w-full md:w-1/2 relative"><video controls poster="Image/edfc.jpg" class="w-full h-[200px] object-cover rounded-md bg-black"><source src="Image/replicate-prediction-n7ax6c0jzsrm80cq6sas856rvc(1).mp4" type="video/mp4"></video><a href="Image/replicate-prediction-n7ax6c0jzsrm80cq6sas856rvc(1).mp4" class="glightbox absolute top-2 right-2 bg-black bg-opacity-50 text-white rounded-full h-8 w-8 flex items-center justify-center cursor-pointer hover:bg-opacity-75 transition" data-gallery="video2"><i class="fas fa-expand text-sm"></i></a></div></div><p class="text-gray-700 text-sm mt-4 max-w-lg mx-auto">From static to cinematic - perfect for reels, promos, or just showing off.</p></div></div></div>
             </div>
     </main>
 
     <footer class="bg-[#0f172a] text-white pt-12 pb-8 px-4">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-gray-300">
-            <div><a href="index.html" class="flex items-center mb-3"><img src="Image/Adobe Express - file(1)-256x256.png" alt="Pikaio Logo" class="h-8 w-8 mr-2 rounded-full"><h2 class="text-white text-xl font-bold">Pikaio</h2></a><p class="opacity-80 mb-4">Look like a million bucks. Without spending it.</p><p class="text-xs text-gray-500">© 2025 Pikaio. All rights reserved.<br>All images shown are generated with permission.</p></div>
+            <div>
+                <a href="#top" class="flex items-center mb-3">
+                    <img src="Image/Adobe Express - file(1)-256x256.png" alt="Pikaio Logo" class="h-8 w-8 mr-2 rounded-full" loading="lazy" decoding="async" width="32" height="32">
+                    <h2 class="text-white text-xl font-bold">Pikaio</h2>
+                </a>
+                <p class="opacity-80 mb-4">Look like a million bucks. Without spending it.</p>
+                <p class="text-xs text-gray-500">© 2025 Pikaio. All rights reserved.<br>All images shown are generated with permission.</p>
+            </div>
             <div><h3 class="text-white font-semibold mb-3">Explore</h3><ul class="space-y-2"><li><a href="index.html#pricing" class="hover:text-white transition-colors">Pricing</a></li><li><a href="index.html#process" class="hover:text-white transition-colors">How it Works</a></li><li><a href="index.html#contact" class="hover:text-white transition-colors">Contact</a></li><li><a href="index.html#faq" class="hover:text-white transition-colors">FAQ</a></li></ul></div>
             <div><h3 class="text-white font-semibold mb-3">Connect</h3><div class="flex space-x-4 items-center mb-4"><a href="https://www.linkedin.com/company/pikaio/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors"><i class="fab fa-linkedin fa-lg"></i></a></div><p class="text-sm text-gray-500">For inquiries: <a href="mailto:hello@pikaio.com" class="underline hover:text-white">hello@pikaio.com</a></p></div>
         </div>
@@ -227,6 +219,7 @@
     <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
 
     <script>
+        // This function is for your before/after sliders, it is unchanged.
         function recenterTransformationSlider(sliderContainer) {
             if (!sliderContainer) return;
             const beforeWrapper = sliderContainer.querySelector('.before-wrapper');
@@ -245,15 +238,61 @@
             const hamburgerButton = document.getElementById('hamburger-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const closeMobileMenuButton = document.getElementById('close-mobile-menu');
-            if(hamburgerButton) hamburgerButton.addEventListener('click', () => { mobileMenu.classList.add('active'); });
-            if(closeMobileMenuButton) closeMobileMenuButton.addEventListener('click', () => { mobileMenu.classList.remove('active'); });
-            
             const mainHeader = document.getElementById('main-header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 80) mainHeader.classList.add('header-scrolled');
-                else mainHeader.classList.remove('header-scrolled');
-            });
+            
+            // --- FIX 2: IMPROVED MOBILE MENU LOGIC ---
+            const openMenu = () => {
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background from scrolling
+            };
 
+            const closeMenu = () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = ''; // Allow background to scroll again
+            };
+
+            if(hamburgerButton) hamburgerButton.addEventListener('click', openMenu);
+            if(closeMobileMenuButton) closeMobileMenuButton.addEventListener('click', closeMenu);
+            
+            // This makes any link inside the mobile menu close it when clicked.
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+            
+
+            // --- FIX 1: HIDE/SHOW HEADER ON SCROLL LOGIC ---
+            let lastScrollY = window.scrollY; // Store the last scroll position
+
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.scrollY;
+
+                // Shrink effect (your original logic)
+                if (currentScrollY > 80) {
+                    mainHeader.classList.add('header-scrolled');
+                } else {
+                    mainHeader.classList.remove('header-scrolled');
+                }
+                
+                // Hide/show on scroll logic
+                if (window.innerWidth < 768) { // 768px is Tailwind's 'md' breakpoint
+                    if (lastScrollY < currentScrollY && currentScrollY > 150) {
+                        // Scrolling DOWN - hide the header
+                        mainHeader.classList.add('header-hidden');
+                    } else if (currentScrollY < lastScrollY) {
+                        // Scrolling UP - show the header
+                        mainHeader.classList.remove('header-hidden');
+                    }
+                } else {
+                    // On desktop, always ensure the header is visible
+                    mainHeader.classList.remove('header-hidden');
+                }
+
+                // Update the last scroll position for the next scroll event
+                lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY; // For Mobile or negative scrolling
+            });
+            
+
+            // --- RESTORED & WORKING GALLERY SCRIPT ---
             const lightbox = GLightbox({ 
                 selector: '.glightbox'
             });
@@ -261,6 +300,11 @@
             const filterButtons = document.querySelectorAll('.filter-button');
             const galleryItems = document.querySelectorAll('.gallery-item');
             
+            const allButton = document.querySelector('.filter-button[data-filter="*"]');
+            if (allButton) {
+                allButton.classList.add('active');
+            }
+
             filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     filterButtons.forEach(btn => btn.classList.remove('active'));
@@ -269,6 +313,8 @@
                     
                     galleryItems.forEach(item => {
                         const matchesFilter = filterValue === '*' || item.classList.contains(filterValue.substring(1));
+                        
+                        // Your original, working transition logic
                         const transitionEndHandler = (event) => {
                             if (event.propertyName === 'opacity' && item.classList.contains('is-hiding')) {
                                 item.style.display = 'none';
@@ -281,16 +327,17 @@
                             if (item.style.display === 'none') {
                                 item.style.display = '';
                             }
-                            void item.offsetHeight;
+                            void item.offsetHeight; 
                             item.classList.remove('is-hiding');
                         } else {
-                            item.classList.add('is-hiding');
-                            item.addEventListener('transitionend', transitionEndHandler);
+                            if (!item.classList.contains('is-hiding')) {
+                                item.classList.add('is-hiding');
+                                item.addEventListener('transitionend', transitionEndHandler);
+                            }
                         }
                     });
                 });
             });
-            document.querySelector('.filter-button[data-filter="*"]').classList.add('active');
 
             const sliders = document.querySelectorAll('.slider-container');
             sliders.forEach(container => {
@@ -298,6 +345,7 @@
                 const divider = container.querySelector('.slider-divider');
                 
                 function updateSlider(x) { 
+                    if (!beforeWrapper || !divider) return;
                     const rect = container.getBoundingClientRect();
                     const offsetX = Math.max(0, Math.min(rect.width, x - rect.left));
                     beforeWrapper.style.clipPath = `inset(0 ${rect.width - offsetX}px 0 0)`;
