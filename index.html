@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
     
-    <title>Pikaio: One Person. Endless Roles. Zero Photoshoots.</title>
-    <!-- Favicon -->
+    <title>Pikaio | AI Headshots & Professional Branding Photos</title>
+    <meta name="description" content="Stop wasting time and money on photoshoots. Pikaio uses custom AI to generate stunning, photorealistic professional photos and headshots for your brand.">
+
     <!-- START: FAVICON CODE -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -49,6 +50,11 @@
         .shine-on-hover { position: relative; overflow: hidden; }
         .shine-on-hover::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent); transition: left 0.6s ease; }
         .shine-on-hover:hover::before { left: 100%; }
+        
+        /* ✅ THE CSS FIX: Force a pointer cursor on purchase buttons */
+        .purchase-button {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body id="top" class="bg-gray-50 text-gray-900 dark:bg-slate-900 dark:text-gray-200 transition-colors duration-300">
@@ -97,133 +103,36 @@
         <section id="gallery-teaser" class="py-20 bg-gray-50 dark:bg-slate-900 px-4"><div class="container mx-auto"><div class="text-center mb-12"><h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Elevate Your Brand, Instantly.</h2><p class="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-6">From personal branding to full marketing campaigns, we create the exact visuals you need to build credibility.</p><div class="inline-flex items-center bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full shadow-md dark:bg-blue-900/50 dark:text-blue-300"><i class="fas fa-check-circle mr-2"></i>These images were never taken. They were made - by Pikaio.</div></div><div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"><a href="gallery.html" class="block"><div class="bg-white dark:bg-slate-800 dark:border dark:border-slate-700 rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/erty.webp" alt="Professional Portrait" class="w-full h-80 object-cover" loading="lazy" decoding="async" width="800" height="600"><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Your Professional Presence</h3><p class="text-gray-600 dark:text-gray-400">From the boardroom to the main stage. We create powerful visuals that establish you as a leader worth listening to - no studio required.</p></div></div></a><a href="gallery.html" class="block"><div class="bg-white dark:bg-slate-800 dark:border dark:border-slate-700 rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/mic.webp" alt="Business Team" class="w-full h-80 object-cover" loading="lazy" decoding="async" width="800" height="600"><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Elevate Your Company's Look</h3><p class="text-gray-600 dark:text-gray-400">Show off your brand with workspace images or location based photos - no photoshoot required.</p></div></div></a><a href="gallery.html" class="block"><div class="bg-white dark:bg-slate-800 dark:border dark:border-slate-700 rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/out-2-4.webp" alt="Lifestyle Persona" class="w-full h-80 object-cover" loading="lazy" decoding="async" width="800" height="600"><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Show the Best Version of You</h3><p class="text-gray-600 dark:text-gray-400">Whether it's travel, fitness, fashion or future-you, we help you look aspirational and authentic.</p></div></div></a><a href="gallery.html" class="block"><div class="bg-white dark:bg-slate-800 dark:border dark:border-slate-700 rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><div class="relative w-full h-80 overflow-hidden" id="slider-container"><img src="Image/567yttg.webp" alt="After Image" class="absolute inset-0 w-full h-full object-cover z-0" loading="lazy" decoding="async" width="800" height="600" /><div id="before-wrapper" class="absolute inset-0 overflow-hidden z-10"><img src="Image/getty_1421479584_200013322000928054_cijnbk.webp" alt="Before Image" class="w-full h-full object-cover" loading="lazy" decoding="async" width="800" height="600" /></div><div id="divider" class="absolute top-0 h-full w-0.5 bg-white z-20" style="left: 50%;"></div></div><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Before & After: Scene Stealer</h3><p class="text-gray-600 dark:text-gray-400">Why admire their moments when you can own them? We place you at the center of any iconic photo, flawlessly.</p></div></div></a></div><div class="text-center mt-12"><a href="gallery.html" class="shine-on-hover bg-blue-600 text-white text-lg px-8 py-4 rounded-xl shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105 duration-300 inline-flex items-center">See What's Possible<i class="fas fa-arrow-right ml-2"></i></a></div></div></section>
         <section id="process" class="py-20 bg-white dark:bg-slate-800 px-4"><div class="container mx-auto"><div class="text-center mb-16"><h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Our Simple 3-Step Process</h2><p class="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">From vision to delivery, we turn your ideas into hyper-real visuals.</p></div><div class="relative grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto"><div class="flex flex-col items-center text-center"><div class="w-20 h-20 bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 rounded-full flex items-center justify-center mb-6 shadow-md"><i class="fas fa-cloud-upload-alt text-3xl"></i></div><h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-3">1. Consult & Upload</h3><p class="text-gray-600 dark:text-gray-400">We chat to understand your goals. Then you securely upload your photos to a private cloud folder.</p></div><div class="flex flex-col items-center text-center"><div class="w-20 h-20 bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 rounded-full flex items-center justify-center mb-6 shadow-md"><i class="fa-regular fa-lightbulb text-4xl"></i></div><h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-3">2. Create & Refine</h3><p class="text-gray-600 dark:text-gray-400">We build your custom model and send a preview gallery. You give feedback, we perfect the images.</p></div><div class="flex flex-col items-center text-center"><div class="w-20 h-20 bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 rounded-full flex items-center justify-center mb-6 shadow-md"><i class="fas fa-check-circle text-3xl"></i></div><h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-3">3. Deliver</h3><p class="text-gray-600 dark:text-gray-400">Every final image is delivered via a private cloud folder—polished, high-quality, and ready to use.</p></div></div></div></section>
         
-        <!-- ✅ START OF UPDATED PRICING SECTION -->
+        <!-- PRICING SECTION -->
         <section id="pricing" class="py-20 bg-gray-50 dark:bg-slate-900 px-4">
             <div class="container mx-auto">
-                <div class="text-center mb-10">
-                    <h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">A Clear Investment in Your Vision</h2>
-                    <p class="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">Choose the package that aligns with your personal or professional goals.</p>
-                </div>
-
-                <!-- Founder's Launch Offer Banner -->
-                <div class="mb-12 text-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg p-6 max-w-4xl mx-auto shadow-xl">
-                    <h3 class="text-3xl font-bold mb-2">Founder's Launch Offer</h3>
-                    <p class="text-lg mb-1">For a limited time, get <span class="font-bold underline">50% OFF</span> any package. Be one of the first to build your visual brand with Pikaio.</p>
-                    <p class="text-sm font-semibold mt-2 opacity-90">Offer ends June 30th</p>
-                </div>
-
-                <div class="flex flex-col items-center space-y-6 mb-12">
-                    <div class="inline-flex rounded-full shadow-sm bg-white dark:bg-slate-800 dark:border dark:border-slate-700 p-1">
-                        <button id="showBusinessPricing" class="px-6 py-2 rounded-full font-semibold transition-colors duration-300">For Businesses</button>
-                        <button id="showIndividualPricing" class="px-6 py-2 rounded-full font-semibold transition-colors duration-300">For Individuals</button>
-                    </div>
-                    <div class="inline-flex rounded-full shadow-sm bg-gray-200 dark:bg-slate-800 p-1">
-                        <button id="usdButton" class="px-5 py-1 rounded-full text-sm font-semibold transition-colors duration-300" data-currency="usd">USD</button>
-                        <button id="inrButton" class="px-5 py-1 rounded-full text-sm font-semibold transition-colors duration-300" data-currency="inr">INR</button>
-                    </div>
-                </div>
-
-                <!-- Business Pricing -->
+                <div class="text-center mb-10"><h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">A Clear Investment in Your Vision</h2><p class="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">Choose the package that aligns with your personal or professional goals.</p></div>
+                <div class="mb-12 text-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg p-6 max-w-4xl mx-auto shadow-xl"><h3 class="text-3xl font-bold mb-2">Founder's Launch Offer</h3><p class="text-lg mb-1">For a limited time, get <span class="font-bold underline">50% OFF</span> any package. Be one of the first to build your visual brand with Pikaio.</p><p class="text-sm font-semibold mt-2 opacity-90">Offer ends June 30th</p></div>
+                <div class="flex flex-col items-center space-y-6 mb-12"><div class="inline-flex rounded-full shadow-sm bg-white dark:bg-slate-800 dark:border dark:border-slate-700 p-1"><button id="showBusinessPricing" class="px-6 py-2 rounded-full font-semibold transition-colors duration-300">For Businesses</button><button id="showIndividualPricing" class="px-6 py-2 rounded-full font-semibold transition-colors duration-300">For Individuals</button></div><div class="inline-flex rounded-full shadow-sm bg-gray-200 dark:bg-slate-800 p-1"><button id="usdButton" class="px-5 py-1 rounded-full text-sm font-semibold transition-colors duration-300" data-currency="usd">USD</button><button id="inrButton" class="px-5 py-1 rounded-full text-sm font-semibold transition-colors duration-300" data-currency="inr">INR</button></div></div>
                 <div id="businessPricing" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <!-- Starter Card -->
-                    <div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300">
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Starter</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-6">Essential visuals for new ventures and personal brands.</p>
-                            <div class="price mb-8" data-price-usd-sale="$249" data-price-inr-sale="₹19,999" data-price-usd-orig="$499" data-price-inr-orig="₹39,999">
-                                <!-- Price will be populated by script -->
-                            </div>
-                            <ul class="text-gray-700 dark:text-gray-300 space-y-3 mb-8">
-                                <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>One person</li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>20 high-resolution images</li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Up to 2 distinct visual scenarios</li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Full commercial usage rights</li>
-                            </ul>
-                        </div>
-                        <a href="#contact" class="block w-full text-center bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 px-6 py-3 rounded-lg font-semibold hover:bg-blue-200 dark:hover:bg-blue-900/80 transition-colors">Get Started</a>
+                    <div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300"><div><h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Starter</h3><p class="text-gray-600 dark:text-gray-400 mb-6">Essential visuals for new ventures and personal brands.</p><div class="price mb-8" data-price-usd-sale="$249" data-price-inr-sale="₹19,999" data-price-usd-orig="$499" data-price-inr-orig="₹39,999"></div><ul class="text-gray-700 dark:text-gray-300 space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>One person</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>20 high-resolution images</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Up to 2 distinct visual scenarios</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Full commercial usage rights</li></ul></div>
+                        <a href="javascript:void(0);" class="purchase-button block w-full text-center bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 px-6 py-3 rounded-lg font-semibold hover:bg-blue-200 dark:hover:bg-blue-900/80 transition-colors" data-stripe-link-usd="https://buy.stripe.com/cNifZh3JcaV5dZb64F8IU03" data-stripe-link-inr="https://buy.stripe.com/5kQ8wPfrUfblg7j3Wx8IU09">Get Started</a>
                     </div>
-                    <!-- Pro Brand Pack -->
-                    <div class="bg-blue-600 text-white rounded-xl shadow-2xl p-8 flex flex-col justify-between transform lg:scale-105 duration-300 relative">
-                        <div class="absolute -top-3 right-0 bg-blue-800 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">POPULAR</div>
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4">Pro Brand Pack</h3>
-                            <p class="mb-6 opacity-90">Expand your presence across platforms or campaigns.</p>
-                            <div class="price mb-8" data-price-usd-sale="$425" data-price-inr-sale="₹34,999" data-price-usd-orig="$849" data-price-inr-orig="₹69,999">
-                                <!-- Price will be populated by script -->
-                            </div>
-                            <ul class="space-y-3 mb-8">
-                                <li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>One person</li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>50 high-resolution images</li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Up to 10 visual scenarios</li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Two rounds of revisions</li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Full commercial usage rights</li>
-                            </ul>
-                        </div>
-                        <a href="#contact" class="block w-full text-center bg-white text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">Select Plan</a>
+                    <div class="bg-blue-600 text-white rounded-xl shadow-2xl p-8 flex flex-col justify-between transform lg:scale-105 duration-300 relative"><div class="absolute -top-3 right-0 bg-blue-800 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">POPULAR</div><div><h3 class="text-2xl font-bold mb-4">Pro Brand Pack</h3><p class="mb-6 opacity-90">Expand your presence across platforms or campaigns.</p><div class="price mb-8" data-price-usd-sale="$425" data-price-inr-sale="₹34,999" data-price-usd-orig="$849" data-price-inr-orig="₹69,999"></div><ul class="space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>One person</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>50 high-resolution images</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Up to 10 visual scenarios</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Two rounds of revisions</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Full commercial usage rights</li></ul></div>
+                        <a href="javascript:void(0);" class="purchase-button block w-full text-center bg-white text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors" data-stripe-link-usd="https://buy.stripe.com/fZufZhbbEaV54oB50B8IU04" data-stripe-link-inr="https://buy.stripe.com/bJebJ1a7A0grf3f2St8IU08">Select Plan</a>
                     </div>
-                    <!-- Enterprise & Teams -->
-                    <div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300">
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Enterprise & Teams</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-6">Tailored solutions for brands, agencies, and teams.</p>
-                            <div class="price text-4xl font-bold text-blue-600 dark:text-blue-400 mb-8" data-price-usd-sale="Custom Quote" data-price-inr-sale="Custom Quote" data-price-usd-orig="Custom Quote" data-price-inr-orig="Custom Quote">
-                                Custom Quote
-                            </div>
-                            <ul class="text-gray-700 dark:text-gray-300 space-y-3 mb-8">
-                                <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Multiple people</li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Custom image volumes</li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Unlimited visual scenarios</li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Dedicated art direction</li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Priority delivery & support</li>
-                            </ul>
-                        </div>
+                    <div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300"><div><h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Enterprise & Teams</h3><p class="text-gray-600 dark:text-gray-400 mb-6">Tailored solutions for brands, agencies, and teams.</p><div class="price text-4xl font-bold text-blue-600 dark:text-blue-400 mb-8" data-price-usd-sale="Custom Quote" data-price-inr-sale="Custom Quote" data-price-usd-orig="Custom Quote" data-price-inr-orig="Custom Quote">Custom Quote</div><ul class="text-gray-700 dark:text-gray-300 space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Multiple people</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Custom image volumes</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Unlimited visual scenarios</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Dedicated art direction</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Priority delivery & support</li></ul></div>
                         <a href="#contact" class="block w-full text-center bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 px-6 py-3 rounded-lg font-semibold hover:bg-blue-200 dark:hover:bg-blue-900/80 transition-colors">Request Custom Quote</a>
                     </div>
                 </div>
-                
-                <!-- Individual Pricing -->
                 <div id="individualPricing" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto hidden">
-                    <!-- Personal Refresh -->
-                    <div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300">
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Personal Refresh</h3>
-                            <div class="flex flex-wrap gap-2 mb-6"><span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full">Dating Apps</span><span class="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 text-xs font-semibold px-3 py-1 rounded-full">Social Media</span><span class="bg-pink-100 text-pink-700 dark:bg-pink-900/50 dark:text-pink-300 text-xs font-semibold px-3 py-1 rounded-full">Trying Something New</span></div>
-                            <div class="price mb-8" data-price-usd-sale="$75" data-price-inr-sale="₹6,249" data-price-usd-orig="$149" data-price-inr-orig="₹12,499">
-                                <!-- Price will be populated by script -->
-                            </div>
-                            <ul class="text-gray-700 dark:text-gray-300 space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>10 high-res images</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>2 unique looks or settings</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Personal use only</li></ul>
-                        </div>
-                        <a href="#contact" class="block w-full text-center bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 px-6 py-3 rounded-lg font-semibold hover:bg-blue-200 dark:hover:bg-blue-900/80 transition-colors">Get Started</a>
+                    <div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300"><div><h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Personal Refresh</h3><div class="flex flex-wrap gap-2 mb-6"><span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full">Dating Apps</span><span class="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 text-xs font-semibold px-3 py-1 rounded-full">Social Media</span><span class="bg-pink-100 text-pink-700 dark:bg-pink-900/50 dark:text-pink-300 text-xs font-semibold px-3 py-1 rounded-full">Trying Something New</span></div><div class="price mb-8" data-price-usd-sale="$75" data-price-inr-sale="₹6,249" data-price-usd-orig="$149" data-price-inr-orig="₹12,499"></div><ul class="text-gray-700 dark:text-gray-300 space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>10 high-res images</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>2 unique looks or settings</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Personal use only</li></ul></div>
+                        <a href="javascript:void(0);" class="purchase-button block w-full text-center bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 px-6 py-3 rounded-lg font-semibold hover:bg-blue-200 dark:hover:bg-blue-900/80 transition-colors" data-stripe-link-usd="https://buy.stripe.com/fZufZhenQ2oz7AN0Kl8IU00" data-stripe-link-inr="https://buy.stripe.com/fZufZhenQ2oz7AN0Kl8IU00">Get Started</a>
                     </div>
-                    <!-- Visionary Profile -->
-                    <div class="bg-blue-600 text-white rounded-xl shadow-2xl p-8 flex flex-col justify-between transform lg:scale-105 duration-300 relative">
-                        <div class="absolute -top-3 right-0 bg-blue-800 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">POPULAR</div>
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4">Visionary Profile</h3>
-                            <div class="flex flex-wrap gap-2 mb-6"><span class="bg-white text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">LinkedIn</span><span class="bg-white text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Personal Branding</span><span class="bg-white text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Content Creators</span></div>
-                            <div class="price mb-8" data-price-usd-sale="$139" data-price-inr-sale="₹11,499" data-price-usd-orig="$279" data-price-inr-orig="₹22,999">
-                                <!-- Price will be populated by script -->
-                            </div>
-                            <ul class="space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>25 high-res images</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Up to 5 distinct scenarios</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Personal use only</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>One round of revisions</li></ul>
-                        </div>
-                        <a href="#contact" class="block w-full text-center bg-white text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">Select Plan</a>
+                    <div class="bg-blue-600 text-white rounded-xl shadow-2xl p-8 flex flex-col justify-between transform lg:scale-105 duration-300 relative"><div class="absolute -top-3 right-0 bg-blue-800 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">POPULAR</div><div><h3 class="text-2xl font-bold mb-4">Visionary Profile</h3><div class="flex flex-wrap gap-2 mb-6"><span class="bg-white text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">LinkedIn</span><span class="bg-white text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Personal Branding</span><span class="bg-white text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Content Creators</span></div><div class="price mb-8" data-price-usd-sale="$139" data-price-inr-sale="₹11,499" data-price-usd-orig="$279" data-price-inr-orig="₹22,999"></div><ul class="space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>25 high-res images</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Up to 5 distinct scenarios</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Personal use only</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>One round of revisions</li></ul></div>
+                        <a href="javascript:void(0);" class="purchase-button block w-full text-center bg-white text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors" data-stripe-link-usd="https://buy.stripe.com/cNiaEX93w2oz4oBakV8IU01" data-stripe-link-inr="https://buy.stripe.com/5kQbJ17Zse7hbR30Kl8IU06">Select Plan</a>
                     </div>
-                    <!-- Ultimate Identity -->
-                    <div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300">
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Ultimate Identity</h3>
-                            <div class="flex flex-wrap gap-2 mb-6"><span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full">Entrepreneurs</span><span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full">Personal Brands</span><span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full">Commercial Use</span></div>
-                            <div class="price mb-8" data-price-usd-sale="$249" data-price-inr-sale="₹19,999" data-price-usd-orig="$499" data-price-inr-orig="₹39,999">
-                                <!-- Price will be populated by script -->
-                            </div>
-                            <ul class="text-gray-700 dark:text-gray-300 space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>50 high-res images</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Up to 10 scenarios or styles</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Full commercial use</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Two rounds of revisions</li></ul>
-                        </div>
-                        <a href="#contact" class="block w-full text-center bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 px-6 py-3 rounded-lg font-semibold hover:bg-blue-200 dark:hover:bg-blue-900/80 transition-colors">Go Ultimate</a>
+                    <div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300"><div><h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Ultimate Identity</h3><div class="flex flex-wrap gap-2 mb-6"><span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full">Entrepreneurs</span><span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full">Personal Brands</span><span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full">Commercial Use</span></div><div class="price mb-8" data-price-usd-sale="$249" data-price-inr-sale="₹19,999" data-price-usd-orig="$499" data-price-inr-orig="₹39,999"></div><ul class="text-gray-700 dark:text-gray-300 space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>50 high-res images</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Up to 10 scenarios or styles</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Full commercial use</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Two rounds of revisions</li></ul></div>
+                        <a href="javascript:void(0);" class="purchase-button block w-full text-center bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 px-6 py-3 rounded-lg font-semibold hover:bg-blue-200 dark:hover:bg-blue-900/80 transition-colors" data-stripe-link-usd="https://buy.stripe.com/7sY14nenQ3sD08l8cN8IU02" data-stripe-link-inr="https://buy.stripe.com/4gM6oHdjM2ozf3fgJj8IU07">Go Ultimate</a>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- ✅ END OF UPDATED PRICING SECTION -->
         
         <section id="faq" class="py-20 bg-white dark:bg-slate-800 px-4"><div class="container mx-auto max-w-4xl"><div class="text-center mb-16"><h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Frequently Asked Questions</h2><p class="text-lg text-gray-700 dark:text-gray-300">Got questions? We've got answers.</p></div><div class="space-y-6"><div class="bg-gray-50 dark:bg-slate-900/70 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 dark:text-gray-100 focus:outline-none list-none">What kind of photos do I need to provide?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600 dark:text-blue-400"></i></span></summary><p class="mt-4 text-gray-600 dark:text-gray-400">For best results, provide 30-60 clear photos of yourself in various lighting, angles, and backgrounds. Good quality selfies and social photos work perfectly. These don't need to be professional; just everyday social photos are perfect. The more variety, the more realistic and versatile your results.</p></details></div><div class="bg-gray-50 dark:bg-slate-900/70 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 dark:text-gray-100 focus:outline-none list-none">How are my photos handled?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600 dark:text-blue-400"></i></span></summary><p class="mt-4 text-gray-600 dark:text-gray-400">Your privacy matters. Every image you send is stored in a secure, private folder. We use them only to build your custom AI model and delete them permanently after the project is complete. Nothing is shared or reused EVER.</p></details></div><div class="bg-gray-50 dark:bg-slate-900/70 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 dark:text-gray-100 focus:outline-none list-none">What if I'm not happy with the results?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600 dark:text-blue-400"></i></span></summary><p class="mt-4 text-gray-600 dark:text-gray-400">Our process is highly collaborative. We provide a proof gallery for you to review. Our Pro and Premium packages include revision rounds where we'll work with you on your feedback to refine the prompts and generate new images that perfectly match your vision. Your satisfaction is key.</p></details></div><div class="bg-gray-50 dark:bg-slate-900/70 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 dark:text-gray-100 focus:outline-none list-none">How long does it take?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600 dark:text-blue-400"></i></span></summary><p class="mt-4 text-gray-600 dark:text-gray-400">Expect your first proof set within 1-2 business days of sending your photos. If your package includes revisions, each round typically takes 2-3 extra business days. Fast, clear communication helps us move even quicker.</p></details></div><div class="bg-gray-50 dark:bg-slate-900/70 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 dark:text-gray-100 focus:outline-none list-none">Do I get full ownership and commercial rights?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600 dark:text-blue-400"></i></span></summary><p class="mt-4 text-gray-600 dark:text-gray-400">Yes! For our 'Ultimate Identity' package (for individuals) and all 'Business' packages, you receive full commercial usage rights. 'Personal Refresh' and 'Visionary Profile' packages include a personal usage license as well.</p></details></div><div class="bg-gray-50 dark:bg-slate-900/70 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 dark:text-gray-100 focus:outline-none list-none">Is this ethical? Am I misrepresenting myself?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600 dark:text-blue-400"></i></span></summary><p class="mt-4 text-gray-600 dark:text-gray-400">Our service is about enhancement, not deception. We work with you to create the best version of yourself, or to visualize aspirational scenarios. We require you to have the rights to the photos you provide and will not create 'deepfakes' or images of other individuals without their consent. Transparency and ethical use are core to our values.</p></details></div></div></div></section>
         
@@ -313,20 +222,19 @@
         closeModalButton.addEventListener('click', () => { successModal.style.display = 'none'; });
         window.addEventListener('click', (event) => { if (event.target == successModal) { successModal.style.display = 'none'; } });
 
-        // ✅ START: UPDATED PRICING LOGIC
+        // ✅ START: JAVASCRIPT LOGIC FOR DYNAMIC PRICING AND LINKS
+        
         function updatePrices() {
             document.querySelectorAll('.price').forEach(el => {
                 const currencyUpper = currentCurrency.charAt(0).toUpperCase() + currentCurrency.slice(1);
                 const salePrice = el.dataset[`price${currencyUpper}Sale`];
                 const origPrice = el.dataset[`price${currencyUpper}Orig`];
 
-                // If it's a "Custom Quote" card, just show that.
                 if (salePrice === "Custom Quote") {
                     el.innerHTML = `<span class="text-4xl font-bold">${salePrice}</span>`;
                     return;
                 }
 
-                // Otherwise, show the sale and original prices.
                 el.innerHTML = `
                     <div class="flex items-center justify-center gap-x-4">
                         <span class="text-4xl font-bold text-inherit">${salePrice}</span>
@@ -335,11 +243,23 @@
                 `;
             });
         }
-        // ✅ END: UPDATED PRICING LOGIC
+        
+        function updatePurchaseLinks() {
+            const purchaseButtons = document.querySelectorAll('.purchase-button');
+            purchaseButtons.forEach(button => {
+                const link = (currentCurrency === 'usd') 
+                    ? button.dataset.stripeLinkUsd
+                    : button.dataset.stripeLinkInr;
+                
+                if (link) {
+                    button.href = link;
+                }
+            });
+        }
 
         function setActivePricingTab(active, inactive) { active.classList.add('bg-blue-600', 'text-white'); active.classList.remove('text-gray-600'); inactive.classList.remove('bg-blue-600', 'text-white'); inactive.classList.add('text-gray-600'); }
-        showBusinessBtn.addEventListener('click', () => { setActivePricingTab(showBusinessBtn, showIndividualBtn); businessPricingDiv.classList.remove('hidden'); individualPricingDiv.classList.add('hidden'); updatePrices(); });
-        showIndividualBtn.addEventListener('click', () => { setActivePricingTab(showIndividualBtn, showBusinessBtn); individualPricingDiv.classList.remove('hidden'); businessPricingDiv.classList.add('hidden'); updatePrices(); });
+        showBusinessBtn.addEventListener('click', () => { setActivePricingTab(showBusinessBtn, showIndividualBtn); businessPricingDiv.classList.remove('hidden'); individualPricingDiv.classList.add('hidden'); updatePrices(); updatePurchaseLinks(); });
+        showIndividualBtn.addEventListener('click', () => { setActivePricingTab(showIndividualBtn, showBusinessBtn); individualPricingDiv.classList.remove('hidden'); businessPricingDiv.classList.add('hidden'); updatePrices(); updatePurchaseLinks(); });
         
         function updateCurrencyToggleStyle() {
             const isDark = document.documentElement.classList.contains('dark');
@@ -355,8 +275,8 @@
             }
         }
 
-        usdButton.addEventListener('click', () => { currentCurrency = 'usd'; updateCurrencyToggleStyle(); updatePrices(); });
-        inrButton.addEventListener('click', () => { currentCurrency = 'inr'; updateCurrencyToggleStyle(); updatePrices(); });
+        usdButton.addEventListener('click', () => { currentCurrency = 'usd'; updateCurrencyToggleStyle(); updatePrices(); updatePurchaseLinks(); });
+        inrButton.addEventListener('click', () => { currentCurrency = 'inr'; updateCurrencyToggleStyle(); updatePrices(); updatePurchaseLinks(); });
         
         if (sliderContainer) {
             const beforeWrapper = document.getElementById("before-wrapper");
@@ -386,6 +306,7 @@
             setActivePricingTab(showBusinessBtn, showIndividualBtn);
             updatePrices();
             updateCurrencyToggleStyle();
+            updatePurchaseLinks();
         }
         initializePage();
     });
