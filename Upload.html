@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="en" class=""> <!-- JS below will handle dark mode -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,105 +22,126 @@
     </script>
 
     <style>
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; background-image: radial-gradient(#e0e7ff 1px, transparent 1px); background-size: 2.5rem 2.5rem; }
-        .dark body { background-color: #0b1120; background-image: radial-gradient(rgba(30, 41, 59, 0.5) 1px, transparent 1px); }
-
-        .action-button { background-color: #2563EB; color: white; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 4px 15px 0 rgba(37, 99, 235, 0.2); border: none; }
-        .action-button:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(37, 99, 235, 0.25); }
-        .action-button:disabled { background-color: #334155 !important; color: #94a3b8 !important; cursor: not-allowed !important; transform: none !important; box-shadow: none !important; }
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s; }
+        .transition-all-300 { transition: all 0.3s ease-in-out; }
         
-        .upload-panel { background-color: white; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.05); animation: fadeIn 0.5s ease-out; border: 1px solid rgba(0,0,0,0.05); }
-        .dark .upload-panel { background-color: #1e293b; border-color: #334155; box-shadow: 0 0 50px rgba(0,0,0,0.2); }
-
-        #upload-zone { border: 2px dashed #d1d5db; background-color: #f9fafb; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; }
-        .dark #upload-zone { border-color: #4b5563; background-color: #182234; }
-        #upload-zone:hover, #upload-zone.dragover { border-color: #2563EB; background-color: white; transform: scale(1.02); box-shadow: 0 0 30px rgba(37, 99, 235, 0.1); }
-        .dark #upload-zone:hover, .dark #upload-zone.dragover { background-color: #253147; box-shadow: 0 0 30px rgba(37, 99, 235, 0.2); }
+        /* Premium Button Style */
+        .action-button { background-color: #2563EB; padding: 14px 28px; border-radius: 12px; font-weight: bold; font-size: 18px; color: white; transition: all 0.2s ease; box-shadow: 0 4px 14px 0 rgb(37 99 235 / 39%); }
+        .action-button:hover:not(:disabled) { background-color: #1D4ED8; transform: translateY(-2px); box-shadow: 0 6px 20px 0 rgb(37 99 235 / 23%); }
+        .action-button:disabled { background-color: #4b5563 !important; color: #9ca3af !important; cursor: not-allowed !important; transform: none !important; box-shadow: none !important; }
         
-        .photo-item { position: relative; width: 100%; padding-top: 100%; border-radius: 12px; overflow: hidden; transition: transform 0.2s ease; }
-        .photo-item:hover { transform: scale(1.05); z-index: 5; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        /* Main Upload Panel */
+        .upload-panel { background-color: white; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); transition: all 0.3s; }
+        .dark .upload-panel { background-color: #1f2937; border: 1px solid #334155; }
+
+        /* Elegant Upload Zone */
+        #upload-zone { border: 2px dashed #d1d5db; background-color: #f9fafb; border-radius: 16px; cursor: pointer; }
+        .dark #upload-zone { border-color: #4b5563; background-color: #1e293b; }
+        #upload-zone:hover, #upload-zone.dragover { border-color: #2563EB; background-color: #eff6ff; }
+        .dark #upload-zone:hover, .dark #upload-zone.dragover { background-color: #253147; }
+        #upload-zone-icon { transition: transform 0.3s; }
+        #upload-zone:hover #upload-zone-icon, #upload-zone.dragover #upload-zone-icon { transform: scale(1.1) translateY(-5px); color: #2563EB; }
+
+        /* Photo Grid & Thumbnails */
+        .photo-item { position: relative; width: 100%; padding-top: 100%; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: transform 0.2s; }
+        .photo-item:hover { transform: scale(1.05); z-index: 5; }
         .photo-item img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-        .photo-item .remove-btn { position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(2px); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; transition: all 0.2s ease; z-index: 10; opacity: 0; transform: scale(0.8); }
-        .photo-item:hover .remove-btn { opacity: 1; transform: scale(1); }
+        .photo-item .remove-btn { position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; background-color: rgba(0, 0, 0, 0.6); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; cursor: pointer; transition: all 0.2s; z-index: 10; opacity: 0; }
+        .photo-item:hover .remove-btn { opacity: 1; }
         .photo-item .remove-btn:hover { background-color: #ef4444; transform: scale(1.1); }
         
-        #upload-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        #upload-overlay.hidden { display: none; }
-        #upload-overlay.visible { animation: fadeIn 0.3s; }
-
-        .review-section { animation: fadeIn 0.5s ease-out; }
-        .success-screen { animation: scaleIn 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        /* Full-Screen Overlay */
+        #upload-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(5px); z-index: 9999; display: none; flex-direction: column; align-items: center; justify-content: center; color: white; opacity: 0; transition: opacity 0.3s; }
+        #upload-overlay.visible { display: flex; opacity: 1; }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-900 dark:bg-slate-900 dark:text-gray-200">
 
-    <div class="flex items-center justify-center pt-8 md:pt-12">
-        <a href="index.html" class="text-2xl font-bold text-gray-900 flex items-center dark:text-white"><img src="https://pikaio.com/Image/file.svg" alt="Pikaio Logo" class="h-10 w-10 mr-2 rounded-full block dark:hidden"><img src="https://pikaio.com/Image/Adobe%20Express%20-%20file(1)-256x256.webp" alt="Pikaio Logo Dark" class="h-10 w-10 mr-2 rounded-full hidden dark:block">Pikaio</a>
-    </div>
+    <header class="sticky top-0 z-50 bg-white dark:bg-slate-800 shadow-sm">
+        <div class="container mx-auto px-4 flex justify-between items-center py-4"><a href="index.html" class="text-2xl font-bold text-gray-900 flex items-center dark:text-white"><img src="https://pikaio.com/Image/file.svg" alt="Pikaio Logo" class="h-10 w-10 mr-2 rounded-full block dark:hidden"><img src="https://pikaio.com/Image/Adobe%20Express%20-%20file(1)-256x256.webp" alt="Pikaio Logo Dark" class="h-10 w-10 mr-2 rounded-full hidden dark:block">Pikaio</a></div>
+    </header>
 
-    <main class="container mx-auto px-4 py-8 md:py-12 flex flex-col items-center justify-center">
+    <main class="container mx-auto px-4 py-12 md:py-20 flex flex-col items-center justify-center">
+        <!-- The Main Upload Panel -->
         <section id="uploadContainer" class="upload-panel w-full max-w-4xl p-6 md:p-10">
             <div class="text-center">
-                <div class="inline-block bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-300 text-sm font-semibold mb-4 px-4 py-1 rounded-full"><i class="fas fa-check-circle mr-2"></i>Thank You For Your Purchase!</div>
-                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-gray-100">Final Step: Upload Your Photos</h1>
-                <p class="text-lg text-gray-500 dark:text-gray-400 mt-2">Our AI is ready. Please provide your photos to begin the process.</p>
+                <!-- ADDED: Payment Confirmation Badge -->
+                <div class="inline-block bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-300 text-sm font-semibold mb-4 px-4 py-1 rounded-full">
+                    <i class="fas fa-check-circle mr-2"></i>Thank You For Your Purchase!
+                </div>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-gray-100 mb-2">Final Step: Upload Your Photos</h1>
+                <p class="text-lg text-gray-600 dark:text-gray-300">Our AI models are ready. Please provide your photos to begin the process.</p>
             </div>
             
+            <!-- ADDED: Important Requirements Box -->
             <div class="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 text-left rounded-r-lg">
-                <div class="flex items-center"><div class="py-1"><i class="fas fa-info-circle text-blue-500 mr-4 text-2xl"></i></div><div><h3 class="font-bold text-gray-900 dark:text-gray-100">Photo Requirements</h3><p class="text-sm text-gray-600 dark:text-gray-400 mt-1">You must upload a minimum of <strong>40 photos</strong> and a maximum of <strong>60</strong>. The more photos you provide, the better your results will be!</p></div></div>
+                <div class="flex items-center">
+                    <div class="py-1"><i class="fas fa-info-circle text-blue-500 mr-4 text-2xl"></i></div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 dark:text-gray-100">Photo Requirements</h3>
+                        <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">You must upload a minimum of <strong>40 photos</strong> and a maximum of <strong>60</strong>. The more photos you provide, the better your results will be!</p>
+                    </div>
+                </div>
             </div>
 
-            <div id="upload-zone" class="mt-6 p-8 text-center"><input type="file" id="fileInput" multiple accept="image/*" class="hidden"><i class="fas fa-images text-5xl text-gray-400"></i><h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-gray-200">Drag & Drop Photos Here</h3><p class="mt-1 text-gray-500 dark:text-gray-400">or</p><button id="selectFilesButton" class="mt-2 text-blue-600 dark:text-blue-400 font-semibold hover:underline">Select Files From Your Device</button></div>
+            <!-- Step 1: The Upload Zone -->
+            <div id="upload-zone" class="mt-6 p-8 text-center transition-all-300">
+                <input type="file" id="fileInput" multiple accept="image/*" class="hidden">
+                <i id="upload-zone-icon" class="fas fa-images text-5xl text-gray-400 transition-all-300"></i>
+                <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-gray-200">Drag & Drop Your Photos</h3>
+                <p class="mt-1 text-gray-500 dark:text-gray-400">or</p>
+                <button id="selectFilesButton" class="mt-2 text-blue-600 dark:text-blue-400 font-semibold hover:underline">Select Files From Your Device</button>
+            </div>
 
+            <!-- Step 2: The Review Panel (Initially Hidden) -->
             <section id="review-section" class="hidden mt-8">
                 <h2 class="text-2xl font-bold text-left text-gray-800 dark:text-gray-200">Review Your Selection</h2>
-                <div class="mt-4"><div class="flex justify-between items-center mb-1"><span id="progress-text" class="text-sm font-medium text-gray-700 dark:text-gray-300"></span><span id="progress-count" class="text-sm font-medium text-gray-700 dark:text-gray-300"></span></div><div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700"><div id="progress-bar-inner" class="h-2.5 rounded-full" style="transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);"></div></div></div>
-                <div id="photo-grid" class="mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 max-h-96 overflow-y-auto p-4 bg-gray-100 dark:bg-slate-800 rounded-lg"></div>
-                <div class="mt-8 text-center"><button id="submitBtn" class="action-button w-full md:w-auto px-16 py-3 rounded-full font-bold text-lg" disabled>Submit Photos</button></div>
+                
+                <!-- Smart Progress Bar -->
+                <div class="mt-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <span id="progress-text" class="text-sm font-medium text-gray-700 dark:text-gray-300"></span>
+                        <span id="progress-count" class="text-sm font-medium text-gray-700 dark:text-gray-300"></span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700"><div id="progress-bar-inner" class="h-2.5 rounded-full transition-all-300"></div></div>
+                </div>
+
+                <div id="photo-grid" class="mt-4 grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-4 max-h-96 overflow-y-auto p-4 bg-gray-100 dark:bg-slate-800 rounded-lg"></div>
+                
+                <div class="mt-8 text-center">
+                    <button id="submitBtn" class="action-button w-full md:w-auto px-16" disabled>Submit Photos</button>
+                </div>
             </section>
         </section>
 
+        <!-- The Success Screen -->
         <section id="successDiv" class="hidden max-w-3xl w-full text-center">
-            <div class="success-screen bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-8 md:p-12"><div class="w-24 h-24 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center mb-6 shadow-lg mx-auto"><i class="fas fa-check-circle text-green-500 text-5xl"></i></div><h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">All Set! Your Files are Received.</h2><p class="text-lg text-gray-600 dark:text-gray-400 mt-4">All <strong><span id="finalCount"></span> photos</strong> were successfully uploaded. Our team will begin building your custom model, and you'll hear from us within 2 business days.</p><a href="index.html" class="mt-8 inline-block bg-gray-200 dark:bg-slate-700 text-gray-700 dark:text-gray-200 font-semibold py-3 px-8 rounded-lg hover:bg-gray-300 dark:hover:bg-slate-600 transition-colors">Back to Homepage</a></div>
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-8 md:p-12">
+                <div class="w-24 h-24 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center mb-6 shadow-lg mx-auto"><i class="fas fa-check-circle text-green-500 text-5xl"></i></div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">All Set! Your Files are Received.</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-300 mt-4">All <strong><span id="finalCount"></span> photos</strong> were successfully uploaded. Our team will begin building your custom model, and you'll hear from us within 2 business days.</p>
+                <a href="index.html" class="mt-8 inline-block bg-gray-200 dark:bg-slate-700 text-gray-700 dark:text-gray-200 font-semibold py-3 px-8 rounded-lg hover:bg-gray-300 dark:hover:bg-slate-600 transition-colors">Back to Homepage</a>
+            </div>
         </section>
     </main>
-    
-    <div id="upload-overlay" class="hidden"><i class="fas fa-cloud-upload-alt fa-4x fa-bounce text-white"></i><h2 id="overlay-text" class="text-2xl font-bold mt-6 text-center text-white"></h2><div class="w-11/12 md:w-1/2 mt-4 bg-gray-600 rounded-full h-2.5"><div id="overlay-progress-bar" class="h-2.5 rounded-full bg-blue-500" style="width: 0%; transition: width 0.3s ease;"></div></div></div>
+
+    <footer class="bg-[#0f172a] text-white pt-12 pb-8 px-4 mt-20"><div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-gray-300"><div><a href="index.html" class="flex items-center mb-3"><img src="https://pikaio.com/Image/Adobe%20Express%20-%20file(1)-256x256.webp" alt="Pikaio Logo" class="h-8 w-8 mr-2 rounded-full"><h2 class="text-white text-xl font-bold">Pikaio</h2></a><p class="opacity-80 mb-4">Look like a million bucks. Without spending it.</p><p class="text-xs text-gray-500">© 2025 Pikaio. All rights reserved.</p></div><div><h3 class="text-white font-semibold mb-3">Explore</h3><ul class="space-y-2"><li><a href="gallery.html" class="hover:text-white">Gallery</a></li><li><a href="index.html#pricing" class="hover:text-white">Pricing</a></li></ul></div><div><h3 class="text-white font-semibold mb-3">Connect</h3><div class="flex space-x-4 items-center mb-4"><a href="https://www.linkedin.com/company/pikaio/" target="_blank" rel="noopener noreferrer" class="hover:text-white"><i class="fab fa-linkedin fa-lg"></i></a></div><p class="text-sm text-gray-500">For inquiries: <a href="mailto:hello@pikaio.com" class="underline hover:text-white">hello@pikaio.com</a></p></div></div></footer>
+
+    <div id="upload-overlay" class="transition-all-300"><i class="fas fa-cloud-upload-alt fa-4x fa-bounce"></i><h2 id="overlay-text" class="text-2xl font-bold mt-6 text-center"></h2><div class="w-11/12 md:w-1/2 mt-4 bg-gray-600 rounded-full h-2.5"><div id="overlay-progress-bar" class="bg-blue-500 h-2.5 rounded-full transition-width duration-300 ease-linear" style="width: 0%"></div></div></div>
 
     <script>
-        // --- CONFIGURATION ---
         const MIN_PHOTOS = 40;
         const MAX_PHOTOS = 60;
         const BYTESCALE_API_KEY = "public_W23MTDyDhZjZdyFo6EkVbbhKN9kr";
         const BYTESCALE_ACCOUNT_ID = "W23MTDy";
 
-        // --- STATE ---
         let selectedFiles = [];
         let isUploading = false;
         
-        // --- DOM ELEMENTS ---
-        const fileInput = document.getElementById("fileInput"),
-            selectFilesButton = document.getElementById("selectFilesButton"),
-            submitBtn = document.getElementById("submitBtn"),
-            photoGrid = document.getElementById("photo-grid"),
-            uploadContainer = document.getElementById("uploadContainer"),
-            successDiv = document.getElementById("successDiv"),
-            finalCount = document.getElementById("finalCount"),
-            uploadZone = document.getElementById("upload-zone"),
-            reviewSection = document.getElementById("review-section"),
-            progressText = document.getElementById("progress-text"),
-            progressCount = document.getElementById("progress-count"),
-            progressBarInner = document.getElementById("progress-bar-inner"),
-            uploadOverlay = document.getElementById("upload-overlay"),
-            overlayText = document.getElementById("overlay-text"),
-            overlayProgressBar = document.getElementById("overlay-progress-bar");
+        const fileInput = document.getElementById('fileInput'), selectFilesButton = document.getElementById('selectFilesButton'), submitBtn = document.getElementById('submitBtn'), photoGrid = document.getElementById('photo-grid'), uploadContainer = document.getElementById('uploadContainer'), successDiv = document.getElementById('successDiv'), finalCount = document.getElementById('finalCount'), uploadZone = document.getElementById('upload-zone'), reviewSection = document.getElementById('review-section'), progressText = document.getElementById('progress-text'), progressCount = document.getElementById('progress-count'), progressBarInner = document.getElementById('progress-bar-inner'), uploadOverlay = document.getElementById('upload-overlay'), overlayText = document.getElementById('overlay-text'), overlayProgressBar = document.getElementById('overlay-progress-bar');
         
-        // --- EVENT LISTENERS ---
         selectFilesButton.onclick = () => fileInput.click();
-        uploadZone.onclick = e => { if (e.target === uploadZone) fileInput.click(); };
+        uploadZone.onclick = (e) => { if(e.target === uploadZone) fileInput.click(); };
         fileInput.onchange = e => processFiles(Array.from(e.target.files));
         submitBtn.onclick = handleSubmit;
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eName => uploadZone.addEventListener(eName, e => { e.preventDefault(); e.stopPropagation(); }, false));
@@ -128,96 +149,42 @@
         ['dragleave', 'drop'].forEach(eName => uploadZone.addEventListener(eName, () => uploadZone.classList.remove('dragover')));
         uploadZone.addEventListener('drop', e => processFiles(Array.from(e.dataTransfer.files)));
 
-        // --- FILE PROCESSING ---
-        function processFiles(files) {
-            const imageFiles = files.filter(f => f.type.startsWith("image/"));
-            if (selectedFiles.length + imageFiles.length > MAX_PHOTOS) {
-                alert(`You can only select up to ${MAX_PHOTOS} photos in total.`);
-                const remaining = MAX_PHOTOS - selectedFiles.length;
-                if (remaining > 0) selectedFiles.push(...imageFiles.slice(0, remaining));
-            } else {
-                selectedFiles.push(...imageFiles);
-            }
-            fileInput.value = '';
-            updateUI();
-        }
-        function removePhoto(index) {
-            if (isUploading) return;
-            selectedFiles.splice(index, 1);
-            updateUI();
-        }
+        function processFiles(files) { const imageFiles = files.filter(f => f.type.startsWith('image/')); if (selectedFiles.length + imageFiles.length > MAX_PHOTOS) { alert(`You can only select up to ${MAX_PHOTOS} photos in total.`); const remaining = MAX_PHOTOS - selectedFiles.length; if (remaining > 0) selectedFiles.push(...imageFiles.slice(0, remaining)); } else { selectedFiles.push(...imageFiles); } fileInput.value = ''; updateUI(); }
+        function removePhoto(index) { if (isUploading) return; selectedFiles.splice(index, 1); updateUI(); }
 
-        // --- UI UPDATES ---
         function updateUI() {
             const count = selectedFiles.length;
             const isValid = count >= MIN_PHOTOS && count <= MAX_PHOTOS;
             const progress = Math.min((count / MIN_PHOTOS) * 100, 100);
 
-            if (count > 0) {
-                reviewSection.classList.remove("hidden");
-                reviewSection.classList.add("review-section");
-            } else {
-                reviewSection.classList.add("hidden");
-                reviewSection.classList.remove("review-section");
-            }
+            if (count > 0) { reviewSection.classList.remove('hidden'); } else { reviewSection.classList.add('hidden'); }
 
             submitBtn.disabled = !isValid || isUploading;
             selectFilesButton.disabled = isUploading;
             progressBarInner.style.width = `${progress}%`;
             progressCount.textContent = `${count} / ${MAX_PHOTOS} photos`;
-            
-            if (progress < 100) {
-                progressText.textContent = `Need ${MIN_PHOTOS - count} more photos to begin.`;
-                progressBarInner.style.backgroundColor = "#2563EB";
-            } else {
-                progressText.textContent = "You're ready to submit!";
-                progressBarInner.style.backgroundColor = "#22c55e";
-            }
+
+            if (progress < 100) { progressText.textContent = `Need ${MIN_PHOTOS - count} more photos to begin.`; progressBarInner.classList.remove('bg-green-500'); progressBarInner.classList.add('bg-blue-600'); } else { progressText.textContent = "You're ready to submit!"; progressBarInner.classList.remove('bg-blue-600'); progressBarInner.classList.add('bg-green-500'); }
             
             updatePhotoGrid();
         }
         
         function updatePhotoGrid() {
-            photoGrid.innerHTML = "";
+            photoGrid.innerHTML = '';
             selectedFiles.forEach((file, index) => {
-                const item = document.createElement("div");
-                item.className = "photo-item";
-                const img = document.createElement("img");
-                img.src = URL.createObjectURL(file);
-                img.onload = () => { URL.revokeObjectURL(img.src); };
-                const removeBtn = document.createElement("span");
-                removeBtn.className = "remove-btn";
-                removeBtn.innerHTML = "×";
-                removeBtn.title = "Remove photo";
-                removeBtn.onclick = () => removePhoto(index);
-                item.append(img, removeBtn);
-                photoGrid.appendChild(item);
+                const item = document.createElement('div'); item.className = 'photo-item';
+                const img = document.createElement('img'); img.src = URL.createObjectURL(file); img.onload = () => URL.revokeObjectURL(img.src);
+                const removeBtn = document.createElement('span'); removeBtn.className = 'remove-btn'; removeBtn.innerHTML = '×'; removeBtn.title = 'Remove photo'; removeBtn.onclick = () => removePhoto(index);
+                item.append(img, removeBtn); photoGrid.appendChild(item);
             });
         }
-
-        // --- UPLOAD ENGINE ---
-        const delay = ms => new Promise(res => setTimeout(res, ms));
-
-        // --- THE CRITICAL FIX IS HERE ---
-        // This version of the function is clean, correct, and does NOT include the faulty Authorization header.
+        
         async function uploadToBytescale(file) {
             const url = `https://api.bytescale.com/v2/accounts/${BYTESCALE_ACCOUNT_ID}/uploads/form_data`;
             const formData = new FormData();
-            formData.append("file", file);
-            
-            // The `fetch` call is now correct, with no extra headers.
-            const response = await fetch(url, {
-                method: "POST",
-                body: formData
-            });
-
-            if (!response.ok) {
-                const errorBody = await response.json();
-                throw {
-                    message: `Upload failed for ${file.name}`,
-                    details: errorBody.error.message
-                };
-            }
+            formData.append('file', file);
+            const response = await fetch(url, { method: 'POST', body: formData, headers: { 'Authorization': `Bearer ${BYTESCALE_API_KEY}` } });
+            if (!response.ok) { const errorBody = await response.json(); throw new Error(`Upload failed for ${file.name}: ${errorBody.error.message}`); }
             return await response.json();
         }
 
@@ -225,39 +192,27 @@
             if (selectedFiles.length < MIN_PHOTOS || selectedFiles.length > MAX_PHOTOS) return;
             isUploading = true;
             updateUI();
-            uploadOverlay.classList.remove('hidden');
             uploadOverlay.classList.add('visible');
-            
             const failedFiles = [];
             for (let i = 0; i < selectedFiles.length; i++) {
                 const progress = Math.round(((i + 1) / selectedFiles.length) * 100);
                 overlayText.innerHTML = `Uploading file ${i + 1} of ${selectedFiles.length}<br><span class="text-sm text-gray-300 mt-2">${selectedFiles[i].name}</span>`;
                 overlayProgressBar.style.width = `${progress}%`;
-                try {
-                    await uploadToBytescale(selectedFiles[i]);
-                } catch (error) {
-                    console.error("A file failed to upload:", error); 
-                    failedFiles.push(selectedFiles[i].name);
-                }
-                await delay(200); // Polite delay to prevent rate-limiting
+                try { await uploadToBytescale(selectedFiles[i]); } catch (error) { console.error(error); failedFiles.push(selectedFiles[i].name); }
             }
-            
             uploadOverlay.classList.remove('visible');
-            uploadOverlay.classList.add('hidden');
-            
             if (failedFiles.length > 0) {
-                alert(`Upload failed for ${failedFiles.length} files: ${failedFiles.join(", ")}. Please check the console (F12) for details and try again.`);
+                alert(`Upload failed for ${failedFiles.length} files: ${failedFiles.join(', ')}. Please check your connection and try again.`);
                 isUploading = false;
                 updateUI();
             } else {
                 finalCount.textContent = selectedFiles.length;
-                uploadContainer.style.display = "none";
-                successDiv.classList.remove("hidden");
+                uploadContainer.style.display = 'none';
+                successDiv.classList.remove('hidden');
                 window.scrollTo(0, 0);
             }
         }
         
-        // --- INITIALIZE ---
         updateUI();
     </script>
 </body>
