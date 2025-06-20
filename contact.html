@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Contact Us | Pikaio</title>
+    <meta name="description" content="Get in touch with the Pikaio team...">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script>
+        tailwind.config = { darkMode: 'class' }
+        if (localStorage.theme === 'dark' || (!('theme'in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+    </script>
+    <style>
+        html {
+            font-size: 14.4px; 
+            -webkit-text-size-adjust: 100%; 
+            -moz-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        body { 
+            font-family: 'Satoshi', sans-serif; 
+            scroll-behavior: smooth; 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale; 
+        }
+        .font-inter { font-family: 'Inter', sans-serif; }
+
+        #main-header { pointer-events: none; }
+        #header-container { 
+            pointer-events: auto; 
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease, background-color 0.3s ease, border-color 0.3s ease; 
+            transform: translateY(0); 
+        }
+        #header-container.hidden-nav { transform: translateY(-150%); opacity: 0; }
+        #header-container.scrolled-up {
+          background-color: white;
+          border-bottom: 1px solid #e5e7eb; 
+        }
+        .dark #header-container.scrolled-up {
+          background-color: black;
+          border-bottom: 1px solid #334155; 
+        }
+
+        @media (min-width: 768px) {
+            #header-container {
+                max-width: 1238.4px !important;
+            }
+        }
+
+        @media (min-width: 768px) { 
+          #header-container.scrolled-up {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+            border: 1px solid #e5e7eb; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07); 
+          }
+          .dark #header-container.scrolled-up {
+            background-color: rgba(15, 23, 42, 0.75);
+            border-color: #334155;
+          }
+        }
+                
+        #mobile-menu-overlay { transition: opacity 0.3s ease-in-out; }
+        #mobile-menu-content { transition: transform 0.3s ease-in-out; transform: scale(0.95); }
+        #mobile-menu-overlay.active #mobile-menu-content { transform: scale(1); }
+                
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); align-items: center; justify-content: center; }
+        .modal-content { padding: 2rem; border-radius: 0.75rem; text-align: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); width: 90%; max-width: calc(400px * 0.9); }
+                
+        .wave-container {
+          position: relative; width: 100%; background: black; display: flex;
+          flex-direction: column; justify-content: space-between; overflow: hidden;
+        }
+        .wave-line {
+          width: 100%; height: 14.4px; 
+          background-color: white;
+          animation: fallBounce 2.4s ease-in-out infinite;
+        }
+        .wave-line:nth-child(1) { animation-delay: 0s; }
+        .wave-line:nth-child(2) { animation-delay: 0.1s; }
+        .wave-line:nth-child(3) { animation-delay: 0.2s; }
+        .wave-line:nth-child(4) { animation-delay: 0.3s; }
+        .wave-line:nth-child(5) { animation-delay: 0.4s; }
+        .wave-line:nth-child(6) { animation-delay: 0.5s; }
+        .wave-line:nth-child(7) { animation-delay: 0.6s; }
+        .wave-line:nth-child(8) { animation-delay: 0.7s; }
+        .wave-line:nth-child(9) { animation-delay: 0.8s; }
+        .wave-line:nth-child(10) { animation-delay: 0.9s; }
+        .wave-line:nth-child(11) { animation-delay: 1.0s; }
+        .wave-line:nth-child(12) { animation-delay: 1.1s; }
+        .wave-line:nth-child(13) { animation-delay: 1.2s; }
+        .wave-line:nth-child(14) { animation-delay: 1.3s; }
+        .wave-line:nth-child(15) { animation-delay: 1.4s; }
+        @keyframes fallBounce {
+          0%, 100%   { transform: translateY(0); }
+          50%        { transform: translateY(12.6px); }
+        }
+
+        #footer-text-content {
+            font-size: 13.6px;
+        }
+        @media (min-width: 768px) {
+            #footer-text-content {
+                font-size: 14.4px;
+            }
+        }
+
+        .contact-section-bg { position: relative; overflow: hidden; }
+        .contact-section-bg::before, .contact-section-bg::after {
+            content: ''; position: absolute; border-radius: 50%; 
+            filter: blur(calc(120px * 0.9)); 
+            z-index: 0; pointer-events: none; opacity: 0.5; 
+        }
+        .contact-section-bg::before { width: 60vw; height: 60vh; top: -10vh; left: -20vw; background: rgba(192, 132, 252, 0.2); }
+        .contact-section-bg::after { width: 50vw; height: 70vh; bottom: -15vh; right: -25vw; background: rgba(56, 189, 248, 0.15); }
+        .dark .contact-section-bg::before { background: rgba(99, 102, 241, 0.15); }
+        .dark .contact-section-bg::after { background: rgba(34, 211, 238, 0.1); }
+        .contact-section-bg > .container { position: relative; z-index: 1; }
+
+    </style>
+</head>
+
+<body id="top" class="bg-slate-50 text-gray-800 dark:bg-slate-950 dark:text-gray-200 transition-colors duration-300">
+
+<header id="main-header" class="fixed w-full top-0 left-0 z-50 md:top-[24px]">
+    <div id="header-container" class="relative w-full md:max-w-[86rem] md:mx-auto h-[56px] px-[24px] flex items-center justify-between md:rounded-full">
+        <div class="flex-1 flex justify-start">
+            <a href="index.html" class="text-[19px] font-bold text-gray-900 flex items-center dark:text-white">
+                <img src="Image/file.svg" alt="Pikaio Logo" class="h-[19px] w-[19px] mr-0.5 rounded-full block dark:hidden">
+                <img src="Image/Adobe Express - file(1)-256x256.webp" alt="Pikaio Logo Dark" class="h-[19px] w-[19px] mr-0.5 rounded-full hidden dark:block">
+                Pikaio
+            </a>
+        </div>
+        <nav class="hidden md:flex items-center justify-center">
+            <a href="gallery.html" class="text-[15px] font-bold text-black hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Gallery</a>
+            <a href="index.html#process" class="text-[15px] font-bold text-black hover:text-gray-800 dark:text-gray-300 dark:hover:text-white ml-[56px]">Process</a>
+            <a href="index.html#pricing" class="text-[15px] font-bold text-black hover:text-gray-800 dark:text-gray-300 dark:hover:text-white ml-[56px]">Pricing</a>
+            <a href="index.html#faq" class="text-[15px] font-bold text-black hover:text-gray-800 dark:text-gray-300 dark:hover:text-white ml-[56px]">FAQ</a>
+            <a href="contact.html" class="text-[15px] font-bold text-blue-600 dark:text-blue-400 ml-[56px]">Contact</a>
+        </nav>
+        <div class="flex-1 flex items-center justify-end space-x-2 sm:space-x-4">
+            <button id="theme-toggle-button" aria-label="Toggle Dark Mode" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hidden md:block"><i class="fas fa-moon text-[17px] block dark:hidden"></i><i class="fas fa-sun text-[17px] hidden dark:block"></i></button>
+            <a href="index.html#pricing" class="hidden md:inline-flex items-center justify-center px-[15px] py-[7px] border border-transparent rounded-full shadow-sm text-[13px] font-bold text-white bg-black dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200">Get Started <svg class="w-[11px] h-[11px] ml-1.5" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+            <div class="md:hidden flex items-center">
+                <button id="theme-toggle-button-mobile" aria-label="Toggle Dark Mode" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"><i class="fas fa-moon text-lg block dark:hidden"></i><i class="fas fa-sun text-lg hidden dark:block"></i></button>
+                <button id="hamburger-button" aria-label="Open Menu" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white ml-2"><i class="fas fa-bars text-xl"></i></button>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="mobile-menu-overlay" class="hidden fixed inset-0 bg-white/95 dark:bg-black/95 backdrop-blur-sm z-[1000] opacity-0">
+    <div id="mobile-menu-content" class="relative w-full h-full flex flex-col p-8">
+        <div class="flex justify-between items-center mb-16">
+            <a href="index.html" class="text-xl font-bold text-gray-900 flex items-center dark:text-white">
+                <img src="Image/file.svg" alt="Pikaio Logo" class="h-5 w-5 mr-0.5 rounded-full block dark:hidden">
+                <img src="Image/Adobe Express - file(1)-256x256.webp" alt="Pikaio Logo Dark" class="h-5 w-5 mr-0.5 rounded-full hidden dark:block">
+                Pikaio
+            </a>
+            <button id="close-mobile-menu" aria-label="Close Menu" class="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white">
+                <i class="fas fa-times text-3xl"></i>
+            </button>
+        </div>
+    <nav class="flex flex-col items-start space-y-8">
+        <a href="gallery.html" class="text-3xl font-bold text-gray-800 dark:text-gray-200">Gallery</a>
+        <a href="index.html#process" class="text-3xl font-bold text-gray-800 dark:text-gray-200">Process</a>
+        <a href="index.html#pricing" class="text-3xl font-bold text-gray-800 dark:text-gray-200">Pricing</a>
+        <a href="index.html#faq" class="text-3xl font-bold text-gray-800 dark:text-gray-200">FAQ</a>
+        <a href="contact.html" class="text-3xl font-bold text-blue-600 dark:text-blue-400">Contact</a>
+    </nav>
+    <a href="index.html#pricing" class="mt-auto inline-flex items-center justify-center px-8 py-3 border border-transparent rounded-full shadow-sm text-base font-bold text-white bg-black dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200">
+        Get Started 
+        <svg class="w-3.5 h-3.5 ml-2" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </a>
+</div>
+</div>
+
+<main>
+    <section class="contact-section-bg pt-28 md:pt-36 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto max-w-7xl">
+            <div class="max-w-2xl lg:max-w-4xl mx-auto text-center">
+                <p class="text-base font-semibold leading-7 text-blue-600 dark:text-blue-400">GET IN TOUCH</p>
+                <h1 class="mt-2 text-4xl font-black text-gray-900 dark:text-white sm:text-5xl">Let's Create Together</h1>
+                <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">Have a question, a project idea, or need a custom enterprise solution? We're here to help. Fill out the form, and our team will get back to you as soon as possible.</p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-16">
+                <div class="flex flex-col justify-center">
+                    <div class="bg-white dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800/50 rounded-2xl p-8 space-y-8 backdrop-blur-sm shadow-xl">
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-900 dark:text-white">General Inquiries</h3>
+                            <p class="mt-2 text-gray-600 dark:text-gray-400">For any general questions, you can reach out to us directly.</p>
+                            <a href="mailto:hello@pikaio.com" class="mt-4 inline-block font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-500">hello@pikaio.com</a>
+                        </div>
+                        <div class="border-t border-gray-200 dark:border-zinc-800"></div>
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-900 dark:text-white">Looking for Answers?</h3>
+                            <p class="mt-2 text-gray-600 dark:text-gray-400">Many common questions are answered on our pricing and FAQ pages.</p>
+                            <div class="mt-6 flex flex-col sm:flex-row gap-4">
+                                <a href="index.html#faq" class="inline-flex items-center justify-center px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-black hover:bg-slate-800 dark:text-black dark:bg-white dark:hover:bg-gray-200 transition-colors">FAQ<svg class="w-3 h-3 ml-1.5" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+                                <a href="index.html#pricing" class="inline-flex items-center justify-center px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-black hover:bg-slate-800 dark:text-black dark:bg-white dark:hover:bg-gray-200 transition-colors">Pricing<svg class="w-3 h-3 ml-1.5" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <form id="contactForm" name="contact" method="POST" data-netlify="true" class="bg-white dark:bg-zinc-900/50 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-zinc-800/50 space-y-6 backdrop-blur-sm">
+                        <input type="hidden" name="form-name" value="contact">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="fullName" class="block text-left text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">Full Name</label>
+                                <input type="text" id="fullName" name="fullName" class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50 text-gray-900 focus:ring-2 focus:ring-blue-500 transition-colors dark:bg-slate-800 dark:border-slate-700 dark:text-white" placeholder="John Doe" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-left text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">Email Address</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50 text-gray-900 focus:ring-2 focus:ring-blue-500 transition-colors dark:bg-slate-800 dark:border-slate-700 dark:text-white" placeholder="john.doe@example.com" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="inquiryType" class="block text-left text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">I'm inquiring for...</label>
+                            <select id="inquiryType" name="inquiryType" class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50 text-gray-900 focus:ring-2 focus:ring-blue-500 transition-colors dark:bg-slate-800 dark:border-slate-700 dark:text-white">
+                                <option value="">Select an option</option>
+                                <option value="individual">Personal Branding (Individual)</option>
+                                <option value="business">Business / Team Branding</option>
+                                <option value="general">General Inquiry</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-left text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">How can we help?</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50 text-gray-900 focus:ring-2 focus:ring-blue-500 transition-colors dark:bg-slate-800 dark:border-slate-700 dark:text-white" placeholder="Tell us about your vision..."></textarea>
+                        </div>
+                        <button type="submit" class="group w-full flex items-center justify-center text-lg font-bold tracking-wider px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:shadow-blue-500/30 dark:hover:shadow-blue-400/30 transition-all duration-300 transform hover:scale-105 text-white bg-gradient-to-br from-gray-900 to-black dark:text-black dark:bg-gradient-to-br dark:from-white dark:to-gray-200">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane ml-3 transition-transform group-hover:translate-x-1"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="bg-black border-t border-slate-800 flex flex-col md:min-h-screen min-h-[60vh] relative">
+    <div class="w-full px-4 sm:px-6 lg:px-8 pt-[32px] pb-[16px]">
+        <div id="footer-text-content" class="flex flex-col md:flex-row justify-between font-bold text-white">
+        <div class="text-left mb-6 md:mb-0">
+            <p class="md:mb-4">© <span id="copyright-year">2024</span> Pikaio. All rights reserved.</p>
+            <p class="mt-2 md:mt-0">Look like a million bucks. Without spending it.</p>
+        </div>
+        <div class="hidden md:block text-right">
+             <nav class="flex flex-wrap justify-end gap-x-6 gap-y-2 md:mb-4">
+                <a href="gallery.html" class="hover:text-slate-300 transition-colors">Gallery</a>
+                <a href="index.html#pricing" class="hover:text-slate-300 transition-colors">Pricing</a>
+                <a href="manifesto.html" class="hover:text-slate-300 transition-colors">Manifesto</a>
+                <a href="index.html#process" class="hover:text-slate-300 transition-colors">Process</a>
+                <a href="contact.html" class="hover:text-slate-300 transition-colors">Contact</a>
+                <a href="https://www.linkedin.com/company/pikaio/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">LinkedIn</a>
+             </nav>
+             <a href="#top" class="inline-block hover:text-slate-300 transition-colors">Back to top</a>
+        </div>
+        <div class="block md:hidden w-full">
+            <nav class="flex flex-wrap justify-start gap-x-6 gap-y-2">
+                <a href="gallery.html" class="hover:text-slate-300 transition-colors">Gallery</a>
+                <a href="index.html#pricing" class="hover:text-slate-300 transition-colors">Pricing</a>
+                <a href="manifesto.html" class="hover:text-slate-300 transition-colors">Manifesto</a>
+                <a href="index.html#process" class="hover:text-slate-300 transition-colors">Process</a>
+                <a href="contact.html" class="hover:text-slate-300 transition-colors">Contact</a>
+                <a href="https://www.linkedin.com/company/pikaio/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">LinkedIn</a>
+            </nav>
+            <div class="text-right mt-4">
+                 <a href="#top" class="inline-block hover:text-slate-300 transition-colors">Back to top</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="flex-grow"></div>
+<div class="absolute bottom-0 left-0 right-0 wave-container h-[22vh] md:h-[288px]" aria-hidden="true">
+  <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div>
+  <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div>
+  <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div>
+  <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div>
+  <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div>
+</div>
+</footer>
+
+<div id="successModal" class="modal"><div class="modal-content bg-white dark:bg-slate-800"><h3 class="text-green-600 dark:text-green-400 font-bold text-2xl mb-4">Message Sent!</h3><p class="text-gray-600 dark:text-gray-300 mb-6 font-medium">Thank you for your message. We'll get back to you shortly.</p><button id="closeModal" class="bg-black hover:bg-slate-800 text-white dark:bg-white dark:text-black dark:hover:bg-gray-200 px-6 py-2 rounded-lg font-bold transition-colors">Close</button></div></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const headerContainer = document.getElementById('header-container');
+    const hamburgerButton = document.getElementById('hamburger-button');
+    const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    const contactForm = document.getElementById('contactForm');
+    const successModal = document.getElementById('successModal');
+    const closeModalButton = document.getElementById('closeModal');
+    const themeToggleButtons = document.querySelectorAll('#theme-toggle-button, #theme-toggle-button-mobile');
+    
+    let lastScrollY = window.scrollY;
+
+    const _openMenu = () => { 
+        if(mobileMenuOverlay) { 
+            mobileMenuOverlay.classList.remove('hidden'); 
+            document.body.style.overflow = 'hidden'; 
+            setTimeout(() => mobileMenuOverlay.classList.add('opacity-100', 'active'), 10); 
+        } 
+    };
+    const _closeMenu = () => { 
+        if(mobileMenuOverlay) { 
+            mobileMenuOverlay.classList.remove('opacity-100', 'active'); 
+            document.body.style.overflow = ''; 
+            setTimeout(() => mobileMenuOverlay.classList.add('hidden'), 300); 
+        } 
+    };
+    const _updateThemeIcons = () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        themeToggleButtons.forEach(btn => {
+            if(btn) {
+                const moonIcon = btn.querySelector('.fa-moon');
+                const sunIcon = btn.querySelector('.fa-sun');
+                if (moonIcon) moonIcon.style.display = isDark ? 'none' : 'block';
+                if (sunIcon) sunIcon.style.display = isDark ? 'block' : 'none';
+            }
+        });
+    };
+    const _toggleTheme = () => { 
+        document.documentElement.classList.toggle('dark'); 
+        localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'; 
+        _updateThemeIcons();
+    };
+
+    if(hamburgerButton) hamburgerButton.addEventListener('click', _openMenu);
+    if(closeMobileMenuButton) closeMobileMenuButton.addEventListener('click', _closeMenu);
+    if(mobileMenuOverlay) {
+        mobileMenuOverlay.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href.includes('.html#') || (href.startsWith('#') && href.length > 1)) {
+                    if (href.startsWith('#') && document.getElementById(href.substring(1))) {
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+                _closeMenu();
+            });
+        });
+    }
+    
+    themeToggleButtons.forEach(btn => {
+        if(btn) btn.addEventListener('click', _toggleTheme);
+    });
+    
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        if (headerContainer) {
+            if (currentScrollY < 100) { 
+                headerContainer.classList.remove('scrolled-up', 'hidden-nav'); 
+            } else if (lastScrollY < currentScrollY && currentScrollY > 100) {
+                headerContainer.classList.add('hidden-nav'); 
+            } else if (lastScrollY > currentScrollY) {
+                headerContainer.classList.remove('hidden-nav'); 
+                if (currentScrollY > 100) {
+                     headerContainer.classList.add('scrolled-up');
+                }
+            }
+        }
+        lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
+    });
+
+    document.querySelectorAll('a[href^="#"], a[href*=".html#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = anchor.getAttribute('href');
+            const [path, fragment] = href.split('#');
+            if (fragment && (path === '' || window.location.pathname.endsWith(path) || path.endsWith('index.html'))) {
+                const targetElement = document.getElementById(fragment);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                    if (mobileMenuOverlay?.classList.contains('active')) _closeMenu(); 
+                } else if (path.endsWith('index.html') && !window.location.pathname.endsWith('index.html')) {
+                }
+            }
+        });
+    });
+    
+    if(contactForm) {
+        contactForm.addEventListener('submit', function (e) { 
+            e.preventDefault(); 
+            const formData = new FormData(contactForm); 
+            fetch("/", { 
+                method: "POST", 
+                headers: { "Content-Type": "application/x-www-form-urlencoded" }, 
+                body: new URLSearchParams(formData).toString() 
+            })
+            .then(() => { 
+                if(successModal) successModal.style.display = 'flex'; 
+                contactForm.reset(); 
+            })
+            .catch((error) => { 
+                console.error("Form submission error:", error);
+                alert("Sorry, there was an error submitting your form. Please try again."); 
+            }); 
+        });
+        if(closeModalButton && successModal) {
+            closeModalButton.addEventListener('click', () => { 
+                successModal.style.display = 'none'; 
+            });
+        }
+        window.addEventListener('click', (event) => { 
+            if (event.target == successModal && successModal) { 
+                successModal.style.display = 'none'; 
+            } 
+        });
+    }
+
+    function handleHashOnLoad() {
+        if (window.location.hash) {
+            const fragment = window.location.hash.substring(1);
+            const targetElement = document.getElementById(fragment);
+            if (targetElement) {
+                setTimeout(() => {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        }
+    }
+
+    function initializePage() {
+        const copyrightYearEl = document.getElementById('copyright-year');
+        if (copyrightYearEl) copyrightYearEl.textContent = new Date().getFullYear(); 
+        
+        if (headerContainer && window.scrollY > 100) {
+            headerContainer.classList.add('scrolled-up');
+        } else if (headerContainer) {
+            headerContainer.classList.remove('scrolled-up', 'hidden-nav');
+        }
+        _updateThemeIcons(); 
+        handleHashOnLoad();
+    }
+    initializePage();
+});
+</script>
+
+</body>
+</html>

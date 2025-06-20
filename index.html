@@ -1,315 +1,939 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- The "dark" class will be added here by the script -->
+<html lang="en" class="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
+<title>Pikaio | AI Headshots & Professional Branding Photos</title>
+<meta name="description" content="Stop wasting time and money on photoshoots. Pikaio uses custom AI to generate stunning, photorealistic professional photos and headshots for your brand.">
+<!-- FAVICON CODE -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<!-- Scripts & Fonts -->
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<script>
+    tailwind.config = { darkMode: 'class' }
+    if (localStorage.theme === 'dark' || (!('theme'in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+</script>
+<style>
+    /* --- GLOBAL SCALING --- */
+    html {
+        /* font-size: 14.4px; CHANGED: Removed to default to 100% (typically 16px) */
+        -webkit-text-size-adjust: 100%; /* Prevent automatic text scaling on some mobile browsers */
+        -moz-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+    body { 
+        font-family: 'Satoshi', sans-serif; /* Your primary body font */
+        scroll-behavior: smooth; 
+        -webkit-font-smoothing: antialiased; 
+        -moz-osx-font-smoothing: grayscale; 
+    }
+    .font-inter { font-family: 'Inter', sans-serif; }
     
-    <title>Pikaio | AI Headshots & Professional Branding Photos</title>
-    <meta name="description" content="Stop wasting time and money on photoshoots. Pikaio uses custom AI to generate stunning, photorealistic professional photos and headshots for your brand.">
+/* HERO STYLES -- AURORA 2.0 (with Mobile Fix) */
+@keyframes aurora-1 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(100px, 80px) rotate(180deg); } /* CHANGED: Removed * 0.9 */
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+@keyframes aurora-2 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-120px, 100px) rotate(180deg); } /* CHANGED: Removed * 0.9 */
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+@keyframes aurora-3 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(80px, -100px) rotate(180deg); } /* CHANGED: Removed * 0.9 */
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
 
-    <!-- START: FAVICON CODE -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <!-- END: FAVICON CODE -->
+.hero-bg {
+    background-color: #f1f5f9; 
+    position: relative;
+    overflow: hidden;
+}
+.dark .hero-bg {
+    background-color: #020617; 
+}
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+.hero-bg::before, .hero-bg::after, .hero-bg .rectangle-wave-3 {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(96px); /* CHANGED: Removed calc(... * 0.9) */
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-bg::before {
+    width: 500px; /* CHANGED: Removed calc(... * 0.9) */
+    height: 500px; /* CHANGED: Removed calc(... * 0.9) */
+    top: -10%;
+    left: -10%;
+    background: rgba(192, 132, 252, 0.4); 
+    animation: aurora-1 25s linear infinite;
+}
+.hero-bg::after {
+    width: 600px; /* CHANGED: Removed calc(... * 0.9) */
+    height: 600px; /* CHANGED: Removed calc(... * 0.9) */
+    bottom: -20%;
+    right: -15%;
+    background: rgba(56, 189, 248, 0.3); 
+    animation: aurora-2 30s linear infinite reverse;
+}
+.hero-bg > .rectangle-wave-3 {
+    width: 450px; /* CHANGED: Removed calc(... * 0.9) */
+    height: 450px; /* CHANGED: Removed calc(... * 0.9) */
+    top: 10%;
+    right: -5%;
+    background: rgba(251, 113, 133, 0.3); 
+    animation: aurora-3 20s linear infinite;
+}
+
+.dark .hero-bg::before { background: rgba(99, 102, 241, 0.4); }
+.dark .hero-bg::after { background: rgba(34, 211, 238, 0.3); }
+.dark .hero-bg > .rectangle-wave-3 { background: rgba(217, 70, 239, 0.35); }
+
+@media (max-width: 768px) { 
+    .hero-bg > .rectangle-wave-3 { display: none; }
+    .hero-bg::before {
+        width: 350px; /* CHANGED: Removed calc(... * 0.9) */
+        height: 350px; /* CHANGED: Removed calc(... * 0.9) */
+        top: -15%; left: -20%;
+    }
+    .hero-bg::after {
+        width: 400px; /* CHANGED: Removed calc(... * 0.9) */
+        height: 400px; /* CHANGED: Removed calc(... * 0.9) */
+        bottom: -15%; right: -25%;
+    }
+}
+
+.hero-bg > .container { position: relative; z-index: 1; }
     
-    <!-- THEME CONTROL SCRIPT (THE "BRAINS") -->
-    <script>
-        tailwind.config = {
-          darkMode: 'class'
-        }
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-          document.documentElement.classList.add('dark')
-        } else {
-          document.documentElement.classList.remove('dark')
-        }
-    </script>
+#main-header { pointer-events: none; }
+#header-container { pointer-events: auto; transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease, background-color 0.3s ease, border-color 0.3s ease; transform: translateY(0); }
+#header-container.hidden-nav { transform: translateY(-150%); opacity: 0; }
+#header-container.scrolled-up {
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb; 
+}
+.dark #header-container.scrolled-up {
+  background-color: black;
+  border-bottom: 1px solid #334155; 
+}
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        header { transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease-in-out; }
-        header.header-hidden { transform: translateY(-100%); }
-        #mobile-menu-overlay { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; transform: translateX(100%); opacity: 0; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 999; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        #mobile-menu-overlay.active { transform: translateX(0); opacity: 1; }
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); align-items: center; justify-content: center; }
-        .modal-content { padding: 2rem; border-radius: 0.75rem; text-align: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); width: 90%; max-width: 400px; }
-        .nav-link-desktop { position: relative; padding-bottom: 4px; }
-        .nav-link-desktop::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: #2563EB; transform: scaleX(0); transform-origin: center; transition: transform 0.3s ease-in-out; }
-        .nav-link-desktop:hover::after { transform: scaleX(1); }
-        #back-to-top { position: fixed; bottom: 2rem; right: 2rem; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s, transform 0.3s; transform: translateY(20px); }
-        #back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
-        .shine-on-hover { position: relative; overflow: hidden; }
-        .shine-on-hover::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent); transition: left 0.6s ease; }
-        .shine-on-hover:hover::before { left: 100%; }
-        
-        /* ✅ THE CSS FIX: Force a pointer cursor on purchase buttons */
-        .purchase-button {
-            cursor: pointer;
-        }
-    </style>
+/* ADDED: Navbar max-width adjustment */
+@media (min-width: 768px) {
+    #header-container {
+        max-width: 1238.4px !important; /* Original 86rem * 14.4px/rem = 1238.4px. Use !important to override Tailwind's md:max-w-[86rem] */
+    }
+}
+
+@media (min-width: 768px) { 
+  #header-container.scrolled-up {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px); /* CHANGED: Removed calc(... * 0.9) */
+    -webkit-backdrop-filter: blur(12px); /* CHANGED: Removed calc(... * 0.9) */
+    border: 1px solid #e5e7eb; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.07); /* CHANGED: Removed calc(... * 0.9) */
+  }
+  .dark #header-container.scrolled-up {
+    background-color: rgba(15, 23, 42, 0.75);
+    border-color: #334155;
+  }
+}
+#mobile-menu-overlay { transition: opacity 0.3s ease-in-out; }
+#mobile-menu-content { transition: transform 0.3s ease-in-out; transform: scale(0.95); }
+#mobile-menu-overlay.active #mobile-menu-content { transform: scale(1); }
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); align-items: center; justify-content: center; }
+.modal-content { padding: 2rem; border-radius: 0.75rem; text-align: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); width: 90%; max-width: 400px; } /* CHANGED: Removed calc(... * 0.9) */
+    
+@keyframes pikaio-energy-pulse { 0% { box-shadow: 0 0 0px rgba(0, 100, 255, 0); transform: scale(1); } 50% { box-shadow: 0 0 20px rgba(0, 100, 255, 0.5); transform: scale(1.02); } /* CHANGED: Removed calc(... * 0.9) */ 100% { box-shadow: 0 0 0px rgba(0, 100, 255, 0); transform: scale(1); } } 
+.pikaio-engine-animation { animation: pikaio-energy-pulse 3s infinite ease-in-out; }
+    
+#interactive-showcase { position: relative; overflow: hidden; background-color: #f8fafc; }
+.dark #interactive-showcase { background-color: #020617; }
+#interactive-showcase::before, #interactive-showcase::after { content: ''; position: absolute; z-index: 0; border-radius: 50%; filter: blur(100px); } /* CHANGED: Removed calc(... * 0.9) */
+#interactive-showcase::before { width: 400px; height: 400px; top: -150px; left: -150px; background: rgba(191, 219, 254, 0.6); } /* CHANGED: Removed calc(... * 0.9) */
+.dark #interactive-showcase::before { background: rgba(30, 64, 175, 0.2); }
+#interactive-showcase::after { width: 500px; height: 500px; bottom: -200px; right: -200px; background: rgba(165, 180, 252, 0.5); } /* CHANGED: Removed calc(... * 0.9) */
+.dark #interactive-showcase::after { background: rgba(79, 70, 229, 0.2); }
+.showcase-grid-bg { position: absolute; inset: 0; z-index: 0; background-image: linear-gradient(rgba(239, 246, 255, 0.6) 1px, transparent 1px), linear-gradient(to right, rgba(239, 246, 255, 0.6) 1px, transparent 1px); background-size: 4rem 4rem; } 
+.dark .showcase-grid-bg { background-image: linear-gradient(rgba(30, 41, 59, 0.4) 1px, transparent 1px), linear-gradient(to right, rgba(30, 41, 59, 0.4) 1px, transparent 1px); } 
+.showcase-bg-logos { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.showcase-bg-logos > div { opacity: 0; }
+.showcase-bg-logos > div.active { opacity: 1; }
+#showcase-content-wrapper { position: relative; z-index: 2; }
+    
+.text-mask { color: transparent; background-image: linear-gradient(45deg, #334155, #111827); -webkit-background-clip: text; background-clip: text; }
+.dark .text-mask { background-image: linear-gradient(45deg, #e2e8f0, #ffffff); }
+@keyframes premium-float { 0% { transform: translate(0px, 0px) rotate(var(--start-rotate)); } 25% { transform: translate(var(--x-drift), -15px) rotate(var(--mid-rotate-1)); } /* CHANGED: Removed calc(... * 0.9) */ 50% { transform: translate(0px, 10px) rotate(var(--end-rotate)); } /* CHANGED: Removed calc(... * 0.9) */ 75% { transform: translate(calc(var(--x-drift) * -0.5), 15px) rotate(var(--mid-rotate-2)); } /* CHANGED: Removed calc(... * 0.9) */ 100% { transform: translate(0px, 0px) rotate(var(--start-rotate)); } } 
+.logo-bg { position: absolute; opacity: 0.6; transition: filter 0.4s ease, opacity 0.4s ease; filter: drop-shadow(0 8px 16px rgba(50, 60, 80, 0.15)); animation: premium-float ease-in-out infinite; } /* CHANGED: Removed calc(... * 0.9) */
+.dark .logo-bg { filter: drop-shadow(0 0 25px rgba(230, 240, 255, 0.25)); } /* CHANGED: Removed calc(... * 0.9) */
+    
+/* LOGO POSITIONS AND DURATIONS - REMOVED *0.9 from widths and x-drifts */
+.logo-p1 { top: 5%; left: 5%; width: 100px; --start-rotate: -15deg; --mid-rotate-1: -10deg; --end-rotate: -12deg; --mid-rotate-2: -18deg; --x-drift: 15px; animation-duration: 22s; animation-delay: -5s; }
+.logo-p2 { bottom: 8%; left: 22%; width: 60px; --start-rotate: 10deg; --mid-rotate-1: 15deg; --end-rotate: 8deg; --mid-rotate-2: 12deg; --x-drift: -10px; animation-duration: 28s; animation-delay: 0s; }
+.logo-p3 { top: 10%; right: 8%; width: 90px; --start-rotate: 5deg; --mid-rotate-1: 0deg; --end-rotate: 8deg; --mid-rotate-2: 2deg; --x-drift: 10px; animation-duration: 19s; animation-delay: -2s; }
+.logo-p4 { bottom: 12%; right: 15%; width: 75px; --start-rotate: -5deg; --mid-rotate-1: -10deg; --end-rotate: -2deg; --mid-rotate-2: -8deg; --x-drift: -12px; animation-duration: 25s; animation-delay: -10s; }
+.logo-p5 { top: 35%; left: 1%; width: 70px; --start-rotate: 25deg; --mid-rotate-1: 30deg; --end-rotate: 20deg; --mid-rotate-2: 28deg; --x-drift: 8px; animation-duration: 18s; animation-delay: -12s; }
+.logo-p6 { top: 55%; right: 2%; width: 50px; --start-rotate: -20deg; --mid-rotate-1: -25deg; --end-rotate: -15deg; --mid-rotate-2: -22deg; --x-drift: -5px; animation-duration: 30s; animation-delay: -3s; }
+.logo-p7 { bottom: 5%; left: 45%; width: 45px; --start-rotate: 15deg; --mid-rotate-1: 10deg; --end-rotate: 18deg; --mid-rotate-2: 12deg; --x-drift: 10px; animation-duration: 17s; animation-delay: -8s; }
+.logo-p8 { top: 2%; right: 30%; width: 65px; --start-rotate: 10deg; --mid-rotate-1: 15deg; --end-rotate: 8deg; --mid-rotate-2: 13deg; --x-drift: -8px; animation-duration: 23s; animation-delay: -1s; }
+.logo-p9 { top: 70%; left: 3%; width: 85px; --start-rotate: -10deg; --mid-rotate-1: -5deg; --end-rotate: -12deg; --mid-rotate-2: -8deg; --x-drift: 12px; animation-duration: 32s; animation-delay: -15s; }
+.logo-p10 { top: 88%; right: 40%; width: 55px; --start-rotate: 20deg; --mid-rotate-1: 25deg; --end-rotate: 18deg; --mid-rotate-2: 22deg; --x-drift: -10px; animation-duration: 18s; animation-delay: -6s; }
+.logo-p11 { top: 40%; left: 42%; width: 50px; --start-rotate: -5deg; --mid-rotate-1: 0deg; --end-rotate: -8deg; --mid-rotate-2: -2deg; --x-drift: 5px; animation-duration: 35s; animation-delay: -9s; }
+.logo-p12 { top: 20%; left: 25%; width: 40px; --start-rotate: 15deg; --mid-rotate-1: 20deg; --end-rotate: 12deg; --mid-rotate-2: 18deg; --x-drift: -7px; animation-duration: 20s; animation-delay: -14s; }
+.logo-p13 { top: 80%; left: 15%; width: 95px; --start-rotate: 12deg; --mid-rotate-1: 5deg; --end-rotate: 15deg; --mid-rotate-2: 10deg; --x-drift: -15px; animation-duration: 26s; animation-delay: -7s; }
+.logo-p14 { top: 60%; left: 60%; width: 60px; --start-rotate: -8deg; --mid-rotate-1: -2deg; --end-rotate: -10deg; --mid-rotate-2: -5deg; --x-drift: 20px; animation-duration: 21s; animation-delay: -4s; }
+.logo-p15 { bottom: 2%; right: 2%; width: 80px; --start-rotate: 18deg; --mid-rotate-1: 22deg; --end-rotate: 15deg; --mid-rotate-2: 20deg; --x-drift: -10px; animation-duration: 29s; animation-delay: -11s; }
+.logo-p16 { top: 5%; right: 5%; width: 70px; --start-rotate: -12deg; --mid-rotate-1: -18deg; --end-rotate: -10deg; --mid-rotate-2: -15deg; --x-drift: 10px; animation-duration: 24s; animation-delay: -1s; }
+
+#showcase-content-container { display: grid; }
+.showcase-view { grid-area: 1 / 1 / 2 / 2; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
+.showcase-view.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.flipper-card-before, .flipper-card-after { transition: opacity 0.4s ease, visibility 0.4s ease; }
+    
+.process-card-glow { background: radial-gradient(300px circle at var(--x) var(--y), rgba(200, 200, 200, 0.2), transparent 40%); z-index: 1; } /* CHANGED: Removed calc(... * 0.9) */
+.dark .process-card-glow { background: radial-gradient(300px circle at var(--x) var(--y), rgba(255, 255, 255, 0.1), transparent 40%); } /* CHANGED: Removed calc(... * 0.9) */
+
+#final-cta { background-image: radial-gradient(ellipse at top, white, #f1f5f9 80%); }
+.dark #final-cta { background: #0f172a; background-image: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124, 58, 237, 0.15), transparent); }
+#final-cta::before, #final-cta::after { content: ''; position: absolute; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, #e2e8f0, transparent); } 
+.dark #final-cta::before, .dark #final-cta::after { background: linear-gradient(to bottom, transparent, #1e293b, transparent); } 
+#final-cta::before { left: 6%; }
+#final-cta::after { right: 6%; }
+@media (max-width: 768px) { #final-cta::before { left: 2rem; } #final-cta::after { right: 2rem; } }
+    
+.wave-container {
+  position: relative; width: 100%; background: black; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden;
+}
+.wave-line {
+  width: 100%; height: 14.4px; /* CHANGED: calc(16px * 0.9) to 14.4px to preserve visual height */ 
+  background-color: white; animation: fallBounce 2.4s ease-in-out infinite;
+}
+.wave-line:nth-child(1) { animation-delay: 0s; } .wave-line:nth-child(2) { animation-delay: 0.1s; } .wave-line:nth-child(3) { animation-delay: 0.2s; } .wave-line:nth-child(4) { animation-delay: 0.3s; } .wave-line:nth-child(5) { animation-delay: 0.4s; } .wave-line:nth-child(6) { animation-delay: 0.5s; } .wave-line:nth-child(7) { animation-delay: 0.6s; } .wave-line:nth-child(8) { animation-delay: 0.7s; } .wave-line:nth-child(9) { animation-delay: 0.8s; } .wave-line:nth-child(10) { animation-delay: 0.9s; } .wave-line:nth-child(11) { animation-delay: 1.0s; } .wave-line:nth-child(12) { animation-delay: 1.1s; } .wave-line:nth-child(13) { animation-delay: 1.2s; } .wave-line:nth-child(14) { animation-delay: 1.3s; } .wave-line:nth-child(15) { animation-delay: 1.4s; }
+    
+@keyframes fallBounce {
+  0%, 100%   { transform: translateY(0); }
+  50%        { transform: translateY(12.6px); } /* CHANGED: calc(14px * 0.9) to 12.6px to preserve visual effect */
+}
+    
+.dotted-bg {
+    background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.1) 1px, transparent 0); 
+    background-size: 2rem 2rem;
+}
+.dark .dotted-bg {
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0); 
+}
+    
+.dot-grid-bg {
+    background-image: radial-gradient(circle, rgba(0,0,0,0.07) 1px, transparent 1px); 
+    background-size: 2rem 2rem; 
+}
+.dark .dot-grid-bg {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px); 
+}
+
+/* Footer Mobile Font Size Adjustment - This rule will be removed and handled by #footer-text-content */
+/* @media (max-width: 767px) { 
+    footer div.flex.flex-col.md\:flex-row.justify-between.text-sm.md\:text-base {
+        font-size: calc(0.875rem + 1px); 
+    }
+} */
+
+/* ADDED: Footer font size adjustments */
+#footer-text-content {
+    font-size: 13.6px; /* Original visual size for mobile: (0.875rem * 14.4px) + 1px = 13.6px */
+}
+@media (min-width: 768px) { /* md breakpoint */
+    #footer-text-content {
+        font-size: 14.4px; /* Original visual size for desktop: 1rem * 14.4px = 14.4px */
+    }
+}
+</style>
 </head>
-<body id="top" class="bg-gray-50 text-gray-900 dark:bg-slate-900 dark:text-gray-200 transition-colors duration-300">
-
-    <header class="sticky top-0 z-50" id="main-header">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-gray-900 flex items-center dark:text-white">
-                <img src="Image/file.svg" alt="Pikaio Logo" class="h-10 w-10 mr-2 rounded-full block dark:hidden" loading="eager" decoding="async" width="40" height="40">
-                <img src="Image/Adobe Express - file(1)-256x256.webp" alt="Pikaio Logo Dark" class="h-10 w-10 mr-2 rounded-full hidden dark:block" loading="eager" decoding="async" width="40" height="40">
+<body id="top" class="bg-slate-50 text-gray-800 dark:bg-slate-950 dark:text-gray-200 transition-colors duration-300">
+<!-- HEADER -->
+<header id="main-header" class="fixed w-full top-0 left-0 z-50 md:top-6">
+    <div id="header-container" class="relative w-full md:max-w-[86rem] md:mx-auto h-14 px-6 flex items-center justify-between md:rounded-full">
+        <div class="flex-1 flex justify-start">
+            <a href="index.html" class="text-[19px] font-bold text-gray-900 flex items-center dark:text-white">
+                <img src="Image/file.svg" alt="Pikaio Logo" class="h-[19px] w-[19px] mr-0.5 rounded-full block dark:hidden">
+                <img src="Image/Adobe Express - file(1)-256x256.webp" alt="Pikaio Logo Dark" class="h-[19px] w-[19px] mr-0.5 rounded-full hidden dark:block">
                 Pikaio
             </a>
-            <nav class="hidden md:flex space-x-8">
-                <a href="gallery.html" class="text-gray-700 font-medium hover:text-blue-600 transition-colors nav-link-desktop dark:text-gray-300 dark:hover:text-blue-400">Gallery</a>
-                <a href="#process" class="text-gray-700 font-medium hover:text-blue-600 transition-colors nav-link-desktop dark:text-gray-300 dark:hover:text-blue-400">Process</a>
-                <a href="#pricing" class="text-gray-700 font-medium hover:text-blue-600 transition-colors nav-link-desktop dark:text-gray-300 dark:hover:text-blue-400">Pricing</a>
-                <a href="#faq" class="text-gray-700 font-medium hover:text-blue-600 transition-colors nav-link-desktop dark:text-gray-300 dark:hover:text-blue-400">FAQ</a>
-                <a href="#contact" class="text-gray-700 font-medium hover:text-blue-600 transition-colors nav-link-desktop dark:text-gray-300 dark:hover:text-blue-400">Contact</a>
-            </nav>
-            <div class="flex items-center space-x-4">
-                <a href="#contact" class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300 hidden md:inline-block">Get Started</a>
-                
-                <button id="theme-toggle-button" class="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors p-2 rounded-full text-xl">
-                    <i class="fas fa-moon block dark:hidden"></i>
-                    <i class="fas fa-sun hidden dark:block"></i>
+        </div>
+        <nav class="hidden md:flex items-center justify-center space-x-14">
+            <a href="gallery.html" class="text-[15px] font-bold text-black hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Gallery</a>
+            <a href="#process" class="text-[15px] font-bold text-black hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Process</a>
+            <a href="#pricing" class="text-[15px] font-bold text-black hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Pricing</a>
+            <a href="#faq" class="text-[15px] font-bold text-black hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">FAQ</a>
+            <a href="contact.html" class="text-[15px] font-bold text-black hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Contact</a>
+        </nav>
+        <div class="flex-1 flex items-center justify-end space-x-2 sm:space-x-4">
+            <button id="theme-toggle-button" aria-label="Toggle Dark Mode" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hidden md:block">
+                <i class="fas fa-moon text-[17px] block dark:hidden"></i>
+                <i class="fas fa-sun text-[17px] hidden dark:block"></i>
+            </button>
+            <a href="#pricing" class="hidden md:inline-flex items-center justify-center px-[15px] py-[7px] border border-transparent rounded-full shadow-sm text-[13px] font-bold text-white bg-black dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200">
+                Get Started 
+                <svg class="w-[11px] h-[11px] ml-1.5" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </a>
+            <div class="md:hidden flex items-center">
+                <button id="theme-toggle-button-mobile" aria-label="Toggle Dark Mode" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                    <i class="fas fa-moon text-lg block dark:hidden"></i>
+                    <i class="fas fa-sun text-lg hidden dark:block"></i>
                 </button>
-                
-                <button id="hamburger-button" class="md:hidden text-gray-600 hover:text-blue-600 transition-colors text-xl dark:text-gray-400 dark:hover:text-blue-400"><i class="fas fa-bars"></i></button>
+                <button id="hamburger-button" aria-label="Open Menu" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white ml-2">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
             </div>
         </div>
-    </header>
-
-    <div id="mobile-menu-overlay" class="hidden bg-gray-50 dark:bg-slate-900">
-        <button id="close-mobile-menu" class="absolute top-6 right-6 text-gray-600 hover:text-blue-600 text-3xl dark:text-gray-400 dark:hover:text-blue-400"><i class="fas fa-times"></i></button>
-        <nav class="flex flex-col space-y-8 text-center text-2xl">
-            <a href="gallery.html" class="text-gray-800 hover:text-blue-600 transition-colors py-2 dark:text-gray-200 dark:hover:text-blue-400">Gallery</a>
-            <a href="#process" class="text-gray-800 hover:text-blue-600 transition-colors py-2 dark:text-gray-200 dark:hover:text-blue-400">Process</a>
-            <a href="#pricing" class="text-gray-800 hover:text-blue-600 transition-colors py-2 dark:text-gray-200 dark:hover:text-blue-400">Pricing</a>
-            <a href="#faq" class="text-gray-800 hover:text-blue-600 transition-colors py-2 dark:text-gray-200 dark:hover:text-blue-400">FAQ</a>
-            <a href="#contact" class="text-gray-800 hover:text-blue-600 transition-colors py-2 dark:text-gray-200 dark:hover:text-blue-400">Contact</a>
-            <a href="#contact" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300 mt-8">Get Started</a>
-        </nav>
     </div>
+</header>
 
-    <main>
-        <section id="hero" class="relative bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-slate-800 min-h-[calc(100vh-80px)] flex items-center justify-center py-20 px-4 overflow-hidden"><div class="container mx-auto text-center z-10 relative"><h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-gray-100 leading-tight mb-6">Photos of You That Were Never Taken<br><span class="text-blue-600 dark:text-blue-400">But Should Have Been.</span></h1><p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-12 max-w-3xl mx-auto">Pikaio creates stunning, ultra-realistic images that show <span class="font-bold">you</span> in any setting, style, or story - without ever stepping in front of a camera.</p><a href="#contact" class="bg-blue-600 text-white text-lg px-8 py-4 rounded-xl shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105 duration-300 inline-block">Book a Free Consultation</a></div><div class="absolute inset-0 opacity-10 dark:opacity-5 pointer-events-none"><svg class="w-full h-full" fill="none" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M 80 0 L 0 0 L 0 80" fill="none" stroke="#e0e7ff" class="dark:stroke-slate-700" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)" /></svg></div></section>
-        <section id="gallery-teaser" class="py-20 bg-gray-50 dark:bg-slate-900 px-4"><div class="container mx-auto"><div class="text-center mb-12"><h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Elevate Your Brand, Instantly.</h2><p class="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-6">From personal branding to full marketing campaigns, we create the exact visuals you need to build credibility.</p><div class="inline-flex items-center bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full shadow-md dark:bg-blue-900/50 dark:text-blue-300"><i class="fas fa-check-circle mr-2"></i>These images were never taken. They were made - by Pikaio.</div></div><div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"><a href="gallery.html" class="block"><div class="bg-white dark:bg-slate-800 dark:border dark:border-slate-700 rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/erty.webp" alt="Professional Portrait" class="w-full h-80 object-cover" loading="lazy" decoding="async" width="800" height="600"><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Your Professional Presence</h3><p class="text-gray-600 dark:text-gray-400">From the boardroom to the main stage. We create powerful visuals that establish you as a leader worth listening to - no studio required.</p></div></div></a><a href="gallery.html" class="block"><div class="bg-white dark:bg-slate-800 dark:border dark:border-slate-700 rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/mic.webp" alt="Business Team" class="w-full h-80 object-cover" loading="lazy" decoding="async" width="800" height="600"><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Elevate Your Company's Look</h3><p class="text-gray-600 dark:text-gray-400">Show off your brand with workspace images or location based photos - no photoshoot required.</p></div></div></a><a href="gallery.html" class="block"><div class="bg-white dark:bg-slate-800 dark:border dark:border-slate-700 rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/out-2-4.webp" alt="Lifestyle Persona" class="w-full h-80 object-cover" loading="lazy" decoding="async" width="800" height="600"><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Show the Best Version of You</h3><p class="text-gray-600 dark:text-gray-400">Whether it's travel, fitness, fashion or future-you, we help you look aspirational and authentic.</p></div></div></a><a href="gallery.html" class="block"><div class="bg-white dark:bg-slate-800 dark:border dark:border-slate-700 rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><div class="relative w-full h-80 overflow-hidden" id="slider-container"><img src="Image/567yttg.webp" alt="After Image" class="absolute inset-0 w-full h-full object-cover z-0" loading="lazy" decoding="async" width="800" height="600" /><div id="before-wrapper" class="absolute inset-0 overflow-hidden z-10"><img src="Image/getty_1421479584_200013322000928054_cijnbk.webp" alt="Before Image" class="w-full h-full object-cover" loading="lazy" decoding="async" width="800" height="600" /></div><div id="divider" class="absolute top-0 h-full w-0.5 bg-white z-20" style="left: 50%;"></div></div><div class="p-6"><h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Before & After: Scene Stealer</h3><p class="text-gray-600 dark:text-gray-400">Why admire their moments when you can own them? We place you at the center of any iconic photo, flawlessly.</p></div></div></a></div><div class="text-center mt-12"><a href="gallery.html" class="shine-on-hover bg-blue-600 text-white text-lg px-8 py-4 rounded-xl shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105 duration-300 inline-flex items-center">See What's Possible<i class="fas fa-arrow-right ml-2"></i></a></div></div></section>
-        <section id="process" class="py-20 bg-white dark:bg-slate-800 px-4"><div class="container mx-auto"><div class="text-center mb-16"><h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Our Simple 3-Step Process</h2><p class="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">From vision to delivery, we turn your ideas into hyper-real visuals.</p></div><div class="relative grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto"><div class="flex flex-col items-center text-center"><div class="w-20 h-20 bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 rounded-full flex items-center justify-center mb-6 shadow-md"><i class="fas fa-cloud-upload-alt text-3xl"></i></div><h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-3">1. Consult & Upload</h3><p class="text-gray-600 dark:text-gray-400">We chat to understand your goals. Then you securely upload your photos to a private cloud folder.</p></div><div class="flex flex-col items-center text-center"><div class="w-20 h-20 bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 rounded-full flex items-center justify-center mb-6 shadow-md"><i class="fa-regular fa-lightbulb text-4xl"></i></div><h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-3">2. Create & Refine</h3><p class="text-gray-600 dark:text-gray-400">We build your custom model and send a preview gallery. You give feedback, we perfect the images.</p></div><div class="flex flex-col items-center text-center"><div class="w-20 h-20 bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 rounded-full flex items-center justify-center mb-6 shadow-md"><i class="fas fa-check-circle text-3xl"></i></div><h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-3">3. Deliver</h3><p class="text-gray-600 dark:text-gray-400">Every final image is delivered via a private cloud folder—polished, high-quality, and ready to use.</p></div></div></div></section>
+<div id="mobile-menu-overlay" class="hidden fixed inset-0 bg-white/95 dark:bg-black/95 backdrop-blur-sm z-[1000] opacity-0">
+    <div id="mobile-menu-content" class="relative w-full h-full flex flex-col p-8">
+        <div class="flex justify-between items-center mb-16">
+            <a href="index.html" class="text-xl font-bold text-gray-900 flex items-center dark:text-white">
+                <img src="Image/file.svg" alt="Pikaio Logo" class="h-5 w-5 mr-0.5 rounded-full block dark:hidden">
+                <img src="Image/Adobe Express - file(1)-256x256.webp" alt="Pikaio Logo Dark" class="h-5 w-5 mr-0.5 rounded-full hidden dark:block">
+                Pikaio
+            </a>
+            <button id="close-mobile-menu" aria-label="Close Menu" class="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white">
+                <i class="fas fa-times text-3xl"></i>
+            </button>
+        </div>
+    <nav class="flex flex-col items-start space-y-8">
+        <a href="gallery.html" class="text-3xl font-bold text-gray-800 dark:text-gray-200">Gallery</a>
+        <a href="#process" class="text-3xl font-bold text-gray-800 dark:text-gray-200">Process</a>
+        <a href="#pricing" class="text-3xl font-bold text-gray-800 dark:text-gray-200">Pricing</a>
+        <a href="#faq" class="text-3xl font-bold text-gray-800 dark:text-gray-200">FAQ</a>
+        <a href="contact.html" class="text-3xl font-bold text-gray-800 dark:text-gray-200">Contact</a>
+    </nav>
+    <a href="#pricing" class="mt-auto inline-flex items-center justify-center px-8 py-3 border border-transparent rounded-full shadow-sm text-base font-bold text-white bg-black dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200">
+        Get Started 
+        <svg class="w-3.5 h-3.5 ml-2" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </a>
+</div>
+</div>
+<main>
+    <section id="hero" class="hero-bg relative flex items-center justify-center py-40 md:py-20 px-4 md:min-h-screen">
+    <div class="rectangle-wave-3"></div>
+    <div class="max-w-7xl mx-auto text-center z-10 relative">
+        <h1 class="text-[35px] sm:text-[47px] md:text-[59px] font-black text-black dark:text-white leading-tight mb-6" style="line-height: 1.15;">
+            Photos of You That Were Never Taken<br>But Should Have Been.
+        </h1>
+        <p class="text-lg md:text-xl font-medium text-slate-600 dark:text-slate-300 mb-12 max-w-3xl mx-auto">
+            Pikaio creates stunning, ultra-realistic images that show you in any setting, style, or story — without ever stepping in front of a camera.
+        </p>
+        <a href="#pricing" class="bg-black text-white dark:bg-white dark:text-black text-lg font-bold px-8 py-4 rounded-full shadow-lg hover:bg-slate-800 dark:hover:bg-gray-200 transition-transform transform hover:scale-105 duration-300 inline-block">
+            See Pricing & Plans
+        </a>
+    </div>
+</section>
+<div class="dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800"></div>
+
+<section id="gallery-teaser" class="py-20 bg-white dark:bg-slate-950 dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:from-slate-900 dark:to-slate-950 px-4">
+    <div class="container mx-auto">
+        <div class="text-center mb-12 max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Elevate Your Brand, Instantly.</h2>
+            <p class="text-lg font-medium text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-6">From personal branding to full marketing campaigns, we create the exact visuals you need to build credibility.</p>
+            <div class="inline-flex items-center bg-blue-100 text-blue-800 text-sm font-bold px-4 py-2 rounded-full shadow-md dark:bg-blue-900/50 dark:text-blue-200"><i class="fas fa-check-circle mr-2"></i>These images were never taken. They were made - by Pikaio.</div>
+        </div>
+        <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"><a href="gallery.html" class="block"><div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/erty.webp" alt="Professional Portrait" class="w-full h-80 object-cover"><div class="p-6"><h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">Professional Presence</h3><p class="font-medium text-gray-600 dark:text-gray-400 text-sm">From the boardroom to the main stage. We create powerful visuals that establish you as a leader worth listening to - no studio required.</p></div></div></a><a href="gallery.html" class="block"><div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/mic.webp" alt="Business Team" class="w-full h-80 object-cover"><div class="p-6"><h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">Elevate Your Company's Look</h3><p class="font-medium text-gray-600 dark:text-gray-400 text-sm">Show off your brand with workspace images or location based photos - no photoshoot required.</p></div></div></a><a href="gallery.html" class="block"><div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><img src="Image/out-2-4.webp" alt="Lifestyle Persona" class="w-full h-80 object-cover"><div class="p-6"><h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">Show the Best Version of You</h3><p class="font-medium text-gray-600 dark:text-gray-400 text-sm">Whether it's travel, fitness, fashion or future-you, we help you look aspirational and authentic.</p></div></div></a><a href="gallery.html" class="block"><div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full"><div class="relative w-full h-80 overflow-hidden" id="slider-container"><img src="Image/567yttg.webp" alt="After Image" class="absolute inset-0 w-full h-full object-cover z-0"><div id="before-wrapper" class="absolute inset-0 overflow-hidden z-10"><img src="Image/getty_1421479584_200013322000928054_cijnbk.webp" alt="Before Image" class="w-full h-full object-cover"></div><div id="divider" class="absolute top-0 h-full w-0.5 bg-white z-20" style="left: 50%;"></div></div><div class="p-6"><h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">Before & After: Scene Stealer</h3><p class="font-medium text-gray-600 dark:text-gray-400 text-sm">Why admire their moments when you can own them? We place you at the center of any iconic photo, flawlessly.</p></div></div></a></div><div class="text-center mt-12"><a href="gallery.html" class="bg-black text-white dark:bg-white dark:text-black text-lg font-bold px-8 py-4 rounded-full shadow-lg hover:bg-slate-800 dark:hover:bg-gray-200 transition-transform transform hover:scale-105 duration-300 inline-flex items-center">See What's Possible<svg class="w-3 h-3 ml-2" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></div>
+    </div>
+</section>
+<section id="interactive-showcase" class="py-20 px-4">
+    <div class="showcase-grid-bg"></div>
+    <div class="showcase-bg-logos" aria-hidden="true">
+        <div id="logos-business">
+            <img src="Image/linkedin.png" alt="LinkedIn Logo" class="logo-bg logo-p1"><img src="Image/gmail.png" alt="Gmail Logo" class="logo-bg logo-p2"><img src="Image/seek.png" alt="Seek Logo" class="logo-bg logo-p3"><img src="Image/slack.png" alt="Slack Logo" class="logo-bg logo-p4"><img src="Image/googlemeet.svg" alt="Google Meet Logo" class="logo-bg logo-p5"><img src="Image/linkedin.png" alt="LinkedIn Logo" class="logo-bg logo-p6"><img src="Image/seek.png" alt="Seek Logo" class="logo-bg logo-p7"><img src="Image/gmail.png" alt="Gmail Logo" class="logo-bg logo-p8"><img src="Image/linkedin.png" alt="LinkedIn Logo" class="logo-bg logo-p9"><img src="Image/googlemeet.svg" alt="Google Meet Logo" class="logo-bg logo-p10"><img src="Image/slack.png" alt="Slack Logo" class="logo-bg logo-p11"><img src="Image/linkedin.png" alt="LinkedIn Logo" class="logo-bg logo-p12"><img src="Image/seek.png" alt="Seek Logo" class="logo-bg logo-p13"><img src="Image/gmail.png" alt="Gmail Logo" class="logo-bg logo-p14"><img src="Image/linkedin.png" alt="LinkedIn Logo" class="logo-bg logo-p15"><img src="Image/slack.png" alt="Slack Logo" class="logo-bg logo-p16">
+        </div>
+        <div id="logos-dating">
+            <img src="Image/tinder.svg" alt="Tinder Logo" class="logo-bg logo-p1"><img src="Image/hinge.png" alt="Hinge Logo" class="logo-bg logo-p2"><img src="Image/bumble.webp" alt="Bumble Logo" class="logo-bg logo-p3"><img src="Image/tinder1.png" alt="Tinder Logo" class="logo-bg logo-p4"><img src="Image/okcupid.png" alt="OkCupid Logo" class="logo-bg logo-p5"><img src="Image/grindr.svg" alt="Grindr Logo" class="logo-bg logo-p6"><img src="Image/badoo.png" alt="Badoo Logo" class="logo-bg logo-p7"><img src="Image/tinder.svg" alt="Tinder Logo" class="logo-bg logo-p8"><img src="Image/hinge.png" alt="Hinge Logo" class="logo-bg logo-p9"><img src="Image/bumble.webp" alt="Bumble Logo" class="logo-bg logo-p10"><img src="Image/okcupid.png" alt="OkCupid Logo" class="logo-bg logo-p11"><img src="Image/tinder1.png" alt="Tinder Logo" class="logo-bg logo-p12"><img src="Image/hinge.png" alt="Hinge Logo" class="logo-bg logo-p13"><img src="Image/tinder.svg" alt="Tinder Logo" class="logo-bg logo-p14"><img src="Image/bumble.webp" alt="Bumble Logo" class="logo-bg logo-p15"><img src="Image/okcupid.png" alt="OkCupid Logo" class="logo-bg logo-p16">
+        </div>
+        <div id="logos-lifestyle">
+            <img src="Image/insta.webp" alt="Instagram Logo" class="logo-bg logo-p1"><img src="Image/snapchat.svg" alt="Snapchat Logo" class="logo-bg logo-p2"><img src="Image/facebook.png" alt="Facebook Logo" class="logo-bg logo-p3"><img src="Image/reddit.png" alt="Reddit Logo" class="logo-bg logo-p4"><img src="Image/pinterest.png" alt="Pinterest Logo" class="logo-bg logo-p5"><img src="Image/tiktok.webp" alt="TikTok Logo" class="logo-bg logo-p6"><img src="Image/youtube.png" alt="YouTube Logo" class="logo-bg logo-p7"><img src="Image/insta.webp" alt="Instagram Logo" class="logo-bg logo-p8"><img src="Image/facebook.png" alt="Facebook Logo" class="logo-bg logo-p9"><img src="Image/snapchat.svg" alt="Snapchat Logo" class="logo-bg logo-p10"><img src="Image/youtube.png" alt="YouTube Logo" class="logo-bg logo-p11"><img src="Image/tiktok.webp" alt="TikTok Logo" class="logo-bg logo-p12"><img src="Image/insta.webp" alt="Instagram Logo" class="logo-bg logo-p13"><img src="Image/facebook.png" alt="Facebook Logo" class="logo-bg logo-p14"><img src="Image/youtube.png" alt="YouTube Logo" class="logo-bg logo-p15"><img src="Image/tiktok.webp" alt="TikTok Logo" class="logo-bg logo-p16">
+        </div>
+    </div>
+<div id="showcase-content-wrapper" class="container mx-auto">
+    <div class="text-center mb-12 max-w-3xl mx-auto p-6">
+        <h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4 text-mask">From Overlooked to Unforgettable</h2>
+        <p class="text-lg font-medium text-gray-700 dark:text-gray-300">Your image is your narrative. Pikaio gives you the power to tell it like never before.</p>
+    </div>
+    <div class="flex justify-center mb-10"><div class="inline-flex rounded-full shadow-sm bg-white/60 dark:bg-slate-800/60 p-1 backdrop-blur-sm"><button data-showcase="business" class="showcase-main-nav-button px-4 md:px-6 py-2 rounded-full font-bold transition-colors duration-300">Professional</button><button data-showcase="dating" class="showcase-main-nav-button px-4 md:px-6 py-2 rounded-full font-bold transition-colors duration-300">Dating</button><button data-showcase="lifestyle" class="showcase-main-nav-button px-4 md:px-6 py-2 rounded-full font-bold transition-colors duration-300">Lifestyle</button></div></div>
+
+    <div id="showcase-content-container">
+        <!-- CHANGED: Removed *0.9 from calc in min-h, h, max-w attributes -->
+        <div id="showcase-business" class="showcase-view"><div class="hidden lg:grid grid-cols-5 gap-8 items-center min-h-[500px]">
+            <div class="col-span-2 flex justify-end items-center"><div class="relative w-full max-w-sm rounded-2xl shadow-xl overflow-hidden bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 aspect-[3/4]"><div class="absolute top-4 left-4 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm">Your Photo</div><img src="Image/show (2).jpg" class="w-full h-full object-cover" alt="Low-Light Selfie"><div class="p-4 border-t border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800"><h3 class="font-bold text-center text-gray-800 dark:text-gray-200">The "Before"</h3></div></div></div><div class="flex justify-center items-center h-full relative z-10"><div class="relative flex items-center justify-center w-28 h-28 bg-blue-500/20 dark:bg-blue-400/20 rounded-full shadow-lg pikaio-engine-animation backdrop-blur-sm"><img src="Image/file.svg" alt="Pikaio Logo" class="h-12 w-12 rounded-full block dark:hidden"><img src="Image/Adobe Express - file(1)-256x256.webp" alt="Pikaio Logo Dark" class="h-12 w-12 rounded-full hidden dark:block"></div></div><div class="col-span-2 flex justify-start items-center"><div class="relative w-full max-w-sm rounded-2xl shadow-2xl overflow-hidden bg-white dark:bg-slate-800 ring-2 ring-blue-500 dark:ring-blue-400 aspect-[3/4]"><div class="absolute top-4 left-4 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm">Pikaio Result</div><img src="Image/guitar (16).webp" class="w-full h-full object-cover" alt="Polished Headshot by Pikaio"><div class="p-4 border-t border-blue-200 dark:border-blue-900 bg-gray-50 dark:bg-slate-800"><h3 class="font-bold text-center text-gray-800 dark:text-gray-200">The "After"</h3></div></div></div></div><div class="lg:hidden">
+            <div class="flipper w-full max-w-sm mx-auto h-[520px] relative">
+                <div class="flipper-card-before absolute w-full h-full"><div class="relative w-full h-full rounded-2xl shadow-xl overflow-hidden bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700"><div class="absolute top-4 left-4 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm">Your Photo</div><img src="Image/show (2).jpg" class="w-full h-full object-cover" alt="Low-Light Selfie"></div></div>
+                <div class="flipper-card-after absolute w-full h-full opacity-0 invisible"><div class="relative w-full h-full rounded-2xl shadow-2xl overflow-hidden bg-white dark:bg-slate-800 ring-2 ring-blue-500 dark:ring-blue-400"><div class="absolute top-4 left-4 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm">Pikaio Result</div><img src="Image/guitar (16).webp" class="w-full h-full object-cover" alt="Polished Headshot by Pikaio"></div></div>
+            </div>
+            <div class="flipper-controls flex justify-center mt-6"><div class="inline-flex rounded-full shadow-sm bg-gray-200 dark:bg-slate-800 p-1"><button data-flip="before" class="flipper-nav-button px-6 py-2 rounded-full font-bold">Before</button><button data-flip="after" class="flipper-nav-button px-6 py-2 rounded-full font-bold">After</button></div></div>
+        </div></div>
+
+        <div id="showcase-dating" class="showcase-view hidden"><div class="hidden lg:grid grid-cols-5 gap-8 items-center min-h-[500px]">
+            <div class="col-span-2 flex justify-end items-center"><div class="relative w-full max-w-[320px] rounded-2xl shadow-xl overflow-hidden flex flex-col h-[520px]">
+                <div class="relative w-full flex-grow overflow-hidden"><img src="Image/atg (5).webp" alt="A standard selfie" class="w-full h-full object-cover"><div class="absolute top-4 left-4 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm z-10">Your Photo</div><div class="absolute top-4 right-4 flex items-center bg-gray-500/80 text-white text-sm font-bold px-3 py-1.5 rounded-full backdrop-blur-sm shadow-lg z-10"><i class="fas fa-heart mr-2"></i>2 Likes</div></div><div class="flex-shrink-0 h-[130px] bg-gradient-to-t from-black/90 to-black/80 p-4 text-white flex flex-col justify-center">
+                    <div class="mb-3"><h3 class="text-2xl font-bold">Alex, 28</h3></div><div class="flex justify-evenly items-center"><button class="h-10 w-10 rounded-full bg-white/10 backdrop-blur-sm text-yellow-500 flex items-center justify-center text-xl shadow-md transition-transform hover:scale-110"><i class="fas fa-undo"></i></button><button class="h-14 w-14 rounded-full bg-white/10 backdrop-blur-sm text-red-500 flex items-center justify-center text-3xl shadow-lg transition-transform hover:scale-110"><i class="fas fa-times"></i></button><button class="h-10 w-10 rounded-full bg-white/10 backdrop-blur-sm text-blue-500 flex items-center justify-center text-xl shadow-md transition-transform hover:scale-110"><i class="fas fa-star"></i></button><button class="h-14 w-14 rounded-full bg-white/10 backdrop-blur-sm text-green-400 flex items-center justify-center text-3xl shadow-lg transition-transform hover:scale-110"><i class="fas fa-heart"></i></button></div></div></div></div><div class="flex justify-center items-center h-full relative z-10"><div class="relative flex items-center justify-center w-28 h-28 bg-blue-500/20 dark:bg-blue-400/20 rounded-full shadow-lg pikaio-engine-animation backdrop-blur-sm"><img src="Image/file.svg" alt="Pikaio Logo" class="h-12 w-12 rounded-full block dark:hidden"><img src="Image/Adobe Express - file(1)-256x256.webp" alt="Pikaio Logo Dark" class="h-12 w-12 rounded-full hidden dark:block"></div></div><div class="col-span-2 flex justify-start items-center"><div class="relative w-full max-w-[320px] rounded-2xl shadow-2xl overflow-hidden ring-2 ring-offset-2 ring-blue-500 dark:ring-blue-400 dark:ring-offset-slate-900 flex flex-col h-[520px]">
+                <div class="relative w-full flex-grow overflow-hidden"><img src="Image/out-2-1.webp" class="w-full h-full object-cover"><div class="absolute top-4 left-4 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm z-10">Pikaio Result</div><div class="absolute top-4 right-4 flex items-center bg-green-500/80 text-white text-sm font-bold px-3 py-1.5 rounded-full backdrop-blur-sm shadow-lg animate-pulse z-10"><i class="fas fa-heart mr-2"></i>99+ Likes</div></div><div class="flex-shrink-0 h-[130px] bg-gradient-to-t from-black/90 to-black/80 p-4 text-white flex flex-col justify-center">
+                    <div class="mb-3"><h3 class="text-2xl font-bold flex items-center">Alex, 28 <i class="fas fa-check-circle text-blue-400 ml-2 text-xl"></i></h3></div><div class="flex justify-evenly items-center"><button class="h-10 w-10 rounded-full bg-white/10 backdrop-blur-sm text-yellow-500 flex items-center justify-center text-xl shadow-md transition-transform hover:scale-110"><i class="fas fa-undo"></i></button><button class="h-14 w-14 rounded-full bg-white/10 backdrop-blur-sm text-red-500 flex items-center justify-center text-3xl shadow-lg transition-transform hover:scale-110"><i class="fas fa-times"></i></button><button class="h-10 w-10 rounded-full bg-white/10 backdrop-blur-sm text-blue-500 flex items-center justify-center text-xl shadow-md transition-transform hover:scale-110"><i class="fas fa-star"></i></button><button class="h-14 w-14 rounded-full bg-white/10 backdrop-blur-sm text-green-400 flex items-center justify-center text-3xl shadow-lg transition-transform hover:scale-110"><i class="fas fa-heart"></i></button></div></div></div></div></div><div class="lg:hidden">
+            <div class="flipper w-full max-w-[320px] mx-auto h-[520px] relative">
+                <div class="flipper-card-before absolute w-full h-full"><div class="relative w-full h-full rounded-2xl shadow-xl overflow-hidden flex flex-col"><div class="relative w-full flex-grow overflow-hidden"><img src="Image/atg (5).webp" class="w-full h-full object-cover"><div class="absolute top-4 left-4 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm z-10">Your Photo</div><div class="absolute top-4 right-4 flex items-center bg-gray-500/80 text-white text-sm font-bold px-3 py-1.5 rounded-full backdrop-blur-sm shadow-lg z-10"><i class="fas fa-heart mr-2"></i>2 Likes</div></div><div class="flex-shrink-0 h-[130px] bg-gradient-to-t from-black/90 to-black/80 p-4 text-white flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold mb-3">Aryan, 21</h3><div class="flex justify-evenly items-center"><button class="h-10 w-10 rounded-full bg-white/10 backdrop-blur-sm text-yellow-500 flex items-center justify-center text-xl shadow-md transition-transform hover:scale-110"><i class="fas fa-undo"></i></button><button class="h-14 w-14 rounded-full bg-white/10 backdrop-blur-sm text-red-500 flex items-center justify-center text-3xl shadow-lg transition-transform hover:scale-110"><i class="fas fa-times"></i></button><button class="h-10 w-10 rounded-full bg-white/10 backdrop-blur-sm text-blue-500 flex items-center justify-center text-xl shadow-md transition-transform hover:scale-110"><i class="fas fa-star"></i></button><button class="h-14 w-14 rounded-full bg-white/10 backdrop-blur-sm text-green-400 flex items-center justify-center text-3xl shadow-lg transition-transform hover:scale-110"><i class="fas fa-heart"></i></button></div></div></div></div>
+                <div class="flipper-card-after absolute w-full h-full opacity-0 invisible"><div class="relative w-full h-full rounded-2xl shadow-2xl overflow-hidden ring-2 ring-offset-2 ring-blue-500 dark:ring-blue-400 dark:ring-offset-slate-900 flex flex-col"><div class="relative w-full flex-grow overflow-hidden"><img src="Image/out-2-1.webp" class="w-full h-full object-cover"><div class="absolute top-4 left-4 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm z-10">Pikaio Result</div><div class="absolute top-4 right-4 flex items-center bg-green-500/80 text-white text-sm font-bold px-3 py-1.5 rounded-full backdrop-blur-sm shadow-lg animate-pulse z-10"><i class="fas fa-heart mr-2"></i>99+ Likes</div></div><div class="flex-shrink-0 h-[130px] bg-gradient-to-t from-black/90 to-black/80 p-4 text-white flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold flex items-center mb-3">Aryan, 21 <i class="fas fa-check-circle text-blue-400 ml-2 text-xl"></i></h3><div class="flex justify-evenly items-center"><button class="h-10 w-10 rounded-full bg-white/10 backdrop-blur-sm text-yellow-500 flex items-center justify-center text-xl shadow-md transition-transform hover:scale-110"><i class="fas fa-undo"></i></button><button class="h-14 w-14 rounded-full bg-white/10 backdrop-blur-sm text-red-500 flex items-center justify-center text-3xl shadow-lg transition-transform hover:scale-110"><i class="fas fa-times"></i></button><button class="h-10 w-10 rounded-full bg-white/10 backdrop-blur-sm text-blue-500 flex items-center justify-center text-xl shadow-md transition-transform hover:scale-110"><i class="fas fa-star"></i></button><button class="h-14 w-14 rounded-full bg-white/10 backdrop-blur-sm text-green-400 flex items-center justify-center text-3xl shadow-lg transition-transform hover:scale-110"><i class="fas fa-heart"></i></button></div></div></div></div>
+            </div>
+            <div class="flipper-controls flex justify-center mt-6"><div class="inline-flex rounded-full shadow-sm bg-gray-200 dark:bg-slate-800 p-1"><button data-flip="before" class="flipper-nav-button px-6 py-2 rounded-full font-bold">Before</button><button data-flip="after" class="flipper-nav-button px-6 py-2 rounded-full font-bold">After</button></div></div>
+        </div></div>
         
-        <!-- PRICING SECTION -->
-        <section id="pricing" class="py-20 bg-gray-50 dark:bg-slate-900 px-4">
-            <div class="container mx-auto">
-                <div class="text-center mb-10"><h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">A Clear Investment in Your Vision</h2><p class="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">Choose the package that aligns with your personal or professional goals.</p></div>
-                <div class="mb-12 text-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg p-6 max-w-4xl mx-auto shadow-xl"><h3 class="text-3xl font-bold mb-2">Founder's Launch Offer</h3><p class="text-lg mb-1">For a limited time, get <span class="font-bold underline">50% OFF</span> any package. Be one of the first to build your visual brand with Pikaio.</p><p class="text-sm font-semibold mt-2 opacity-90">Offer ends June 30th</p></div>
-                <div class="flex flex-col items-center space-y-6 mb-12"><div class="inline-flex rounded-full shadow-sm bg-white dark:bg-slate-800 dark:border dark:border-slate-700 p-1"><button id="showBusinessPricing" class="px-6 py-2 rounded-full font-semibold transition-colors duration-300">For Businesses</button><button id="showIndividualPricing" class="px-6 py-2 rounded-full font-semibold transition-colors duration-300">For Individuals</button></div><div class="inline-flex rounded-full shadow-sm bg-gray-200 dark:bg-slate-800 p-1"><button id="usdButton" class="px-5 py-1 rounded-full text-sm font-semibold transition-colors duration-300" data-currency="usd">USD</button><button id="inrButton" class="px-5 py-1 rounded-full text-sm font-semibold transition-colors duration-300" data-currency="inr">INR</button></div></div>
-                <div id="businessPricing" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300"><div><h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Starter</h3><p class="text-gray-600 dark:text-gray-400 mb-6">Essential visuals for new ventures and personal brands.</p><div class="price mb-8" data-price-usd-sale="$249" data-price-inr-sale="₹19,999" data-price-usd-orig="$499" data-price-inr-orig="₹39,999"></div><ul class="text-gray-700 dark:text-gray-300 space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>One person</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>20 high-resolution images</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Up to 2 distinct visual scenarios</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Full commercial usage rights</li></ul></div>
-                        <a href="javascript:void(0);" class="purchase-button block w-full text-center bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 px-6 py-3 rounded-lg font-semibold hover:bg-blue-200 dark:hover:bg-blue-900/80 transition-colors" data-stripe-link-usd="https://buy.stripe.com/cNifZh3JcaV5dZb64F8IU03" data-stripe-link-inr="https://buy.stripe.com/5kQ8wPfrUfblg7j3Wx8IU09">Get Started</a>
+        <div id="showcase-lifestyle" class="showcase-view hidden"><div class="hidden lg:grid grid-cols-5 gap-8 items-center min-h-[500px]">
+            <div class="col-span-2 flex justify-end items-center"><div class="relative w-full max-w-sm rounded-2xl shadow-xl overflow-hidden bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 aspect-[3/4]"><div class="absolute top-4 left-4 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm">Your Photo</div><img src="Image/show.jpg" class="w-full h-full object-cover" alt="Phone Pic in Yard"><div class="p-4 border-t border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800"><h3 class="font-bold text-center text-gray-800 dark:text-gray-200">The "Before"</h3></div></div></div><div class="flex justify-center items-center h-full relative z-10"><div class="relative flex items-center justify-center w-28 h-28 bg-blue-500/20 dark:bg-blue-400/20 rounded-full shadow-lg pikaio-engine-animation backdrop-blur-sm"><img src="Image/file.svg" alt="Pikaio Logo" class="h-12 w-12 rounded-full block dark:hidden"><img src="Image/Adobe Express - file(1)-256x256.webp" alt="Pikaio Logo Dark" class="h-12 w-12 rounded-full hidden dark:block"></div></div><div class="col-span-2 flex justify-start items-center"><div class="relative w-full max-w-sm rounded-2xl shadow-2xl overflow-hidden bg-white dark:bg-slate-800 ring-2 ring-blue-500 dark:ring-blue-400 aspect-[3/4]"><div class="absolute top-4 left-4 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm">Pikaio Result</div><img src="Image/movie (10).webp" class="w-full h-full object-cover" alt="Magazine-Style Shot by Pikaio"><div class="p-4 border-t border-blue-200 dark:border-blue-900 bg-gray-50 dark:bg-slate-800"><h3 class="font-bold text-center text-gray-800 dark:text-gray-200">The "After"</h3></div></div></div></div><div class="lg:hidden">
+            <div class="flipper w-full max-w-sm mx-auto h-[520px] relative">
+                <div class="flipper-card-before absolute w-full h-full"><div class="relative w-full h-full rounded-2xl shadow-xl overflow-hidden bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700"><div class="absolute top-4 left-4 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm">Your Photo</div><img src="Image/show.jpg" class="w-full h-full object-cover" alt="Phone Pic in Yard"></div></div>
+                <div class="flipper-card-after absolute w-full h-full opacity-0 invisible"><div class="relative w-full h-full rounded-2xl shadow-2xl overflow-hidden bg-white dark:bg-slate-800 ring-2 ring-blue-500 dark:ring-blue-400"><div class="absolute top-4 left-4 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm">Pikaio Result</div><img src="Image/movie (10).webp" class="w-full h-full object-cover" alt="Magazine-Style Shot by Pikaio"></div></div>
+            </div>
+            <div class="flipper-controls flex justify-center mt-6"><div class="inline-flex rounded-full shadow-sm bg-gray-200 dark:bg-slate-800 p-1"><button data-flip="before" class="flipper-nav-button px-6 py-2 rounded-full font-bold">Before</button><button data-flip="after" class="flipper-nav-button px-6 py-2 rounded-full font-bold">After</button></div></div>
+        </div></div>
+    </div>
+</div>
+</section>
+<div class="w-full h-px hidden dark:block dark:bg-slate-800"></div>
+<section class="py-20 bg-white dark:bg-slate-950 px-4"><div class="container mx-auto text-center"><h2 class="text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-slate-100 leading-tight mb-8">“Wait, this AI made that photo of me?”</h2><a href="manifesto.html" class="inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-full shadow-lg text-base font-bold text-white dark:text-black bg-black dark:bg-white hover:bg-slate-800 dark:hover:bg-gray-200 transition-transform transform hover:scale-105">Pretty Much<svg class="w-3 h-3 ml-2" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></div></section>
+<div class="w-full h-px hidden dark:block dark:bg-slate-800"></div>
+<section id="process" class="py-20 dotted-bg px-4 bg-slate-50 dark:bg-black">
+    <div class="container mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Your New Look in 3 Simple Steps</h2>
+            <p class="text-lg font-medium text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">From vision to delivery, we turn your ideas into hyper-real visuals.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+<div class="process-card group relative p-px rounded-xl bg-gradient-to-br from-gray-200 to-gray-300 dark:from-slate-800 dark:to-slate-700 shadow-lg transition-shadow duration-300 hover:shadow-2xl">
+            <div class="relative h-full bg-white dark:bg-slate-900 rounded-[11px] p-8 overflow-hidden">
+                <div class="process-card-glow pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="--x: 50%; --y: 0%;"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-12 h-12 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center">
+                            <i class="fas fa-credit-card text-xl text-slate-800 dark:text-slate-200"></i>
+                        </div>
+                        <span class="text-3xl font-bold text-gray-300 dark:text-slate-600">01</span>
                     </div>
-                    <div class="bg-blue-600 text-white rounded-xl shadow-2xl p-8 flex flex-col justify-between transform lg:scale-105 duration-300 relative"><div class="absolute -top-3 right-0 bg-blue-800 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">POPULAR</div><div><h3 class="text-2xl font-bold mb-4">Pro Brand Pack</h3><p class="mb-6 opacity-90">Expand your presence across platforms or campaigns.</p><div class="price mb-8" data-price-usd-sale="$425" data-price-inr-sale="₹34,999" data-price-usd-orig="$849" data-price-inr-orig="₹69,999"></div><ul class="space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>One person</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>50 high-resolution images</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Up to 10 visual scenarios</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Two rounds of revisions</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Full commercial usage rights</li></ul></div>
-                        <a href="javascript:void(0);" class="purchase-button block w-full text-center bg-white text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors" data-stripe-link-usd="https://buy.stripe.com/fZufZhbbEaV54oB50B8IU04" data-stripe-link-inr="https://buy.stripe.com/bJebJ1a7A0grf3f2St8IU08">Select Plan</a>
-                    </div>
-                    <div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300"><div><h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Enterprise & Teams</h3><p class="text-gray-600 dark:text-gray-400 mb-6">Tailored solutions for brands, agencies, and teams.</p><div class="price text-4xl font-bold text-blue-600 dark:text-blue-400 mb-8" data-price-usd-sale="Custom Quote" data-price-inr-sale="Custom Quote" data-price-usd-orig="Custom Quote" data-price-inr-orig="Custom Quote">Custom Quote</div><ul class="text-gray-700 dark:text-gray-300 space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Multiple people</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Custom image volumes</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Unlimited visual scenarios</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Dedicated art direction</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Priority delivery & support</li></ul></div>
-                        <a href="#contact" class="block w-full text-center bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 px-6 py-3 rounded-lg font-semibold hover:bg-blue-200 dark:hover:bg-blue-900/80 transition-colors">Request Custom Quote</a>
-                    </div>
-                </div>
-                <div id="individualPricing" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto hidden">
-                    <div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300"><div><h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Personal Refresh</h3><div class="flex flex-wrap gap-2 mb-6"><span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full">Dating Apps</span><span class="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 text-xs font-semibold px-3 py-1 rounded-full">Social Media</span><span class="bg-pink-100 text-pink-700 dark:bg-pink-900/50 dark:text-pink-300 text-xs font-semibold px-3 py-1 rounded-full">Trying Something New</span></div><div class="price mb-8" data-price-usd-sale="$75" data-price-inr-sale="₹6,249" data-price-usd-orig="$149" data-price-inr-orig="₹12,499"></div><ul class="text-gray-700 dark:text-gray-300 space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>10 high-res images</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>2 unique looks or settings</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Personal use only</li></ul></div>
-                        <a href="javascript:void(0);" class="purchase-button block w-full text-center bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 px-6 py-3 rounded-lg font-semibold hover:bg-blue-200 dark:hover:bg-blue-900/80 transition-colors" data-stripe-link-usd="https://buy.stripe.com/fZufZhenQ2oz7AN0Kl8IU00" data-stripe-link-inr="https://buy.stripe.com/fZufZhenQ2oz7AN0Kl8IU00">Get Started</a>
-                    </div>
-                    <div class="bg-blue-600 text-white rounded-xl shadow-2xl p-8 flex flex-col justify-between transform lg:scale-105 duration-300 relative"><div class="absolute -top-3 right-0 bg-blue-800 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">POPULAR</div><div><h3 class="text-2xl font-bold mb-4">Visionary Profile</h3><div class="flex flex-wrap gap-2 mb-6"><span class="bg-white text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">LinkedIn</span><span class="bg-white text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Personal Branding</span><span class="bg-white text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Content Creators</span></div><div class="price mb-8" data-price-usd-sale="$139" data-price-inr-sale="₹11,499" data-price-usd-orig="$279" data-price-inr-orig="₹22,999"></div><ul class="space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>25 high-res images</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Up to 5 distinct scenarios</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>Personal use only</li><li class="flex items-center"><i class="fas fa-check-circle text-white mr-3"></i>One round of revisions</li></ul></div>
-                        <a href="javascript:void(0);" class="purchase-button block w-full text-center bg-white text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors" data-stripe-link-usd="https://buy.stripe.com/cNiaEX93w2oz4oBakV8IU01" data-stripe-link-inr="https://buy.stripe.com/5kQbJ17Zse7hbR30Kl8IU06">Select Plan</a>
-                    </div>
-                    <div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg p-8 flex flex-col justify-between transform transition-transform hover:scale-105 duration-300"><div><h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Ultimate Identity</h3><div class="flex flex-wrap gap-2 mb-6"><span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full">Entrepreneurs</span><span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full">Personal Brands</span><span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full">Commercial Use</span></div><div class="price mb-8" data-price-usd-sale="$249" data-price-inr-sale="₹19,999" data-price-usd-orig="$499" data-price-inr-orig="₹39,999"></div><ul class="text-gray-700 dark:text-gray-300 space-y-3 mb-8"><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>50 high-res images</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Up to 10 scenarios or styles</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Full commercial use</li><li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Two rounds of revisions</li></ul></div>
-                        <a href="javascript:void(0);" class="purchase-button block w-full text-center bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400 px-6 py-3 rounded-lg font-semibold hover:bg-blue-200 dark:hover:bg-blue-900/80 transition-colors" data-stripe-link-usd="https://buy.stripe.com/7sY14nenQ3sD08l8cN8IU02" data-stripe-link-inr="https://buy.stripe.com/4gM6oHdjM2ozf3fgJj8IU07">Go Ultimate</a>
-                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">Select & Pay</h3>
+                    <p class="font-medium text-gray-600 dark:text-gray-400">Choose your package and complete the secure payment.</p>
                 </div>
             </div>
-        </section>
-        
-        <section id="faq" class="py-20 bg-white dark:bg-slate-800 px-4"><div class="container mx-auto max-w-4xl"><div class="text-center mb-16"><h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Frequently Asked Questions</h2><p class="text-lg text-gray-700 dark:text-gray-300">Got questions? We've got answers.</p></div><div class="space-y-6"><div class="bg-gray-50 dark:bg-slate-900/70 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 dark:text-gray-100 focus:outline-none list-none">What kind of photos do I need to provide?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600 dark:text-blue-400"></i></span></summary><p class="mt-4 text-gray-600 dark:text-gray-400">For best results, provide 30-60 clear photos of yourself in various lighting, angles, and backgrounds. Good quality selfies and social photos work perfectly. These don't need to be professional; just everyday social photos are perfect. The more variety, the more realistic and versatile your results.</p></details></div><div class="bg-gray-50 dark:bg-slate-900/70 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 dark:text-gray-100 focus:outline-none list-none">How are my photos handled?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600 dark:text-blue-400"></i></span></summary><p class="mt-4 text-gray-600 dark:text-gray-400">Your privacy matters. Every image you send is stored in a secure, private folder. We use them only to build your custom AI model and delete them permanently after the project is complete. Nothing is shared or reused EVER.</p></details></div><div class="bg-gray-50 dark:bg-slate-900/70 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 dark:text-gray-100 focus:outline-none list-none">What if I'm not happy with the results?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600 dark:text-blue-400"></i></span></summary><p class="mt-4 text-gray-600 dark:text-gray-400">Our process is highly collaborative. We provide a proof gallery for you to review. Our Pro and Premium packages include revision rounds where we'll work with you on your feedback to refine the prompts and generate new images that perfectly match your vision. Your satisfaction is key.</p></details></div><div class="bg-gray-50 dark:bg-slate-900/70 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 dark:text-gray-100 focus:outline-none list-none">How long does it take?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600 dark:text-blue-400"></i></span></summary><p class="mt-4 text-gray-600 dark:text-gray-400">Expect your first proof set within 1-2 business days of sending your photos. If your package includes revisions, each round typically takes 2-3 extra business days. Fast, clear communication helps us move even quicker.</p></details></div><div class="bg-gray-50 dark:bg-slate-900/70 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 dark:text-gray-100 focus:outline-none list-none">Do I get full ownership and commercial rights?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600 dark:text-blue-400"></i></span></summary><p class="mt-4 text-gray-600 dark:text-gray-400">Yes! For our 'Ultimate Identity' package (for individuals) and all 'Business' packages, you receive full commercial usage rights. 'Personal Refresh' and 'Visionary Profile' packages include a personal usage license as well.</p></details></div><div class="bg-gray-50 dark:bg-slate-900/70 rounded-xl shadow-md p-6"><details class="group"><summary class="flex justify-between items-center cursor-pointer text-xl font-semibold text-gray-900 dark:text-gray-100 focus:outline-none list-none">Is this ethical? Am I misrepresenting myself?<span class="group-open:rotate-180 transition-transform duration-300"><i class="fas fa-chevron-down text-blue-600 dark:text-blue-400"></i></span></summary><p class="mt-4 text-gray-600 dark:text-gray-400">Our service is about enhancement, not deception. We work with you to create the best version of yourself, or to visualize aspirational scenarios. We require you to have the rights to the photos you provide and will not create 'deepfakes' or images of other individuals without their consent. Transparency and ethical use are core to our values.</p></details></div></div></div></section>
-        
-        <section id="contact" class="py-20 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-slate-800 px-4"><div class="container mx-auto max-w-xl text-center"><h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">Ready to See What's Possible?</h2><p class="text-lg text-gray-700 dark:text-gray-300 mb-10">Whether for brand, business, or personal presence - start your free consultation and discover what custom AI visuals can do for you.</p><form id="contactForm" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-xl space-y-6"><input type="hidden" name="form-name" value="contact" /><div class="hidden"><label>Don’t fill this out if you’re human: <input name="bot-field" /></label></div><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div><label for="fullName" class="block text-left text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">Full Name</label>
-            <input type="text" id="fullName" name="fullName" class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition-colors dark:bg-slate-700 dark:border-slate-600 dark:text-white dark:placeholder-gray-400" placeholder="John Doe" required></div><div><label for="email" class="block text-left text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">Email Address</label>
-            <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition-colors dark:bg-slate-700 dark:border-slate-600 dark:text-white dark:placeholder-gray-400" placeholder="john.doe@example.com" required></div></div><div><label for="inquiryType" class="block text-left text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">I'm inquiring for...</label>
-            <select id="inquiryType" name="inquiryType" class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition-colors dark:bg-slate-700 dark:border-slate-600 dark:text-white"><option value="">Select an option</option><option value="individual">Personal Branding (Individual)</option><option value="business">Business / Team Branding</option><option value="general">General Inquiry</option></select></div><div><label for="message" class="block text-left text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">How can we help?</label>
-            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition-colors dark:bg-slate-700 dark:border-slate-600 dark:text-white dark:placeholder-gray-400" placeholder="Tell us about your vision..."></textarea></div><button type="submit" class="w-full bg-blue-600 text-white text-lg px-8 py-4 rounded-xl shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105 duration-300">Send Message</button></form></div></section>
-    </main>
-
-    <footer class="bg-[#0f172a] text-white pt-12 pb-8 px-4"><div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-gray-300"><div><a href="#top" class="flex items-center mb-3">
-        <img src="Image/Adobe Express - file(1)-256x256.webp" alt="Pikaio Logo" class="h-8 w-8 mr-2 rounded-full" loading="lazy" decoding="async" width="32" height="32">
-        <h2 class="text-white text-xl font-bold">Pikaio</h2></a><p class="opacity-80 mb-4">Look like a million bucks. Without spending it.</p><p class="text-xs text-gray-500">© 2025 Pikaio. All rights reserved.<br>All images shown are generated with permission.</p></div>
-    <div><h3 class="text-white font-semibold mb-3">Explore</h3><ul class="space-y-2">
-        <li><a href="gallery.html" class="hover:text-white transition-colors">Gallery</a></li>
-        <li><a href="#pricing" class="hover:text-white transition-colors">Pricing</a></li>
-        <li><a href="#process" class="hover:text-white transition-colors">How it Works</a></li>
-        <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
-        <li><a href="#faq" class="hover:text-white transition-colors">FAQ</a></li>
-    </ul></div>
-    <div><h3 class="text-white font-semibold mb-3">Connect</h3><div class="flex space-x-4 items-center mb-4"><a href="https://www.linkedin.com/company/pikaio/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors"><i class="fab fa-linkedin fa-lg"></i></a></div><p class="text-sm text-gray-500">For inquiries: <a href="mailto:hello@pikaio.com" class="underline hover:text-white">hello@pikaio.com</a></p></div></div></footer>
-    <a href="#top" id="back-to-top" class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-700 transition-all z-50"><i class="fas fa-arrow-up"></i></a>
-    <div id="successModal" class="modal"><div class="modal-content bg-white dark:bg-slate-800"><h3 class="text-green-600 dark:text-green-400">Message Sent!</h3><p class="text-gray-600 dark:text-gray-300">Thank you for reaching out. We've received your message and will get back to you shortly.</p><button id="closeModal" class="bg-blue-600 hover:bg-blue-700 text-white">Close</button></div></div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const mainHeader = document.getElementById('main-header');
-        
-        function handleHeaderScroll() {
-            if (window.scrollY > 50) {
-                mainHeader.classList.add('py-2', 'shadow-lg', 'dark:bg-slate-900/90', 'bg-white/95', 'backdrop-blur-sm');
-                mainHeader.classList.remove('py-4', 'dark:bg-slate-800/[0.85]', 'bg-white');
-            } else {
-                mainHeader.classList.add('py-4', 'dark:bg-slate-800/[0.85]', 'bg-white');
-                mainHeader.classList.remove('py-2', 'shadow-lg', 'dark:bg-slate-900/90', 'bg-white/95', 'backdrop-blur-sm');
-            }
-        }
-        
-        const hamburgerButton = document.getElementById('hamburger-button');
-        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-        const closeMobileMenuButton = document.getElementById('close-mobile-menu');
-        const backToTopButton = document.getElementById('back-to-top');
-        const contactForm = document.getElementById('contactForm');
-        const successModal = document.getElementById('successModal');
-        const closeModalButton = document.getElementById('closeModal');
-        const showBusinessBtn = document.getElementById('showBusinessPricing');
-        const showIndividualBtn = document.getElementById('showIndividualPricing');
-        const businessPricingDiv = document.getElementById('businessPricing');
-        const individualPricingDiv = document.getElementById('individualPricing');
-        const usdButton = document.getElementById('usdButton');
-        const inrButton = document.getElementById('inrButton');
-        const sliderContainer = document.getElementById("slider-container");
-        let currentCurrency = 'usd';
-
-        const openMenu = () => { mobileMenuOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; };
-        const closeMenu = () => { mobileMenuOverlay.classList.remove('active'); document.body.style.overflow = ''; };
-        hamburgerButton.addEventListener('click', openMenu);
-        closeMobileMenuButton.addEventListener('click', closeMenu);
-        mobileMenuOverlay.querySelectorAll('a').forEach(link => { link.addEventListener('click', closeMenu); });
-
-        let lastScrollY = window.scrollY;
-        window.addEventListener('scroll', () => {
-            handleHeaderScroll();
-            const currentScrollY = window.scrollY;
-            if (window.innerWidth < 768) {
-                if (lastScrollY < currentScrollY && currentScrollY > 150) mainHeader.classList.add('header-hidden');
-                else if (currentScrollY < lastScrollY) mainHeader.classList.remove('header-hidden');
-            } else { mainHeader.classList.remove('header-hidden'); }
-            if (currentScrollY > 400) backToTopButton.classList.add('show'); else backToTopButton.classList.remove('show');
-            lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = anchor.getAttribute('href');
-                if (href.length > 1 && document.querySelector(href)) { e.preventDefault(); document.querySelector(href).scrollIntoView({ behavior: 'smooth' }); }
-            });
-        });
-        
-        contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const formData = new FormData(contactForm);
-            fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(formData).toString() })
-            .then(() => { successModal.style.display = 'flex'; contactForm.reset(); })
-            .catch(() => { alert("Sorry, there was an error submitting your form."); });
-        });
-        closeModalButton.addEventListener('click', () => { successModal.style.display = 'none'; });
-        window.addEventListener('click', (event) => { if (event.target == successModal) { successModal.style.display = 'none'; } });
-
-        // ✅ START: JAVASCRIPT LOGIC FOR DYNAMIC PRICING AND LINKS
-        
-        function updatePrices() {
-            document.querySelectorAll('.price').forEach(el => {
-                const currencyUpper = currentCurrency.charAt(0).toUpperCase() + currentCurrency.slice(1);
-                const salePrice = el.dataset[`price${currencyUpper}Sale`];
-                const origPrice = el.dataset[`price${currencyUpper}Orig`];
-
-                if (salePrice === "Custom Quote") {
-                    el.innerHTML = `<span class="text-4xl font-bold">${salePrice}</span>`;
-                    return;
-                }
-
-                el.innerHTML = `
-                    <div class="flex items-center justify-center gap-x-4">
-                        <span class="text-4xl font-bold text-inherit">${salePrice}</span>
-                        <span class="text-2xl font-medium text-gray-400 dark:text-gray-500 line-through">${origPrice}</span>
+        </div>        
+        <div class="process-card group relative p-px rounded-xl bg-gradient-to-br from-gray-200 to-gray-300 dark:from-slate-800 dark:to-slate-700 shadow-lg transition-shadow duration-300 hover:shadow-2xl">
+            <div class="relative h-full bg-white dark:bg-slate-900 rounded-[11px] p-8 overflow-hidden">
+                <div class="process-card-glow pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="--x: 50%; --y: 0%;"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-12 h-12 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center">
+                            <i class="fas fa-cloud-upload-alt text-xl text-slate-800 dark:text-slate-200"></i>
+                        </div>
+                        <span class="text-3xl font-bold text-gray-300 dark:text-slate-600">02</span>
                     </div>
-                `;
-            });
-        }
-        
-        function updatePurchaseLinks() {
-            const purchaseButtons = document.querySelectorAll('.purchase-button');
-            purchaseButtons.forEach(button => {
-                const link = (currentCurrency === 'usd') 
-                    ? button.dataset.stripeLinkUsd
-                    : button.dataset.stripeLinkInr;
-                
-                if (link) {
-                    button.href = link;
-                }
-            });
-        }
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">Upload Photos</h3>
+                    <p class="font-medium text-gray-600 dark:text-gray-400">Provide your best photos with a variety of angles.</p>
+                </div>
+            </div>
+        </div>
+        <div class="process-card group relative p-px rounded-xl bg-gradient-to-br from-gray-200 to-gray-300 dark:from-slate-800 dark:to-slate-700 shadow-lg transition-shadow duration-300 hover:shadow-2xl">
+            <div class="relative h-full bg-white dark:bg-slate-900 rounded-[11px] p-8 overflow-hidden">
+                <div class="process-card-glow pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="--x: 50%; --y: 0%;"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-12 h-12 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center">
+                            <i class="fas fa-check-circle text-xl text-slate-800 dark:text-slate-200"></i>
+                        </div>
+                        <span class="text-3xl font-bold text-gray-300 dark:text-slate-600">03</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">Receive & Refine</h3>
+                    <p class="font-medium text-gray-600 dark:text-gray-400">We deliver your gallery and refine images until they're perfect.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<!-- MODIFIED: Pricing Section Background -->
+<section id="pricing" class="py-20 bg-slate-100 dark:bg-slate-950 px-4">
+    <div class="container mx-auto">
+        <div class="text-center mb-10">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">A Clear Investment in Your Vision</h2>
+            <p class="text-lg font-medium text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">Choose the package that aligns with your goals.</p>
+        </div>
+        <div class="mb-12 text-center bg-white dark:bg-slate-800/80 border border-gray-200 dark:border-slate-700 rounded-lg p-4 max-w-2xl mx-auto shadow-md">
+            <p class="font-bold text-slate-800 dark:text-slate-200"><i class="fas fa-percent mr-2 text-blue-500"></i>Launch Offer: For a limited time, get <span class="font-extrabold text-black dark:text-white">50% OFF</span> any package.</p>
+        </div>
+        <div class="flex flex-col items-center space-y-6 mb-12">
+            <div id="pricing-toggle-container" class="relative inline-flex rounded-full bg-gray-200 dark:bg-slate-800 p-1"> 
+                <div id="pricing-glider" class="absolute top-1 bottom-1 rounded-full bg-white dark:bg-black shadow-md transition-all duration-300 ease-in-out"></div>
+                <button id="showBusinessPricing" class="pricing-toggle-btn relative z-10 px-6 py-2 rounded-full font-bold transition-colors duration-300">For Businesses</button>
+                <button id="showIndividualPricing" class="pricing-toggle-btn relative z-10 px-6 py-2 rounded-full font-bold transition-colors duration-300">For Individuals</button>
+            </div>
+            <div id="currency-toggle-container" class="relative inline-flex rounded-full bg-gray-200 dark:bg-slate-800 p-1">
+                <div id="currency-glider" class="absolute top-1 bottom-1 rounded-full bg-white dark:bg-slate-700 shadow-md transition-all duration-300 ease-in-out"></div>
+                <button id="usdButton" class="currency-toggle-btn relative z-10 px-5 py-1 rounded-full text-sm font-bold transition-colors duration-300" data-currency="usd">USD</button>
+                <button id="inrButton" class="currency-toggle-btn relative z-10 px-5 py-1 rounded-full text-sm font-bold transition-colors duration-300" data-currency="inr">INR</button>
+            </div>
+        </div>
+        <div id="businessPricing" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl shadow-xl p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Starter</h3>
+                    <p class="font-medium text-gray-600 dark:text-gray-400 mb-6">Essential visuals for new ventures and personal brands.</p>
+                    <div class="price mb-8" data-price-usd-sale="$249" data-price-inr-sale="₹19,999" data-price-usd-orig="$499" data-price-inr-orig="₹39,999"></div>
+                    <ul class="font-medium text-gray-700 dark:text-gray-300 space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>One person</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>20 high-resolution images</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>Up to 2 distinct visual scenarios</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>Full commercial usage rights</li>
+                    </ul>
+                </div>
+                <a href="javascript:void(0);" class="purchase-button block w-full text-center bg-transparent border-2 border-black dark:border-white text-black dark:text-white px-6 py-3 rounded-lg font-bold hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-colors duration-300" data-stripe-link-usd="https://buy.stripe.com/cNifZh3JcaV5dZb64F8IU03" data-stripe-link-inr="https://buy.stripe.com/5kQ8wPfrUfblg7j3Wx8IU09">Get Started</a>
+            </div>
+            <div class="bg-white dark:bg-slate-900 ring-2 ring-blue-500 rounded-xl shadow-2xl p-8 flex flex-col justify-between transform lg:scale-105 duration-300 relative">
+                <div class="absolute -top-3 right-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Pro Brand Pack</h3>
+                    <p class="font-medium text-gray-600 dark:text-gray-400 mb-6">Expand your presence across platforms or campaigns.</p>
+                    <div class="price mb-8" data-price-usd-sale="$425" data-price-inr-sale="₹34,999" data-price-usd-orig="$849" data-price-inr-orig="₹69,999"></div>
+                    <ul class="font-medium text-gray-700 dark:text-gray-300 space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>One person</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>50 high-resolution images</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Up to 10 visual scenarios</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Two rounds of revisions</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Full commercial usage rights</li>
+                    </ul>
+                </div>
+                <a href="javascript:void(0);" class="purchase-button block w-full text-center bg-black text-white px-6 py-3 rounded-lg font-bold hover:bg-slate-800 transition-colors duration-300" data-stripe-link-usd="https://buy.stripe.com/fZufZhbbEaV54oB50B8IU04" data-stripe-link-inr="https://buy.stripe.com/bJebJ1a7A0grf3f2St8IU08">Select Plan</a>
+            </div>
+            <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl shadow-xl p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Enterprise & Teams</h3>
+                    <p class="font-medium text-gray-600 dark:text-gray-400 mb-6">Tailored solutions for brands, agencies, and teams.</p>
+                    <div class="price text-4xl font-bold text-slate-800 dark:text-slate-200 mb-8" data-price-usd-sale="Custom Quote" data-price-inr-sale="Custom Quote" data-price-usd-orig="Custom Quote" data-price-inr-orig="Custom Quote">Custom Quote</div>
+                    <ul class="font-medium text-gray-700 dark:text-gray-300 space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>Multiple people</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>Custom image volumes</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>Unlimited visual scenarios</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>Dedicated art direction</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>Priority delivery & support</li>
+                    </ul>
+                </div>
+                <a href="contact.html" class="block w-full text-center bg-transparent border-2 border-black dark:border-white text-black dark:text-white px-6 py-3 rounded-lg font-bold hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-colors duration-300">Request Custom Quote</a>
+            </div>
+        </div>
+        <div id="individualPricing" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto hidden">
+            <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl shadow-xl p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Personal Refresh</h3>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 border border-blue-200 dark:border-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Dating Apps</span>
+                        <span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 border border-blue-200 dark:border-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Social Media</span>
+                        <span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 border border-blue-200 dark:border-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Trying Something New</span>
+                    </div>
+                    <div class="price mb-8" data-price-usd-sale="$75" data-price-inr-sale="₹6,249" data-price-usd-orig="$149" data-price-inr-orig="₹12,499"></div>
+                    <ul class="font-medium text-gray-700 dark:text-gray-300 space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>10 high-res images</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>2 unique looks or settings</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>Personal use only</li>
+                    </ul>
+                </div>
+                <a href="javascript:void(0);" class="purchase-button block w-full text-center bg-transparent border-2 border-black dark:border-white text-black dark:text-white px-6 py-3 rounded-lg font-bold hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-colors duration-300" data-stripe-link-usd="https://buy.stripe.com/fZufZhenQ2oz7AN0Kl8IU00" data-stripe-link-inr="https://buy.stripe.com/4gMaEX2F80gr3kxboZ8IU05">Get Started</a>
+            </div>
+            <!-- MODIFIED: Personal Visionary Profile Box Tags -->
+            <div class="bg-white dark:bg-slate-900 ring-2 ring-blue-500 rounded-xl shadow-2xl p-8 flex flex-col justify-between transform lg:scale-105 duration-300 relative">
+                <div class="absolute -top-3 right-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Visionary Profile</h3>
+                                        <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-fuchsia-100 text-fuchsia-700 dark:bg-fuchsia-900/60 dark:text-fuchsia-300 border border-fuchsia-200 dark:border-fuchsia-700 text-xs font-semibold px-3 py-1 rounded-full">LinkedIn</span>
+                        <span class="bg-fuchsia-100 text-fuchsia-700 dark:bg-fuchsia-900/60 dark:text-fuchsia-300 border border-fuchsia-200 dark:border-fuchsia-700 text-xs font-semibold px-3 py-1 rounded-full">Personal Branding</span>
+                        <span class="bg-fuchsia-100 text-fuchsia-700 dark:bg-fuchsia-900/60 dark:text-fuchsia-300 border border-fuchsia-200 dark:border-fuchsia-700 text-xs font-semibold px-3 py-1 rounded-full">Content Creators</span>
+                    </div>
+                    <div class="price mb-8" data-price-usd-sale="$139" data-price-inr-sale="₹11,499" data-price-usd-orig="$279" data-price-inr-orig="₹22,999"></div>
+                    <ul class="font-medium text-gray-700 dark:text-gray-300 space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>25 high-res images</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Up to 5 distinct scenarios</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>Personal use only</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-500 mr-3"></i>One round of revisions</li>
+                    </ul>
+                </div>
+                <a href="javascript:void(0);" class="purchase-button block w-full text-center bg-black text-white px-6 py-3 rounded-lg font-bold hover:bg-slate-800 transition-colors duration-300" data-stripe-link-usd="https://buy.stripe.com/cNiaEX93w2oz4oBakV8IU01" data-stripe-link-inr="https://buy.stripe.com/5kQbJ17Zse7hbR30Kl8IU06">Select Plan</a>
+            </div>
+            <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl shadow-xl p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Ultimate Identity</h3>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 border border-blue-200 dark:border-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Entrepreneurs</span>
+                        <span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 border border-blue-200 dark:border-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Personal Brands</span>
+                        <span class="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 border border-blue-200 dark:border-blue-700 text-xs font-semibold px-3 py-1 rounded-full">Commercial Use</span>
+                    </div>
+                    <div class="price mb-8" data-price-usd-sale="$249" data-price-inr-sale="₹19,999" data-price-usd-orig="$499" data-price-inr-orig="₹39,999"></div>
+                    <ul class="font-medium text-gray-700 dark:text-gray-300 space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>50 high-res images</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>Up to 10 scenarios or styles</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>Full commercial use</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-gray-400 dark:text-slate-600 mr-3"></i>Two rounds of revisions</li>
+                    </ul>
+                </div>
+                <a href="javascript:void(0);" class="purchase-button block w-full text-center bg-transparent border-2 border-black dark:border-white text-black dark:text-white px-6 py-3 rounded-lg font-bold hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-colors duration-300" data-stripe-link-usd="https://buy.stripe.com/7sY14nenQ3sD08l8cN8IU02" data-stripe-link-inr="https://buy.stripe.com/4gM6oHdjM2ozf3fgJj8IU07">Go Ultimate</a>
+            </div>
+        </div>
+    </div>
+</section>
 
-        function setActivePricingTab(active, inactive) { active.classList.add('bg-blue-600', 'text-white'); active.classList.remove('text-gray-600'); inactive.classList.remove('bg-blue-600', 'text-white'); inactive.classList.add('text-gray-600'); }
-        showBusinessBtn.addEventListener('click', () => { setActivePricingTab(showBusinessBtn, showIndividualBtn); businessPricingDiv.classList.remove('hidden'); individualPricingDiv.classList.add('hidden'); updatePrices(); updatePurchaseLinks(); });
-        showIndividualBtn.addEventListener('click', () => { setActivePricingTab(showIndividualBtn, showBusinessBtn); individualPricingDiv.classList.remove('hidden'); businessPricingDiv.classList.add('hidden'); updatePrices(); updatePurchaseLinks(); });
-        
-        function updateCurrencyToggleStyle() {
-            const isDark = document.documentElement.classList.contains('dark');
-            const allStyleClasses = ['shadow-inner', 'bg-slate-700', 'bg-white', 'text-blue-300', 'text-blue-600', 'text-gray-600', 'dark:text-gray-400'];
-            usdButton.classList.remove(...allStyleClasses);
-            inrButton.classList.remove(...allStyleClasses);
-            if (currentCurrency === 'usd') {
-                usdButton.classList.add('shadow-inner', isDark ? 'bg-slate-700' : 'bg-white', isDark ? 'text-blue-300' : 'text-blue-600');
-                inrButton.classList.add('text-gray-600', 'dark:text-gray-400');
-            } else {
-                usdButton.classList.add('text-gray-600', 'dark:text-gray-400');
-                inrButton.classList.add('shadow-inner', isDark ? 'bg-slate-700' : 'bg-white', isDark ? 'text-blue-300' : 'text-blue-600');
-            }
-        }
+<!--<div class="w-full h-px bg-gray-200 dark:bg-slate-700"></div>
+<section id="testimonials" class="py-20 bg-gray-100 dark:bg-slate-950 dot-grid-bg px-4">
+    <div class="container mx-auto max-w-6xl">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Trusted by Professionals & Brands</h2>
+            <p class="text-lg font-medium text-gray-700 dark:text-gray-300">We don't just create images; we create confidence and results.</p>
+        </div>
+        <div class="bg-slate-50 dark:bg-slate-900/50 rounded-2xl shadow-xl border dark:border-slate-800 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            <div class="w-full md:w-1/2 grid grid-cols-5 gap-2">
+                <div class="relative group col-span-2"><img src="Image/daisy1 (3).jpg" alt="Real photo" class="rounded-lg shadow-md w-full h-full object-cover"><div class="absolute inset-0 bg-black/20 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><span class="bg-black/50 text-white text-xs font-bold px-2 py-1 rounded-full">REAL PHOTO</span></div></div>
+                <div class="relative group col-span-3"><img src="Image/daisy1 (2).jpg" alt="Real photo" class="rounded-lg shadow-md w-full h-full object-cover"><div class="absolute inset-0 bg-black/20 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><span class="bg-black/50 text-white text-xs font-bold px-2 py-1 rounded-full">REAL PHOTO</span></div></div>
+                <div class="relative group col-span-3"><img src="Image/56t.jpg" alt="AI Generated photo" class="rounded-lg shadow-md w-full h-full object-cover"><div class="absolute inset-0 bg-black/20 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><span class="bg-black text-white text-xs font-bold px-2 py-1 rounded-full">PIKAIO GENERATED</span></div></div>
+                <div class="relative group col-span-2"><img src="Image/sdfgytr.jpg" alt="AI Generated photo" class="rounded-lg shadow-md w-full h-full object-cover"><div class="absolute inset-0 bg-black/20 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><span class="bg-black text-white text-xs font-bold px-2 py-1 rounded-full">PIKAIO GENERATED</span></div></div>
+                <div class="relative group col-span-5"><img src="Image/ertyhg.jpg" alt="AI Generated photo" class="rounded-lg shadow-md w-full h-full object-cover"><div class="absolute inset-0 bg-black/20 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><span class="bg-black text-white text-xs font-bold px-2 py-1 rounded-full">PIKAIO GENERATED</span></div></div>
+            </div>
+            <div class="w-full md:w-1/2 text-center md:text-left">
+                <i class="fas fa-quote-left text-4xl text-gray-300 dark:text-gray-600"></i>
+                <p class="text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-200 mt-4">"Pikaio completely transformed our online presence. We got an entire month's worth of high-end marketing content without a single photoshoot. It's the best investment we've made all year."</p>
+                <div class="mt-6">
+                    <p class="font-bold text-lg text-gray-900 dark:text-white">Daisy Aggarwal</p>
+                    <p class="font-medium text-gray-500 dark:text-gray-400">[Owner, Daisy The Fashion Villa]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>-->
 
-        usdButton.addEventListener('click', () => { currentCurrency = 'usd'; updateCurrencyToggleStyle(); updatePrices(); updatePurchaseLinks(); });
-        inrButton.addEventListener('click', () => { currentCurrency = 'inr'; updateCurrencyToggleStyle(); updatePrices(); updatePurchaseLinks(); });
-        
-        if (sliderContainer) {
-            const beforeWrapper = document.getElementById("before-wrapper");
-            const divider = document.getElementById("divider");
-            function updateSlider(x) { const r = sliderContainer.getBoundingClientRect(); const o = Math.max(0, Math.min(r.width, x - r.left)); beforeWrapper.style.clipPath = `inset(0 ${r.width - o}px 0 0)`; divider.style.left = `${o}px`; }
-            window.addEventListener("load", () => { if(sliderContainer) { const r = sliderContainer.getBoundingClientRect(); updateSlider(r.left + (r.width / 2)); } });
-            sliderContainer.addEventListener("mousemove", (e) => { updateSlider(e.clientX); });
-            sliderContainer.addEventListener("touchmove", (e) => { if (e.touches.length > 0) { updateSlider(e.touches[0].clientX); } });
-        }
+<section id="faq" class="py-20 bg-white dark:bg-slate-900 px-4 sm:px-6 lg:px-8 font-inter dark:border-t dark:border-zinc-800">
+    <div class="container mx-auto max-w-7xl">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Frequently Asked Questions</h2>
+            <p class="text-lg font-medium text-gray-700 dark:text-gray-400">Got questions? We've got answers.</p>
+        </div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- CHANGED: text-[calc(22px*0.9)] to text-[22px] for FAQ titles -->
+        <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-slate-700">
+            <h3 class="text-[22px] font-bold text-gray-900 dark:text-white mb-3">What kind of photos do I need to provide?</h3>
+            <p class="font-medium text-gray-600 dark:text-gray-400 leading-relaxed">For best results, provide 30-60 clear photos of yourself in various lighting, angles, and backgrounds. Good quality selfies and social photos work perfectly. The more variety, the more realistic and versatile your results.</p>
+        </div>
+        <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-slate-700">
+            <h3 class="text-[22px] font-bold text-gray-900 dark:text-white mb-3">How is my data handled?</h3>
+            <p class="font-medium text-gray-600 dark:text-gray-400 leading-relaxed">Your privacy is our priority. Your photos are used only to create your custom AI model and are deleted permanently after your project is complete. They are never shared or used for any other purpose.</p>
+        </div>
+        <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-slate-700">
+            <h3 class="text-[22px] font-bold text-gray-900 dark:text-white mb-3">What if I'm not happy with the results?</h3>
+            <p class="font-medium text-gray-600 dark:text-gray-400 leading-relaxed">Your satisfaction is key. Our Pro and Enterprise packages include revision rounds where we'll work with you on your feedback to refine the images until they're perfect.</p>
+        </div>
+        <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-slate-700">
+            <h3 class="text-[22px] font-bold text-gray-900 dark:text-white mb-3">How long does it take?</h3>
+            <p class="font-medium text-gray-600 dark:text-gray-400 leading-relaxed">Expect your first proof set within 1-2 business days of sending your photos. If your package includes revisions, each round typically takes 2-3 extra business days.</p>
+        </div>
+        <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-slate-700">
+            <h3 class="text-[22px] font-bold text-gray-900 dark:text-white mb-3">Do I get full ownership and commercial rights?</h3>
+            <p class="font-medium text-gray-600 dark:text-gray-400 leading-relaxed">Yes! For our 'Ultimate Identity' package (for individuals) and all 'Business' packages, you receive full commercial usage rights. Other packages include a personal usage license.</p>
+        </div>
+        <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-slate-700">
+            <h3 class="text-[22px] font-bold text-gray-900 dark:text-white mb-3">Is this ethical?</h3>
+            <p class="font-medium text-gray-600 dark:text-gray-400 leading-relaxed">Our service is about enhancement, not deception. We require you to have the rights to the photos you provide and will not create 'deepfakes' or images of other individuals without consent.</p>
+        </div>
+        <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-slate-700">
+            <h3 class="text-[22px] font-bold text-gray-900 dark:text-white mb-3">Can you create photos in any style or location?</h3>
+            <p class="font-medium text-gray-600 dark:text-gray-400 leading-relaxed">Absolutely. Our AI can place you in virtually any setting you can imagine—from a professional office to a fantasy landscape. Just describe your vision, and we'll bring it to life with incredible detail and realism.</p>
+        </div>
+        <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-slate-700">
+            <h3 class="text-[22px] font-bold text-gray-900 dark:text-white mb-3">How do revisions work?</h3>
+            <p class="font-medium text-gray-600 dark:text-gray-400 leading-relaxed">For packages that include revisions, you'll receive a gallery of images to review. You can provide specific feedback on the ones you'd like adjusted, and our team will work on refining them. This collaborative process ensures the final images meet your expectations.</p>
+        </div>
+        <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-slate-700 flex flex-col">
+            <h3 class="text-[22px] font-bold text-gray-900 dark:text-white mb-3">Have more questions?</h3>
+            <p class="font-medium text-gray-600 dark:text-gray-400 leading-relaxed">Our team is ready to help. Reach out and we'll be happy to answer any questions you have about our process or technology.</p>
+            <div class="mt-auto pt-6 flex gap-3">
+                <a href="manifesto.html" class="px-4 py-2 rounded-lg font-semibold bg-black text-white hover:bg-gray-800 transition-colors">Our Manifesto</a>
+                <a href="contact.html" class="px-4 py-2 rounded-lg font-semibold bg-gray-100 text-black border border-gray-200 hover:bg-gray-200 dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700 transition-colors">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<div class="w-full h-px bg-gray-200 dark:bg-slate-700"></div>
+<section id="final-cta" class="relative overflow-hidden flex items-center justify-center min-h-[40vh] md:min-h-0 py-20 md:py-48">
+    <div class="relative container mx-auto px-4 text-center z-10">
+        <p class="text-sm font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase mb-4">
+            The Wait is Over
+        </p>
+        <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-8">
+            Define Your Digital Identity.
+        </h2>
+        <a href="#pricing" class="group inline-flex items-center justify-center bg-black dark:bg-white text-white dark:text-black font-bold text-base sm:text-lg px-10 py-4 rounded-full shadow-lg shadow-slate-400/30 dark:shadow-black/30 hover:shadow-xl hover:shadow-blue-500/30 dark:hover:shadow-blue-400/30 transition-all duration-300 transform hover:scale-[1.03]">
+            Get Started Now
+            <svg class="w-4 h-4 ml-3 transition-transform group-hover:translate-x-1" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+        </a>
+        <div class="mt-6">
+            <a href="gallery.html" class="text-sm font-bold text-slate-600 dark:text-slate-400 hover:underline">
+                Or, explore the gallery
+            </a>
+        </div>
+    </div>
+</section>
+</main>
+<footer class="bg-black border-t border-slate-800 flex flex-col md:min-h-screen min-h-[60vh] relative">
+    <div class="w-full px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+        <!-- CHANGED: Added id="footer-text-content" and removed text-sm md:text-base classes -->
+        <div id="footer-text-content" class="flex flex-col md:flex-row justify-between font-bold text-white">
+        <div class="text-left mb-6 md:mb-0">
+            <p class="md:mb-4">© <span id="copyright-year">2024</span> Pikaio. All rights reserved.</p>
+            <p class="mt-2 md:mt-0">Look like a million bucks. Without spending it.</p>
+        </div>
+        <div class="hidden md:block text-right">
+             <nav class="flex flex-wrap justify-end gap-x-6 gap-y-2 md:mb-4">
+                <a href="gallery.html" class="hover:text-slate-300 transition-colors">Gallery</a>
+                <a href="#pricing" class="hover:text-slate-300 transition-colors">Pricing</a>
+                <a href="manifesto.html" class="hover:text-slate-300 transition-colors">Manifesto</a>
+                <a href="#process" class="hover:text-slate-300 transition-colors">Process</a>
+                <a href="contact.html" class="hover:text-slate-300 transition-colors">Contact</a>
+                <a href="https://www.linkedin.com/company/pikaio/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">LinkedIn</a>
+             </nav>
+             <a href="#top" class="inline-block hover:text-slate-300 transition-colors">Back to top</a>
+        </div>
+        <div class="block md:hidden w-full">
+            <nav class="flex flex-wrap justify-start gap-x-6 gap-y-2">
+                <a href="gallery.html" class="hover:text-slate-300 transition-colors">Gallery</a>
+                <a href="#pricing" class="hover:text-slate-300 transition-colors">Pricing</a>
+                <a href="manifesto.html" class="hover:text-slate-300 transition-colors">Manifesto</a>
+                <a href="#process" class="hover:text-slate-300 transition-colors">Process</a>
+                <a href="contact.html" class="hover:text-slate-300 transition-colors">Contact</a>
+                <a href="https://www.linkedin.com/company/pikaio/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">LinkedIn</a>
+            </nav>
+            <div class="text-right mt-4">
+                 <a href="#top" class="inline-block hover:text-slate-300 transition-colors">Back to top</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="flex-grow"></div>
+<!-- CHANGED: md:h-[calc(320px*0.9)] to md:h-[288px] to preserve visual height -->
+<div class="absolute bottom-0 left-0 right-0 wave-container h-[22vh] md:h-[288px]" aria-hidden="true">
+  <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div>
+</div>
+</footer>
+<div id="successModal" class="modal"><div class="modal-content bg-white dark:bg-slate-800"><h3 class="text-green-600 dark:text-green-400 font-bold text-2xl mb-4">Message Sent!</h3><p class="text-gray-600 dark:text-gray-300 mb-6 font-medium">Thank you for your message. We'll get back to you shortly.</p><button id="closeModal" class="bg-black hover:bg-slate-800 text-white dark:bg-white dark:text-black dark:hover:bg-gray-200 px-6 py-2 rounded-lg font-bold transition-colors">Close</button></div></div>
+<script>
+// Javascript remains unchanged.
+document.addEventListener('DOMContentLoaded', () => {
+    const headerContainer = document.getElementById('header-container');
+    const hamburgerButton = document.getElementById('hamburger-button');
+    const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    const contactForm = document.getElementById('contactForm');
+    const successModal = document.getElementById('successModal');
+    const closeModalButton = document.getElementById('closeModal');
+    const businessPricingDiv = document.getElementById('businessPricing');
+    const individualPricingDiv = document.getElementById('individualPricing');
+    const pricingToggleButtons = document.querySelectorAll('.pricing-toggle-btn');
+    const pricingGlider = document.getElementById('pricing-glider');
+    const currencyToggleButtons = document.querySelectorAll('.currency-toggle-btn');
+    const currencyGlider = document.getElementById('currency-glider');
+    const sliderContainer = document.getElementById("slider-container");
+    const themeToggleButtons = document.querySelectorAll('#theme-toggle-button, #theme-toggle-button-mobile');
+    const mainShowcaseNavButtons = document.querySelectorAll('.showcase-main-nav-button');
+    const showcaseViews = document.querySelectorAll('.showcase-view');
+    const mobileFlipperNavButtons = document.querySelectorAll('.flipper-nav-button');
+    const logoContainers = document.querySelectorAll('.showcase-bg-logos > div');
+    let lastScrollY = window.scrollY;
 
-        const themeToggleButton = document.getElementById('theme-toggle-button');
-        
-        themeToggleButton.addEventListener('click', () => {
-            const isDarkMode = document.documentElement.classList.contains('dark');
-            if (isDarkMode) {
-                document.documentElement.classList.remove('dark');
-                localStorage.theme = 'light';
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark';
-            }
-            updateCurrencyToggleStyle();
-        });
+    const openMenu = () => { if(mobileMenuOverlay) { mobileMenuOverlay.classList.remove('hidden'); document.body.style.overflow = 'hidden'; setTimeout(() => mobileMenuOverlay.classList.add('opacity-100', 'active'), 10); }};
+    const closeMenu = () => { if(mobileMenuOverlay) { mobileMenuOverlay.classList.remove('opacity-100', 'active'); document.body.style.overflow = ''; setTimeout(() => mobileMenuOverlay.classList.add('hidden'), 300); }};
+    const toggleTheme = () => { document.documentElement.classList.toggle('dark'); localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'; };
 
-        function initializePage() {
-            handleHeaderScroll(); 
-            setActivePricingTab(showBusinessBtn, showIndividualBtn);
-            updatePrices();
-            updateCurrencyToggleStyle();
-            updatePurchaseLinks();
-        }
-        initializePage();
+    if(hamburgerButton) hamburgerButton.addEventListener('click', openMenu);
+    if(closeMobileMenuButton) closeMobileMenuButton.addEventListener('click', closeMenu);
+    if(mobileMenuOverlay) mobileMenuOverlay.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+    themeToggleButtons.forEach(btn => btn.addEventListener('click', toggleTheme));
+    
+    window.addEventListener('scroll', () => {
+        if (!headerContainer) return;
+        const currentScrollY = window.scrollY;
+        if (currentScrollY < 100) { headerContainer.classList.remove('scrolled-up', 'hidden-nav'); } 
+        else if (lastScrollY < currentScrollY) { headerContainer.classList.add('hidden-nav'); } 
+        else { headerContainer.classList.remove('hidden-nav'); headerContainer.classList.add('scrolled-up'); }
+        lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
     });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { const href = anchor.getAttribute('href'); if (href.length > 1) { const targetElement = document.querySelector(href); if (targetElement) { e.preventDefault(); targetElement.scrollIntoView({ behavior: 'smooth' });}} }); });
+    
+    if(contactForm) {
+        contactForm.addEventListener('submit', function (e) { e.preventDefault(); const formData = new FormData(contactForm); fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(formData).toString() }).then(() => { if(successModal) successModal.style.display = 'flex'; contactForm.reset(); }).catch(() => { alert("Sorry, there was an error submitting your form."); }); });
+        if(closeModalButton && successModal) closeModalButton.addEventListener('click', () => { successModal.style.display = 'none'; });
+        window.addEventListener('click', (event) => { if (event.target == successModal && successModal) { successModal.style.display = 'none'; } });
+    }
+
+    function updatePricesAndLinks(currency) {
+        document.querySelectorAll('.price').forEach(el => { const currencyUpper = currency.charAt(0).toUpperCase() + currency.slice(1); const salePrice = el.dataset[`price${currencyUpper}Sale`]; const origPrice = el.dataset[`price${currencyUpper}Orig`]; if (salePrice && salePrice.toLowerCase() === "custom quote") { el.innerHTML = `<span class="text-4xl font-bold">${salePrice}</span>`; return; } if(salePrice && origPrice) { el.innerHTML = `<div class="flex items-center justify-center gap-x-4"><span class="text-4xl font-bold text-inherit">${salePrice}</span><span class="text-2xl font-medium text-gray-400 dark:text-gray-500 line-through">${origPrice}</span></div>`; } });
+        document.querySelectorAll('.purchase-button').forEach(button => { const link = (currency === 'usd') ? button.dataset.stripeLinkUsd : button.dataset.stripeLinkInr; if (link) { button.href = link; } });
+    }
+
+    function moveGlider(glider, activeTab) {
+        if (glider && activeTab) {
+            glider.style.width = `${activeTab.offsetWidth}px`;
+            glider.style.left = `${activeTab.offsetLeft}px`;
+        }
+    }
+    
+    pricingToggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const target = button.id === 'showBusinessPricing' ? businessPricingDiv : individualPricingDiv;
+            const other = button.id === 'showBusinessPricing' ? individualPricingDiv : businessPricingDiv;
+            if(target) target.classList.remove('hidden');
+            if(other) other.classList.add('hidden');
+            moveGlider(pricingGlider, button);
+        });
+    });
+
+    currencyToggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const currency = button.dataset.currency;
+            updatePricesAndLinks(currency);
+            moveGlider(currencyGlider, button);
+        });
+    });
+    
+    if (sliderContainer) {
+        const beforeWrapper = document.getElementById("before-wrapper");
+        const divider = document.getElementById("divider");
+        function updateSlider(x) { 
+            if (!sliderContainer || !beforeWrapper || !divider) return;
+            const r = sliderContainer.getBoundingClientRect(); 
+            const o = Math.max(0, Math.min(r.width, x - r.left)); 
+            beforeWrapper.style.clipPath = `inset(0 ${r.width - o}px 0 0)`; 
+            divider.style.left = `${o}px`; 
+        }
+        window.addEventListener("load", () => { if(sliderContainer) { const r = sliderContainer.getBoundingClientRect(); updateSlider(r.left + (r.width / 2)); } });
+        sliderContainer.addEventListener("mousemove", (e) => { updateSlider(e.clientX); });
+        sliderContainer.addEventListener("touchmove", (e) => { if (e.touches.length > 0) { updateSlider(e.touches[0].clientX); } });
+    }
+
+    function setActiveButton(buttons, activeButton) {
+        buttons.forEach(btn => {
+            btn.classList.remove('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black');
+            btn.classList.add('text-gray-500', 'dark:text-gray-400');
+        });
+        activeButton.classList.add('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black');
+        activeButton.classList.remove('text-gray-500', 'dark:text-gray-400');
+    }
+
+    mainShowcaseNavButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetShowcaseId = `showcase-${button.dataset.showcase}`;
+            const targetLogosId = `logos-${button.dataset.showcase}`;
+            setActiveButton(mainShowcaseNavButtons, button);
+            showcaseViews.forEach(view => view.classList.toggle('hidden', view.id !== targetShowcaseId));
+            logoContainers.forEach(container => container.classList.toggle('active', container.id === targetLogosId));
+            
+            const activeShowcaseView = document.getElementById(targetShowcaseId);
+            if (activeShowcaseView) {
+                const beforeCard = activeShowcaseView.querySelector('.flipper-card-before');
+                const afterCard = activeShowcaseView.querySelector('.flipper-card-after');
+                if (beforeCard && afterCard) {
+                    beforeCard.classList.remove('opacity-0', 'invisible');
+                    afterCard.classList.add('opacity-0', 'invisible');
+                }
+                const flipperButtons = activeShowcaseView.querySelectorAll('.flipper-nav-button');
+                const beforeButton = activeShowcaseView.querySelector('.flipper-nav-button[data-flip="before"]');
+                if (flipperButtons.length && beforeButton) {
+                    setActiveButton(flipperButtons, beforeButton);
+                }
+            }
+        });
+    });
+
+    mobileFlipperNavButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const flipState = button.dataset.flip;
+            const controlsContainer = button.closest('.flipper-controls');
+            if (!controlsContainer) return;
+            const buttonsInGroup = controlsContainer.querySelectorAll('.flipper-nav-button');
+            setActiveButton(buttonsInGroup, button);
+            const activeShowcase = [...showcaseViews].find(view => !view.classList.contains('hidden'));
+            if(activeShowcase) {
+                const beforeCard = activeShowcase.querySelector('.flipper-card-before');
+                const afterCard = activeShowcase.querySelector('.flipper-card-after');
+                if (beforeCard && afterCard) {
+                    if (flipState === 'before') {
+                        beforeCard.classList.remove('opacity-0', 'invisible');
+                        afterCard.classList.add('opacity-0', 'invisible');
+                    } else {
+                        afterCard.classList.remove('opacity-0', 'invisible');
+                        beforeCard.classList.add('opacity-0', 'invisible');
+                    }
+                }
+            }
+        });
+    });
+    
+    document.querySelectorAll('.process-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const glow = card.querySelector('.process-card-glow');
+            if (glow) {
+                glow.style.setProperty('--x', `${x}px`);
+                glow.style.setProperty('--y', `${y}px`);
+            }
+        });
+    });
+
+    function initializePage() {
+        const initialPricingButton = document.getElementById('showBusinessPricing');
+        if(initialPricingButton && pricingGlider) moveGlider(pricingGlider, initialPricingButton);
+        const initialCurrencyButton = document.getElementById('usdButton');
+        if(initialCurrencyButton && currencyGlider) {
+            moveGlider(currencyGlider, initialCurrencyButton);
+            updatePricesAndLinks('usd');
+        }
+        if (mainShowcaseNavButtons.length > 0) {
+            setActiveButton(mainShowcaseNavButtons, mainShowcaseNavButtons[0]);
+            showcaseViews.forEach((view, index) => view.classList.toggle('hidden', index !== 0));
+            logoContainers.forEach((container, index) => container.classList.toggle('active', index === 0));
+            if (showcaseViews[0]) {
+                const firstShowcaseFlipperButtons = showcaseViews[0].querySelectorAll('.flipper-nav-button');
+                if (firstShowcaseFlipperButtons.length > 0) {
+                    setActiveButton(firstShowcaseFlipperButtons, firstShowcaseFlipperButtons[0]);
+                }
+            }
+        }
+        const copyrightYearEl = document.getElementById('copyright-year');
+        if (copyrightYearEl) { copyrightYearEl.textContent = new Date().getFullYear(); }
+    }
+    initializePage();
+});
 </script>
 </body>
 </html>

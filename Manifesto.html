@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Pikaio | The Manifesto</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <script>
+        tailwind.config = { darkMode: 'class' }
+        if (localStorage.theme === 'dark' || (!('theme'in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+    </script>
+
+    <style>
+        html {
+            font-size: 14.4px; 
+            -webkit-text-size-adjust: 100%; 
+            -moz-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+        body { 
+            font-family: 'Satoshi', sans-serif; 
+            scroll-behavior: smooth; 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .font-inter { font-family: 'Inter', sans-serif; }
+
+        .highlight, .highlight-red {
+            padding: 0.1em 0.3em; 
+            border-radius: 4px;
+            font-weight: bold; 
+        }
+        .highlight { background-color: #dbeafe; color: #1e40af; }
+        .dark .highlight { background-color: #1e40af; color: #dbeafe; }
+        .highlight-red { background-color: #fee2e2; color: #991b1b; }
+        .dark .highlight-red { background-color: #7f1d1d; color: #fee2e2; }
+        
+        #main-header { pointer-events: none; }
+        #header-container { 
+            pointer-events: auto; 
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease, background-color 0.3s ease, border-color 0.3s ease; 
+            transform: translateY(0); 
+        }
+        #header-container.hidden-nav { transform: translateY(-150%); opacity: 0; }
+        #header-container.scrolled-up {
+          background-color: white;
+          border-bottom: 1px solid #e5e7eb; 
+        }
+        .dark #header-container.scrolled-up {
+          background-color: black;
+          border-bottom: 1px solid #334155;
+        }
+
+        @media (min-width: 768px) {
+            #header-container {
+                max-width: 1238.4px !important;
+            }
+        }
+
+        @media (min-width: 768px) {
+          #header-container.scrolled-up {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+            border: 1px solid #e5e7eb; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07); 
+          }
+          .dark #header-container.scrolled-up {
+            background-color: rgba(15, 23, 42, 0.75);
+            border-color: #334155;
+          }
+        }
+        #mobile-menu-overlay { transition: opacity 0.3s ease-in-out; }
+        #mobile-menu-content { transition: transform 0.3s ease-in-out; transform: scale(0.95); }
+        #mobile-menu-overlay.active #mobile-menu-content { transform: scale(1); }
+            
+        .wave-container {
+          position: relative; width: 100%; background: black; display: flex;
+          flex-direction: column; justify-content: space-between; overflow: hidden;
+        }
+        .wave-line {
+          width: 100%; height: 14.4px; background-color: white;
+          animation: fallBounce 2.4s ease-in-out infinite;
+        }
+        .wave-line:nth-child(1) { animation-delay: 0s; } .wave-line:nth-child(2) { animation-delay: 0.1s; } .wave-line:nth-child(3) { animation-delay: 0.2s; } .wave-line:nth-child(4) { animation-delay: 0.3s; } .wave-line:nth-child(5) { animation-delay: 0.4s; } .wave-line:nth-child(6) { animation-delay: 0.5s; } .wave-line:nth-child(7) { animation-delay: 0.6s; } .wave-line:nth-child(8) { animation-delay: 0.7s; } .wave-line:nth-child(9) { animation-delay: 0.8s; } .wave-line:nth-child(10) { animation-delay: 0.9s; } .wave-line:nth-child(11) { animation-delay: 1.0s; } .wave-line:nth-child(12) { animation-delay: 1.1s; } .wave-line:nth-child(13) { animation-delay: 1.2s; } .wave-line:nth-child(14) { animation-delay: 1.3s; } .wave-line:nth-child(15) { animation-delay: 1.4s; }
+        @keyframes fallBounce {
+          0%, 100%   { transform: translateY(0); }
+          50%        { transform: translateY(12.6px); }
+        }
+        
+        #footer-text-content {
+            font-size: 13.6px;
+        }
+        @media (min-width: 768px) {
+            #footer-text-content {
+                font-size: 14.4px;
+            }
+        }
+    </style>
+</head>
+<body id="top" class="bg-white text-gray-800 dark:bg-black dark:text-gray-200 transition-colors duration-300">
+
+    <header id="main-header" class="fixed w-full top-0 left-0 z-50 md:top-[24px]">
+        <div id="header-container" class="relative w-full md:max-w-[86rem] md:mx-auto h-[56px] px-[24px] flex items-center justify-between md:rounded-full">
+            <div class="flex-1 flex justify-start">
+                <a href="index.html" class="text-[19px] font-bold text-gray-900 flex items-center dark:text-white">
+                    <img src="Image/file.svg" alt="Pikaio Logo" class="h-[19px] w-[19px] mr-0.5 rounded-full block dark:hidden">
+                    <img src="Image/Adobe Express - file(1)-256x256.webp" alt="Pikaio Logo Dark" class="h-[19px] w-[19px] mr-0.5 rounded-full hidden dark:block">
+                    Pikaio
+                </a>
+            </div>
+            <nav class="hidden md:flex items-center justify-center">
+                <a href="gallery.html" class="text-[15px] font-bold text-black hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Gallery</a>
+                <a href="index.html#process" class="text-[15px] font-bold text-black hover:text-gray-800 dark:text-gray-300 dark:hover:text-white ml-[56px]">Process</a>
+                <a href="index.html#pricing" class="text-[15px] font-bold text-black hover:text-gray-800 dark:text-gray-300 dark:hover:text-white ml-[56px]">Pricing</a>
+                <a href="index.html#faq" class="text-[15px] font-bold text-black hover:text-gray-800 dark:text-gray-300 dark:hover:text-white ml-[56px]">FAQ</a>
+                <a href="contact.html" class="text-[15px] font-bold text-black hover:text-gray-800 dark:text-gray-300 dark:hover:text-white ml-[56px]">Contact</a>
+            </nav>
+            <div class="flex-1 flex items-center justify-end space-x-2 sm:space-x-4">
+                <button id="theme-toggle-button" aria-label="Toggle Dark Mode" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hidden md:block"><i class="fas fa-moon text-[17px] block dark:hidden"></i><i class="fas fa-sun text-[17px] hidden dark:block"></i></button>
+                <a href="index.html#pricing" class="hidden md:inline-flex items-center justify-center px-[15px] py-[7px] border border-transparent rounded-full shadow-sm text-[13px] font-bold text-white bg-black dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200">Get Started <svg class="w-[11px] h-[11px] ml-1.5" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+                <div class="md:hidden flex items-center">
+                    <button id="theme-toggle-button-mobile" aria-label="Toggle Dark Mode" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"><i class="fas fa-moon text-lg block dark:hidden"></i><i class="fas fa-sun text-lg hidden dark:block"></i></button>
+                    <button id="hamburger-button" aria-label="Open Menu" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white ml-2"><i class="fas fa-bars text-xl"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu-overlay" class="hidden fixed inset-0 bg-white/95 dark:bg-black/95 backdrop-blur-sm z-[1000] opacity-0">
+        <div id="mobile-menu-content" class="relative w-full h-full flex flex-col p-8">
+            <div class="flex justify-between items-center mb-16">
+                <a href="index.html" class="text-xl font-bold text-gray-900 flex items-center dark:text-white">
+                    <img src="Image/file.svg" alt="Pikaio Logo" class="h-5 w-5 mr-0.5 rounded-full block dark:hidden">
+                    <img src="Image/Adobe Express - file(1)-256x256.webp" alt="Pikaio Logo Dark" class="h-5 w-5 mr-0.5 rounded-full hidden dark:block">
+                    Pikaio
+                </a>
+                <button id="close-mobile-menu" aria-label="Close Menu" class="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white">
+                    <i class="fas fa-times text-3xl"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col items-start space-y-8">
+                <a href="gallery.html" class="text-3xl font-bold text-gray-800 dark:text-gray-200">Gallery</a>
+                <a href="index.html#process" class="text-3xl font-bold text-gray-800 dark:text-gray-200">Process</a>
+                <a href="index.html#pricing" class="text-3xl font-bold text-gray-800 dark:text-gray-200">Pricing</a>
+                <a href="index.html#faq" class="text-3xl font-bold text-gray-800 dark:text-gray-200">FAQ</a>
+                <a href="contact.html" class="text-3xl font-bold text-gray-800 dark:text-gray-200">Contact</a>
+            </nav>
+            <a href="index.html#pricing" class="mt-auto inline-flex items-center justify-center px-8 py-3 border border-transparent rounded-full shadow-sm text-base font-bold text-white bg-black dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200">
+                Get Started 
+                <svg class="w-3.5 h-3.5 ml-2" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </a>
+        </div>
+    </div>
+
+    <main>
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="pt-28 md:pt-36 pb-20 md:pb-24">
+                <h1 class="text-5xl md:text-6xl font-bold tracking-tighter mb-16 font-satoshi dark:text-white">We're Giving Your Ambition<br>an Unfair Visual Advantage.</h1>
+                <div class="space-y-6 text-base leading-relaxed font-normal text-black dark:text-gray-100 font-inter">
+                    <p>Forget "authentic."<br>That word is a cage.</p>
+                    <p>Your ambition isn't "authentic." It's raw, relentless, reaching.<br>Your potential isn't "authentic." It's an explosion waiting for a spark.<br>Why should your image be anything less?</p>
+                    <p>We didn't build <span class="highlight">Pikaio</span> for snapshots.<br>We built it for statements.<br>For the founder who needs to look funded before the check clears.<br>For the speaker whose ideas demand a stage presence to match.<br>For the consultant whose expertise needs to radiate, not just reside.</p>
+                    <p>Pikaio isn't about <span class="highlight-red">faking it</span>.<br>It's about <span class="font-bold">making it happen. Now.</span><br>Your face. Your likeness. Forged into visual proof of your highest self.<br>Any room. Any style. Any narrative you dictate.<br>No waiting for reality to catch up.<br>You arrive, visually, first.</p>
+                    <p>The world loves a "process."<br>We love results.<br>The world praises "the grind."<br>We arm you to bypass it.</p>
+                    <p>They'll call it an illusion.<br>Is a perfectly tailored suit an illusion? A powerful pitch deck? A curated career?<br>Or are they tools of intention?</p>
+                    <p>Technology has always bent reality to human will.<br>The map. The printing press. The internet.<br>Each one, a "distortion" that unlocked a new level of human capability.<br>Each one, initially met with skepticism, then accepted as essential.</p>
+                    
+                    <p><span class="highlight">Pikaio</span> is that, for your personal image.</p>
+
+                    <p><span class="highlight">It’s leverage. It's access. It's the visual authority you <em>should</em> have, on demand.</span></p>
+                    
+                    <div class="pt-6 flex">
+                        <div class="border-l-4 border-black dark:border-gray-400 mr-4 self-stretch"></div>
+                        <p class="text-lg leading-relaxed"> 
+                            <span class="font-bold text-black dark:text-white">Stop documenting your current state.</span><br>
+                            <span class="font-bold text-black dark:text-white">Start projecting your inevitable success.</span><br>
+                            Because in the new economy of attention, your image isn't just part of the story.<br>
+                            <span class="italic font-bold">It is the opening line. Make it undeniable.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-black border-t border-slate-800 flex flex-col md:min-h-screen min-h-[60vh] relative">
+        <div class="w-full px-4 sm:px-6 lg:px-8 pt-[32px] pb-[16px]">
+            <div id="footer-text-content" class="flex flex-col md:flex-row justify-between font-bold text-white">
+            <div class="text-left mb-6 md:mb-0">
+                <p class="md:mb-4">© <span id="copyright-year">2024</span> Pikaio. All rights reserved.</p>
+                <p class="mt-2 md:mt-0">Look like a million bucks. Without spending it.</p>
+            </div>
+            <div class="hidden md:block text-right">
+                 <nav class="flex flex-wrap justify-end gap-x-6 gap-y-2 md:mb-4">
+                    <a href="gallery.html" class="hover:text-slate-300 transition-colors">Gallery</a>
+                    <a href="index.html#pricing" class="hover:text-slate-300 transition-colors">Pricing</a>
+                    <a href="manifesto.html" class="hover:text-slate-300 transition-colors text-blue-600 dark:text-blue-400">Manifesto</a>
+                    <a href="index.html#process" class="hover:text-slate-300 transition-colors">Process</a>
+                    <a href="contact.html" class="hover:text-slate-300 transition-colors">Contact</a>
+                    <a href="https://www.linkedin.com/company/pikaio/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">LinkedIn</a>
+                 </nav>
+                 <a href="#top" class="inline-block hover:text-slate-300 transition-colors">Back to top</a>
+            </div>
+            <div class="block md:hidden w-full">
+                <nav class="flex flex-wrap justify-start gap-x-6 gap-y-2">
+                    <a href="gallery.html" class="hover:text-slate-300 transition-colors">Gallery</a>
+                    <a href="index.html#pricing" class="hover:text-slate-300 transition-colors">Pricing</a>
+                    <a href="manifesto.html" class="hover:text-slate-300 transition-colors text-blue-600 dark:text-blue-400">Manifesto</a>
+                    <a href="index.html#process" class="hover:text-slate-300 transition-colors">Process</a>
+                    <a href="contact.html" class="hover:text-slate-300 transition-colors">Contact</a>
+                    <a href="https://www.linkedin.com/company/pikaio/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">LinkedIn</a>
+                </nav>
+                <div class="text-right mt-4">
+                     <a href="#top" class="inline-block hover:text-slate-300 transition-colors">Back to top</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex-grow"></div>
+    <div class="absolute bottom-0 left-0 right-0 wave-container h-[22vh] md:h-[288px]" aria-hidden="true">
+      <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div> <div class="wave-line"></div>
+    </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const headerContainer = document.getElementById('header-container');
+            const hamburgerButton = document.getElementById('hamburger-button');
+            const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const themeToggleButtons = document.querySelectorAll('#theme-toggle-button, #theme-toggle-button-mobile');
+            
+            let lastScrollY = window.scrollY;
+        
+            const openMenu = () => { 
+                if(mobileMenuOverlay) { 
+                    mobileMenuOverlay.classList.remove('hidden'); 
+                    document.body.style.overflow = 'hidden'; 
+                    setTimeout(() => mobileMenuOverlay.classList.add('opacity-100', 'active'), 10); 
+                } 
+            };
+            const closeMenu = () => { 
+                if(mobileMenuOverlay) { 
+                    mobileMenuOverlay.classList.remove('opacity-100', 'active'); 
+                    document.body.style.overflow = ''; 
+                    setTimeout(() => mobileMenuOverlay.classList.add('hidden'), 300); 
+                } 
+            };
+             const _updateThemeIcons = () => { 
+                const isDark = document.documentElement.classList.contains('dark');
+                themeToggleButtons.forEach(btn => {
+                    if(btn) {
+                        const moonIcon = btn.querySelector('.fa-moon');
+                        const sunIcon = btn.querySelector('.fa-sun');
+                        if (moonIcon) moonIcon.style.display = isDark ? 'none' : 'block';
+                        if (sunIcon) sunIcon.style.display = isDark ? 'block' : 'none';
+                    }
+                });
+            };
+            const toggleTheme = () => { 
+                document.documentElement.classList.toggle('dark'); 
+                localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'; 
+                _updateThemeIcons();
+            };
+        
+            if(hamburgerButton) hamburgerButton.addEventListener('click', openMenu);
+            if(closeMobileMenuButton) closeMobileMenuButton.addEventListener('click', closeMenu);
+            if(mobileMenuOverlay) {
+                mobileMenuOverlay.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        const href = link.getAttribute('href');
+                        if (href.includes('.html#') || (href.startsWith('#') && href.length > 1)) {
+                            if (href.startsWith('#') && document.getElementById(href.substring(1))) {
+                                e.preventDefault();
+                                document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }
+                        closeMenu(); 
+                    });
+                });
+            }
+            
+            themeToggleButtons.forEach(btn => {
+                if(btn) btn.addEventListener('click', toggleTheme);
+            });
+            
+            window.addEventListener('scroll', () => {
+                if (!headerContainer) return;
+                const currentScrollY = window.scrollY;
+                const scrollThreshold = 10; 
+
+                if (currentScrollY < scrollThreshold) { 
+                    headerContainer.classList.remove('scrolled-up', 'hidden-nav'); 
+                } else if (lastScrollY < currentScrollY && currentScrollY > scrollThreshold) { 
+                    headerContainer.classList.add('hidden-nav'); 
+                } else if (lastScrollY > currentScrollY) {
+                    headerContainer.classList.remove('hidden-nav'); 
+                    if (currentScrollY > scrollThreshold) {
+                         headerContainer.classList.add('scrolled-up');
+                    }
+                }
+                lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
+            });
+        
+            document.querySelectorAll('a[href^="#"], a[href*=".html#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = anchor.getAttribute('href');
+                    const [path, fragment] = href.split('#');
+                    if (path === '' && fragment && document.getElementById(fragment)) {
+                        e.preventDefault();
+                        document.getElementById(fragment).scrollIntoView({ behavior: 'smooth' });
+                        if (mobileMenuOverlay?.classList.contains('active')) closeMenu();
+                    }
+                });
+            });
+
+            function handleHashOnLoad() {
+                if (window.location.hash) {
+                    const fragment = window.location.hash.substring(1);
+                    const targetElement = document.getElementById(fragment);
+                    if (targetElement) {
+                        setTimeout(() => { 
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
+                    }
+                }
+            }
+        
+            function initializePage() {
+                const copyrightYearEl = document.getElementById('copyright-year');
+                if (copyrightYearEl) copyrightYearEl.textContent = new Date().getFullYear(); 
+                
+                if (headerContainer && window.scrollY > 10) {
+                    headerContainer.classList.add('scrolled-up');
+                } else if (headerContainer) {
+                    headerContainer.classList.remove('scrolled-up', 'hidden-nav');
+                }
+                _updateThemeIcons(); 
+                handleHashOnLoad(); 
+            }
+            initializePage();
+        });
+    </script>
+</body>
+</html>

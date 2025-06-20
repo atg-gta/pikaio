@@ -58,7 +58,7 @@
 <body class="bg-gray-100 text-gray-900 dark:bg-slate-900 dark:text-gray-200">
 
     <div class="flex items-center justify-center pt-8 md:pt-12">
-        <a href="index.html" class="text-2xl font-bold text-gray-900 flex items-center dark:text-white"><img src="https://pikaio.com/Image/file.svg" alt="Pikaio Logo" class="h-10 w-10 mr-2 rounded-full block dark:hidden"><img src="https://pikaio.com/Image/Adobe%20Express%20-%20file(1)-256x256.webp" alt="Pikaio Logo Dark" class="h-10 w-10 mr-2 rounded-full hidden dark:block">Pikaio</a>
+        <a href="index.html" class="text-2xl font-bold text-gray-900 flex items-center dark:text-white"><img src="Image/file.svg" alt="Pikaio Logo" class="h-10 w-10 mr-2 rounded-full block dark:hidden"><img src="Image/Adobe Express - file(1)-256x256.webp" alt="Pikaio Logo Dark" class="h-10 w-10 mr-2 rounded-full hidden dark:block">Pikaio</a>
     </div>
 
     <main class="container mx-auto px-4 py-8 md:py-12 flex flex-col items-center justify-center">
@@ -73,6 +73,25 @@
                 <div class="flex items-center"><div class="py-1"><i class="fas fa-info-circle text-blue-500 mr-4 text-2xl"></i></div><div><h3 class="font-bold text-gray-900 dark:text-gray-100">Photo Requirements</h3><p class="text-sm text-gray-600 dark:text-gray-400 mt-1">You must upload a minimum of <strong>40 photos</strong> and a maximum of <strong>60</strong>. The more photos you provide, the better your results will be!</p></div></div>
             </div>
 
+            <!-- SECTION: Photo Description -->
+            <div class="mt-8 text-left">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-3">Describe Your Vision</h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                    Please describe the kind of photos you're looking for. Be as detailed as possible regarding:
+                    <ul class="list-disc list-inside ml-4 my-2 text-gray-600 dark:text-gray-400 text-sm">
+                        <li><strong>Clothing:</strong> Style, color, specific items (e.g., "dark blue business suit, white shirt, red tie").</li>
+                        <li><strong>Background/Location:</strong> Type of setting (e.g., "modern office interior," "outdoor city street," "beach at sunset").</li>
+                        <li><strong>Pose/Mood:</strong> Desired poses or overall feeling (e.g., "confident, looking at camera," "candid, laughing," "dramatic, looking away").</li>
+                        <li><strong>Specific Scenarios:</strong> (e.g., "giving a presentation on stage," "working on a laptop in a cafe").</li>
+                    </ul>
+                </p>
+                <textarea id="photoDescription" name="photoDescription" rows="6" class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50 text-gray-900 focus:ring-2 focus:ring-blue-500 transition-colors dark:bg-slate-700 dark:border-slate-600 dark:text-white placeholder-gray-400 dark:placeholder-gray-500" placeholder="e.g., Professional headshot in a modern office with a blurred background, wearing a navy suit. Also, a casual shot outdoors in a park, wearing a light blue shirt and jeans..."></textarea>
+                <p class="mt-3 text-sm text-blue-600 dark:text-blue-400">
+                    <i class="fas fa-info-circle mr-1"></i> Your detailed description will be submitted along with your photos.
+                </p>
+            </div>
+            <!-- END SECTION -->
+
             <div id="upload-zone" class="mt-6 p-8 text-center"><input type="file" id="fileInput" multiple accept="image/*" class="hidden"><i class="fas fa-images text-5xl text-gray-400"></i><h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-gray-200">Drag & Drop Photos Here</h3><p class="mt-1 text-gray-500 dark:text-gray-400">or</p><button id="selectFilesButton" class="mt-2 text-blue-600 dark:text-blue-400 font-semibold hover:underline">Select Files From Your Device</button></div>
 
             <section id="review-section" class="hidden mt-8">
@@ -84,21 +103,38 @@
         </section>
 
         <section id="successDiv" class="hidden max-w-3xl w-full text-center">
-            <div class="success-screen bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-8 md:p-12"><div class="w-24 h-24 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center mb-6 shadow-lg mx-auto"><i class="fas fa-check-circle text-green-500 text-5xl"></i></div><h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">All Set! Your Files are Received.</h2><p class="text-lg text-gray-600 dark:text-gray-400 mt-4">All <strong><span id="finalCount"></span> photos</strong> were successfully uploaded. Our team will begin building your custom model, and you'll hear from us within 2 business days.</p><a href="index.html" class="mt-8 inline-block bg-gray-200 dark:bg-slate-700 text-gray-700 dark:text-gray-200 font-semibold py-3 px-8 rounded-lg hover:bg-gray-300 dark:hover:bg-slate-600 transition-colors">Back to Homepage</a></div>
+            <div class="success-screen bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-8 md:p-12">
+                <div class="w-24 h-24 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center mb-6 shadow-lg mx-auto">
+                    <i class="fas fa-check-circle text-green-500 text-5xl"></i>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">All Set! Your Files are Received.</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 mt-4">
+                    All <strong><span id="finalCount"></span> photos</strong> were successfully uploaded. 
+                    Your vision description has also been noted. Our team will begin building your custom model, and you'll hear from us within 2 business days.
+                </p>
+                <a href="index.html" class="mt-8 inline-block bg-gray-200 dark:bg-slate-700 text-gray-700 dark:text-gray-200 font-semibold py-3 px-8 rounded-lg hover:bg-gray-300 dark:hover:bg-slate-600 transition-colors">Back to Homepage</a>
+            </div>
         </section>
+        
+        <!-- HIDDEN NETLIFY FORM FOR PHOTO DESCRIPTION -->
+        <form name="photoDescriptionForm" data-netlify="true" netlify-honeypot="bot-field-desc" class="hidden">
+            <input type="hidden" name="form-name" value="photoDescriptionForm">
+            <p class="hidden"><label>Don’t fill this out if you’re human: <input name="bot-field-desc"></label></p>
+            <textarea name="visionDescription" id="hiddenVisionDescription"></textarea>
+            <!-- You can add a hidden input here to pass an order ID or email if you have it -->
+            <!-- e.g., <input type="hidden" name="orderId" id="hiddenOrderId"> -->
+        </form>
+
     </main>
     
     <div id="upload-overlay" class="hidden"><i class="fas fa-cloud-upload-alt fa-4x fa-bounce text-white"></i><h2 id="overlay-text" class="text-2xl font-bold mt-6 text-center text-white"></h2><div class="w-11/12 md:w-1/2 mt-4 bg-gray-600 rounded-full h-2.5"><div id="overlay-progress-bar" class="h-2.5 rounded-full bg-blue-500" style="width: 0%; transition: width 0.3s ease;"></div></div></div>
 
     <script>
         // --- YOUR PROVEN, WORKING JAVASCRIPT ENGINE ---
-        // This logic is identical to the version you confirmed was working perfectly.
-        // It has been paired with the final premium UI.
-
         const MIN_PHOTOS = 40;
         const MAX_PHOTOS = 60;
-        const BYTESCALE_API_KEY = "public_W23MTDyDhZjZdyFo6EkVbbhKN9kr";
-        const BYTESCALE_ACCOUNT_ID = "W23MTDy";
+        const BYTESCALE_API_KEY = "public_W23MTDyDhZjZdyFo6EkVbbhKN9kr"; 
+        const BYTESCALE_ACCOUNT_ID = "W23MTDy"; 
 
         let selectedFiles = [];
         let isUploading = false;
@@ -117,7 +153,8 @@
             progressBarInner = document.getElementById('progress-bar-inner'),
             uploadOverlay = document.getElementById('upload-overlay'),
             overlayText = document.getElementById('overlay-text'),
-            overlayProgressBar = document.getElementById('overlay-progress-bar');
+            overlayProgressBar = document.getElementById('overlay-progress-bar'),
+            photoDescriptionTextarea = document.getElementById('photoDescription'); 
         
         selectFilesButton.onclick = () => fileInput.click();
         uploadZone.onclick = (e) => { if(e.target === uploadZone) fileInput.click(); };
@@ -159,15 +196,16 @@
 
             submitBtn.disabled = !isValid || isUploading;
             selectFilesButton.disabled = isUploading;
+            if (photoDescriptionTextarea) photoDescriptionTextarea.disabled = isUploading;
             progressBarInner.style.width = `${progress}%`;
             progressCount.textContent = `${count} / ${MAX_PHOTOS} photos`;
 
             if (progress < 100) {
                 progressText.textContent = `Need ${MIN_PHOTOS - count} more photos to begin.`;
-                progressBarInner.style.backgroundColor = "#2563EB";
+                progressBarInner.style.backgroundColor = "#2563EB"; 
             } else {
                 progressText.textContent = "You're ready to submit!";
-                progressBarInner.style.backgroundColor = "#22c55e";
+                progressBarInner.style.backgroundColor = "#22c55e"; 
             }
             
             updatePhotoGrid();
@@ -185,7 +223,10 @@
                 removeBtn.className = 'remove-btn';
                 removeBtn.innerHTML = '×';
                 removeBtn.title = 'Remove photo';
-                removeBtn.onclick = () => removePhoto(index);
+                removeBtn.onclick = (e) => {
+                    e.stopPropagation(); 
+                    removePhoto(index);
+                };
                 item.append(img, removeBtn);
                 photoGrid.appendChild(item);
             });
@@ -195,7 +236,6 @@
             const url = `https://api.bytescale.com/v2/accounts/${BYTESCALE_ACCOUNT_ID}/uploads/form_data`;
             const formData = new FormData();
             formData.append('file', file);
-            // This fetch call uses the Authorization header, as in the version you confirmed was working.
             const response = await fetch(url, {
                 method: 'POST',
                 body: formData,
@@ -211,10 +251,11 @@
         async function handleSubmit() {
             if (selectedFiles.length < MIN_PHOTOS || selectedFiles.length > MAX_PHOTOS) return;
             isUploading = true;
-            updateUI();
+            updateUI(); 
             uploadOverlay.classList.remove('hidden');
             uploadOverlay.classList.add('visible');
             const failedFiles = [];
+
             for (let i = 0; i < selectedFiles.length; i++) {
                 const progress = Math.round(((i + 1) / selectedFiles.length) * 100);
                 overlayText.innerHTML = `Uploading file ${i + 1} of ${selectedFiles.length}<br><span class="text-sm text-gray-300 mt-2">${selectedFiles[i].name}</span>`;
@@ -226,19 +267,62 @@
                     failedFiles.push(selectedFiles[i].name);
                 }
             }
-            uploadOverlay.classList.remove('visible');
-            uploadOverlay.classList.add('hidden');
             
-            if (failedFiles.length > 0) {
+            // --- SUBMIT DESCRIPTION TO NETLIFY (IF FILES UPLOADED SUCCESSFULLY) ---
+            if (failedFiles.length === 0) {
+                const descriptionText = photoDescriptionTextarea.value;
+                const hiddenDescriptionTextarea = document.getElementById('hiddenVisionDescription');
+                const netlifyForm = document.forms['photoDescriptionForm'];
+
+                // Optionally, if you pass an order ID or email to this page (e.g., via URL query param),
+                // you can retrieve it here and add it to a hidden field in the Netlify form.
+                // For example:
+                // const urlParams = new URLSearchParams(window.location.search);
+                // const orderId = urlParams.get('orderId');
+                // if (orderId) {
+                //     const hiddenOrderIdField = document.getElementById('hiddenOrderId'); // Assuming you add this field
+                //     if (hiddenOrderIdField) hiddenOrderIdField.value = orderId;
+                // }
+
+                if (netlifyForm && hiddenDescriptionTextarea) {
+                    hiddenDescriptionTextarea.value = descriptionText;
+                    
+                    fetch('/', { 
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams(new FormData(netlifyForm)).toString()
+                    })
+                    .then(() => {
+                        console.log('Photo vision description submitted to Netlify successfully.');
+                        // Now proceed to show success for photo upload
+                        showSuccessScreen();
+                    })
+                    .catch(error => {
+                        console.error('Error submitting description to Netlify:', error);
+                        alert('Photos uploaded, but there was an issue submitting your vision description. Please contact support with your description.');
+                        showSuccessScreen(); // Still show photo success even if description fails, but with a warning.
+                    });
+                } else {
+                    console.error('Netlify description form or textarea not found.');
+                    alert('Photos uploaded, but your vision description could not be automatically submitted. Please contact support with your description.');
+                    showSuccessScreen();
+                }
+            } else {
+                uploadOverlay.classList.remove('visible');
+                uploadOverlay.classList.add('hidden');
                 alert(`Upload failed for ${failedFiles.length} files: ${failedFiles.join(', ')}. Please check your connection and try again.`);
                 isUploading = false;
-                updateUI();
-            } else {
-                finalCount.textContent = selectedFiles.length;
-                uploadContainer.style.display = 'none';
-                successDiv.classList.remove('hidden');
-                window.scrollTo(0, 0);
+                updateUI(); 
             }
+        }
+
+        function showSuccessScreen() {
+            uploadOverlay.classList.remove('visible');
+            uploadOverlay.classList.add('hidden');
+            finalCount.textContent = selectedFiles.length;
+            uploadContainer.style.display = 'none';
+            successDiv.classList.remove('hidden');
+            window.scrollTo(0, 0);
         }
         
         updateUI();
